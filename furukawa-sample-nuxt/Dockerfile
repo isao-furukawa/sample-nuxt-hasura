@@ -41,7 +41,7 @@ RUN chsh -s /usr/local/bin/fish && echo exec fish >> ~/.bashrc
 RUN fish -l
 
 # pnpm と ni コマンドをglobalインストール
-RUN npm install -g pnpm@8.10.5 @antfu/ni
+RUN npm install -g pnpm@8.11.0 @antfu/ni
 
 # pnpmのstoreの位置を明示的に設定しておく
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
