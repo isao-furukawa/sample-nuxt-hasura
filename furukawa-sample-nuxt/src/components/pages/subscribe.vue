@@ -5,8 +5,8 @@ div サブスクリプションのサンプル
       n-tr
         //- th 期
         n-th ID
-        n-th 商品名
-        n-th 価格
+        n-th {{ $t('product_name') }}
+        n-th {{ $t('price') }}
     n-tbody
       template(v-if="searchProductsQueryLoading")
         n-tr: n-td ロード中

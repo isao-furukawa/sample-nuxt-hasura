@@ -7,3 +7,6 @@ menu:
   home: Home
   subscribe: Subscription
   update: Update Mutation
+
+product_name: product name
+price: price
