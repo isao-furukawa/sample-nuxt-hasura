@@ -19,7 +19,7 @@ div サブスクリプションのサンプル
   p: button( @click="doIt1") りんごの在庫をランダム変化
   p: button( @click="doIt2") みかんの在庫をランダム変化
   p: button( @click="doIt3") バナナの在庫をランダム変化
-  p: button( @click="doIt4") 言語Cookie確認
+  //- p: button( @click="doIt4") 言語Cookie確認
   //- p: button( @click="doIt5") Apolloキャッシュ
 
 </template>

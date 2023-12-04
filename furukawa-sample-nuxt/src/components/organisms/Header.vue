@@ -1,21 +1,16 @@
 <template lang="pug">
-img.logo(
-  width="32"
-  height="32"
-  src="~assets/logo.png"
-)
-n-space
-  n-text
-    | Nuxt3+Hasuraサンプル
-n-space
-  n-text()
-    | {{ title }}
-n-space
-  n-button
+
+n-space(justify="space-around" size="large" align="center")
+  img.logo(
+    width="32"
+    height="32"
+    src="~assets/logo.png"
+  )
+  n-button(size="tiny")
     NuxtLink(:to='switchLocalePath("ja")') {{ $t('language.ja') }}
-  n-button
+  n-button(size="tiny")
     NuxtLink(:to='switchLocalePath("en")') {{ $t('language.en') }}
-  n-button
+  n-button(size="tiny")
     NuxtLink(:to='switchLocalePath("vi")') {{ $t('language.vi') }}
 </template>
 <script lang="ts" setup>
