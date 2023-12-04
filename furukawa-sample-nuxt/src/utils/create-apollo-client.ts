@@ -64,7 +64,11 @@ function createLink(authHeaders: { [key: string]: string }) {
       // uri: 'http://localhost:3333/graphql',
       // uri: `${nuxt.$config.API_HOST}/graphql`,
       // uri: nuxt.$config.API_ENDPOINT,
-      uri: `${runtimeConfig.public.API_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`,
+
+      // TODO: とりあえずベタ書きしておくけど後で良い方法考える
+      uri: process.server 
+            ? `${runtimeConfig.public.API_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`
+            : `${runtimeConfig.public.API_PROTOCOL}://localhost:8080/${runtimeConfig.public.API_PATH}`,
       credentials: 'include', // withCredentials = true 設定
       // uri: runtimeConfig.public.API_ENDPOINT,
       headers: authHeaders,
@@ -85,7 +89,12 @@ function createLink(authHeaders: { [key: string]: string }) {
             //   ? 'wss://local-api.sample.jp/v1/graphql'
             //   : // : 'ws://localhost:8080/v1/graphql',
             //     'wss://qas-api.sample.jp/v1/graphql',
-            url: `${runtimeConfig.public.API_WS_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`,
+
+            // TODO: とりあえずベタ書きしておくけど後で良い方法考える
+            url: process.server 
+            ? `${runtimeConfig.public.API_WS_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`
+            : `${runtimeConfig.public.API_WS_PROTOCOL}://localhost:8080/${runtimeConfig.public.API_PATH}`,
+            // url: `${runtimeConfig.public.API_WS_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`,
             // credentials: 'include', // withCredentials = true 設定
             connectionParams: {
               headers: authHeaders,

@@ -85,13 +85,16 @@ services:
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
       PG_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
       ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false' # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true' # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       #  jwk-refresh-log
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: hogehoge
+
+      HASURA_GRAPHQL_LOG_LEVEL: error
+      # HASURA_GRAPHQL_ASYNC_ACTIONS_FETCH_BATCH_SIZE: ???
 
       # HASURA経由でアクション発火時に渡す情報
       HASURA_ACTION_SECRET_ENV: jojo
@@ -156,7 +159,7 @@ services:
       - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
       - NUXT_PUBLIC_DOCKER_MODE=true
       - NUXT_PUBLIC_SSR_MODE=true
-      - NUXT_PUBLIC_API_HOST=localhost:8080
+      - NUXT_PUBLIC_API_HOST=furukawa-sample-hasura:8080
       - NUXT_PUBLIC_API_PROTOCOL=http
       - NUXT_PUBLIC_API_WS_PROTOCOL=ws
       - NUXT_PUBLIC_API_PATH=v1/graphql
