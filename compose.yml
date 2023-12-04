@@ -12,13 +12,12 @@ volumes:
   # sample-log-firelens-volume:
 
 services:
-
   # 🔽🔽🔽🔽🔽🔽🔽🔽🔽 Hasuraが永続化機構として利用するPostgreSQL 🔽🔽🔽🔽🔽🔽🔽🔽🔽
   furukawa-sample-postgresql:
     container_name: furukawa-sample-postgresql
     tty: true
     #platform: linux/x86_64
-    image: postgres:16.1
+    image: postgres:15.4
     # ログを見たければ↓コマンドを有効にする
     # command: postgres -c log_destination=stderr -c log_statement=all -c log_connections=on -c log_disconnections=on
     # log_statement = none: 記録しない。デフォルトは通常これ。
@@ -31,14 +30,14 @@ services:
       - furukawa-sample-postgresql-volume:/var/lib/postgresql/data
     environment:
       # タイムゾーンは日本にしとく
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: sample
       # POSTGRES_USER: ${POSTGRES_USER:-postgres}
       # POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-please-change-postgres-password}"
     ports:
-      - '5432:5432'
+      - "5432:5432"
     healthcheck:
       test: pg_isready --username root --dbname sample
       # test: pg_isready -U example_user -postgres-example-password
@@ -56,7 +55,7 @@ services:
       context: ./furukawa-sample-hasura
       dockerfile: Dockerfile
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       furukawa-sample-postgresql:
         condition: service_healthy
@@ -85,9 +84,9 @@ services:
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
       PG_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
       ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true' # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
-      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       #  jwk-refresh-log
       ## uncomment next line to set an admin secret
@@ -117,7 +116,7 @@ services:
       # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
 
       # HASURA_GRAPHQL_CORS_DOMAIN: "https://*.foo.bar.com:8080, http://*.localhost, http://localhost:3000, http://example.com"
-      HASURA_GRAPHQL_CORS_DOMAIN: '*'
+      HASURA_GRAPHQL_CORS_DOMAIN: "*"
 
       # CORS が無効な場合でも、WebSocket の初期ハンドシェイクで Cookie を読み取ることができます。
       # これは潜在的なセキュリティ上の欠陥となり得ます。自分が何をしているのか確認してください。
@@ -147,7 +146,7 @@ services:
       #   - MODE_LOCAL=true
       #   - API_HOST=http://my-rails:3000
     ports:
-      - '2000:2000'
+      - "2000:2000"
     depends_on:
       furukawa-sample-hasura:
         condition: service_healthy
