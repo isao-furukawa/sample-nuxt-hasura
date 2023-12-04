@@ -16,7 +16,7 @@ git clone git@github.com:skydisc-laine/sample-nuxt-hasura.git
 
 #### 2. 落としてきたディレクトリに移動する
 
-```shell
+```
 cd sample-nuxt-hasura
 ```
 
@@ -26,12 +26,17 @@ cd sample-nuxt-hasura
 docker compose up
 ```
 
+#### 4. ブラウザでアクセスするとアプリの動作が確認できる
+
+http://localhost:8080/console ← Hasura の管理コンソール(Admin Secret 求められたら hogehoge で OK)
+
+http://localhost:2000 ← Nuxt のアプリのホーム画面
+
 ## ディレクトリの説明
 
 furukawa-sample-postgresql
 
 ```
-.
 └── docker-entrypoint-initdb.d
     ├── 01_create_tables.sql ← テーブル作成のSQL
     └── 02_insert_data.sql   ← 少量のサンプルデータインサート用のSQL
@@ -40,7 +45,6 @@ furukawa-sample-postgresql
 furukawa-sample-hasura
 
 ```
-.
 ├── Dockerfile
 └── hasura ← このディレクトリ以下がHasuraのメタデータフォルダ
     ├── config.yaml
@@ -76,7 +80,6 @@ furukawa-sample-hasura
 furukawa-sample-nuxt
 
 ```
-.
 ├── Dockerfile
 ├── README.md
 ├── codegen.yml ← pnpm codegen コマンドでgraphqlの型生成するための設定ファイル
