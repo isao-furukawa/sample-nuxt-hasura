@@ -15,7 +15,8 @@ export default defineNuxtPlugin((nuxt) => {
 
   vueApp.use(
     createGtm({
-      id: 'GTM-PKPLBH8',
+      // id: 'GTM-PKPLBH8',
+      id: 'GTM-ABCDEF8',
 
       // 非同期読み込みによってページを高速化かどうか？
       // true に設定するとトラッキングの精度が下がる
