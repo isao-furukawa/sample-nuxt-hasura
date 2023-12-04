@@ -6,8 +6,8 @@ TemplatesNaiveUiLayout.layout-container
     OrganismsSideMenu
     n-layout(content-style='padding: 24px;')
       slot
-      template(v-for="n in 10" :key="n")
-        n-h2 縦するクロール確認用 {{ n }}
+      template(v-for="n in 20" :key="n")
+        n-h2 縦スクロール確認用 {{ n }}
   n-layout-footer.footer-container(bordered='' position='absolute' style='height: 64px; padding: 24px')
     | &#x57CE;&#x5E9C;&#x8DEF;
 </template>

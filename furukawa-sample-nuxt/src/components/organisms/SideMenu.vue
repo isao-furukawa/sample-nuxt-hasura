@@ -3,7 +3,7 @@ n-layout-sider(
   bordered
   collapse-mode="width"
   :collapsed-width="64"
-  :width="240"
+  :width="440"
   :collapsed="collapsed"
   show-trigger
   @collapse="collapsed = true"
@@ -50,7 +50,7 @@ function renderIcon(clazz: string, name: string) {
 const localePath = useLocalePath();
 const i18n = useI18n();
 const activeKey = ref<string | null>(null);
-const collapsed = ref(true);
+const collapsed = ref(false);
 
 const open = () => {
   console.warn('⭐オープン');
@@ -77,9 +77,8 @@ const menuItemRender = (path: string, labelKey: string) => {
 // <span class="material-icons-outlined">
 // home
 // </span>
-// 事業沿革
 const menuOptions: MenuOption[] = [
-{
+  {
     key: 'index',
     label: () => menuItemRender('/', 'menu.home'),
     icon: renderIcon('material-icons-outlined', 'home'),
@@ -94,144 +93,6 @@ const menuOptions: MenuOption[] = [
     label: () => menuItemRender('/subscribe', 'menu.subscribe'),
     icon: renderIcon('material-icons-outlined', 'subscriptions'),
   },
-  // {
-  //   key: 'philosophy',
-  //   label: () => menuItemRender('/philosophy', 'menu.philosophy'),
-  //   icon: renderIcon('material-icons-outlined', 'volunteer_activism'),
-  // },
-  // {
-  //   key: 'history',
-  //   label: () => menuItemRender('/history', 'menu.history'),
-  //   icon: renderIcon('material-icons-outlined', 'history_edu'),
-  // },
-  // {
-  //   key: 'contact',
-  //   label: () => menuItemRender('/contact', 'menu.contact'),
-  //   icon: renderIcon('material-icons-outlined', 'mail'),
-  // },
-  // {
-  //   key: 'pre-classrooms',
-  //   label: () => i18n.t('menu.pre-classrooms.group-title'),
-  //   icon: renderIcon('material-icons-outlined', 'school'),
-  //   children: [
-  //     {
-  //       key: 'osaka',
-  //       label: () => menuItemRender('/pre-classrooms/osaka', 'menu.pre-classrooms.osaka'),
-  //       // icon: renderIcon(HomeIcon),
-  //       children: [
-  //         {
-  //           key: 'aa',
-  //           label: () => 'あいう',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       key: 'tokyo',
-  //       label: () => menuItemRender('/pre-classrooms/tokyo', 'menu.pre-classrooms.tokyo'),
-  //       // icon: renderIcon(HomeIcon),
-  //     },
-  //     {
-  //       label: 'Beverage',
-  //       key: 'beverage',
-  //       icon: renderIcon('material-icons-outlined', 'double_arrow'),
-  //       children: [
-  //         {
-  //           label: 'Whisky',
-  //           key: 'whisky',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       label: 'Food',
-  //       key: 'food',
-  //       children: [
-  //         {
-  //           label: 'Sandwich',
-  //           key: 'sandwich',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       label: 'The past increases.',
-  //       key: 'the-past-increases-the-future-recedes',
-  //     },
-  //   ],
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
-  // {
-  //   key: 'achievement',
-  //   label: () => menuItemRender('/achievement', 'menu.achievement'),
-  //   icon: renderIcon('material-icons-outlined', 'insights'),
-  // },
 ];
 </script>
 <style lang="scss" scoped>
