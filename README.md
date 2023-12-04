@@ -141,3 +141,20 @@ furukawa-sample-nuxt
 │       └── create-apollo-client.ts ← apollo-clientインスタンスの生成処理を共通で切り出してある(※後でnuxtのserver middlewareで使うから)
 └── tsconfig.json
 ```
+
+## Hasura の開発の方法
+
+1. 管理コンソールでテーブル作ったりカラム作ったりする
+2. docker exec -it (docker ps -aqlf "name=furukawa-sample-hasura") /bin/fish みたいな感じでコンテナの中に入る
+3. コンテナの中で Hasura の CLI コマンドを実行する
+
+```
+# 移動
+cd /hasura
+
+# メタデータ設定ファイルの出力
+hasura metadata export
+```
+
+4. furukawa-sample-hasura の hasura ディレクトリに出力される。
+5. 普通に git で管理すれば良い(コミット,push)
