@@ -1,0 +1,21 @@
+table:
+  name: products
+  schema: public
+array_relationships:
+  - name: receipt_items
+    using:
+      foreign_key_constraint_on:
+        column: product_id
+        table:
+          name: receipt_items
+          schema: public
+select_permissions:
+  - role: worker
+    permission:
+      columns:
+        - name
+        - price
+      filter:
+        id:
+          _eq: aaaaa
+    comment: ""
