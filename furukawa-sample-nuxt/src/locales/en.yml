@@ -1,0 +1,27 @@
+language:
+  ja: Japanese
+  en: English
+  vi: Vietnamese
+
+menu:
+  home: Home
+  subscribe: Subscription
+  update: Update Mutation
+  philosophy: Philosophy
+  pre-classrooms:
+    group-title: Pre School
+    osaka: Osaka
+    tokyo: Tokyo
+  history: History
+  achievement: Achievement
+  contact: Contact
+
+history:
+  page-title: 沿革
+  timeline:
+    - date: '2021/12/01'
+      title: ああああ
+      content: コンテンツ
+    - date: '1997/04/01'
+      title: いいいい
+      content: コンテンツ222

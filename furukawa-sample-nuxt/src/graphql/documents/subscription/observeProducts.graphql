@@ -1,0 +1,7 @@
+subscription observeProducts {
+  products(limit: 10, offset: 0) {
+    id
+    name
+    price
+  }
+}

@@ -1,0 +1,22 @@
+{
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "extends": "./.nuxt/tsconfig.json",
+  // "compilerOptions": {
+  //   // "lib": ["DOM", "DOM.Iterable", "ES2019", "esnext.asynciterable"],
+  //   // "esModuleInterop": true,
+  //   // "moduleResolution": "node",
+  //   // "resolveJsonModule": true,
+  //   // "target": "ES2019",
+  //   // "module": "esnext",
+  //   // "strictNullChecks": false,
+  //   // "types": [
+  //   //   // This comment is for "prettier" array line break hacking
+  //   //   // "node",
+  //   //   // "@nuxt/types",
+  //   //   // "@nuxtjs/i18n",
+  //   //   // "@types/lodash-es",
+  //   //   // "dayjs",
+  //   //   // "naive-ui/volar"
+  //   // ]
+  // }
+}

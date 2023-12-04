@@ -1,0 +1,13 @@
+mutation UpdateProducts(
+  # prettier line break hack
+  $where: products_bool_exp!
+  $set: products_set_input
+) {
+  update_products(where: $where, _set: $set) {
+    returning {
+      id
+      name
+      price
+    }
+  }
+}

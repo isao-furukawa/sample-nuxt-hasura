@@ -1,0 +1,15 @@
+mutation UpdateUsers(
+  # prettier line break hack
+  $where: users_bool_exp!
+  $set: users_set_input
+) {
+  update_users(where: $where, _set: $set) {
+    returning {
+      id
+      gender
+      birthday
+      first_name
+      family_name
+    }
+  }
+}

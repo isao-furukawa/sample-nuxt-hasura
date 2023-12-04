@@ -1,0 +1,80 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "globals": {
+    "axios": "readonly",
+    "require": "readonly",
+    "module": "readonly",
+    "process": "readonly",
+    "window": "readonly",
+    "document": "readonly",
+    "navigator": "readonly",
+    "location": "readonly",
+    "defineProps": "readonly",
+    "defineEmits": "readonly"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:vue-pug/vue3-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "@nuxtjs/eslint-config-typescript",
+    "prettier"
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "parser": {
+      "js": "espree",
+      "ts": "@typescript-eslint/parser",
+      "<template>": "espree"
+    }
+  },
+  "plugins": ["@typescript-eslint", "vue"],
+  "ignorePatterns": ["**/graphql/generated/*.ts"],
+  "rules": {
+    "camelcase": "off",
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "eqeqeq": "warn",
+    "generator-star-spacing": "off",
+    "import/namespace": [2, { "allowComputed": true }],
+    "init-declarations": "warn",
+    "no-await-in-loop": "warn",
+    "no-console": "off",
+    "no-empty-function": "warn",
+    "no-extend-native": "warn",
+    "no-nested-ternary": "warn",
+    "no-param-reassign": "warn",
+    "no-parsing-error": "off",
+    "no-return-await": "warn",
+    "no-script-url": "warn",
+    "no-self-compare": "warn",
+    "no-use-before-define": "warn",
+    "no-useless-concat": "warn",
+    "no-useless-return": "warn",
+    "no-var": "warn",
+    "quotes": ["warn", "single"],
+    "semi": ["error", "always"],
+    "vue/no-unused-refs": "warn",
+    "vue/no-multiple-template-root": "off",
+    "vue/multi-word-component-names": "off",
+    "vue/require-default-prop": "off",
+    "yoda": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-unused-vars": "off"
+  }
+}

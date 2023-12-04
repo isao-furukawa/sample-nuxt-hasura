@@ -1,0 +1,45 @@
+language:
+  ja: 日本語
+  en: 英語
+  vi: ベトナム語
+
+menu:
+  home: ホーム
+  subscribe: サブスクリプション
+  update: 更新ミューテーション
+  philosophy: 教育理念
+  pre-classrooms:
+    group-title: 幼児教育
+    osaka: 大阪教室
+    tokyo: 東京教室
+  history: 事業沿革
+  achievement: 入試実績
+  contact: お問い合わせ
+
+history:
+  page-title: 沿革
+  timeline:
+    - date: 2006/01/05
+      title: 株式会社XXXXXXXX設立（資本金300万円）
+    - date: 2009/07/01
+      title: 資本金を1000万円に増額
+    - date: 2012/11/12
+      title: 第一回「家族感謝祭」を開催
+    - date: 2013/12/04
+      title: 東京オフィス開設（恵比寿）
+      content: 経営理念を「すべての人がともにイキイキとはたらく未来を創る。」とする
+    - date: 2015/03/17
+      title: 専門学生の採用プラットフォーム「XXXXXXXX」を公式リリース
+      content: 経済産業省「商業・サービス競争力強化連携支援事業」の認定を受ける
+    - date: 2016/09/23
+      title: 東京オフィス移転（飯田橋）
+    - date: 2017/12/30
+      title: 第一回「産学連携リクルーティングセミナー」を開催
+    - date: 2018/02/08
+      title: 第一回「ZZZZZZZZ勉強会」を開催
+    - date: 2019/10/19
+      title: 「業界別採用動向調査」を開始
+    - date: 2020/01/02
+      title: 第一回「職業教育シンポジウム」を開催
+    - date: 2022/02/01
+      title: 資本金を6,750万円（資本準備金を含む）に増額
