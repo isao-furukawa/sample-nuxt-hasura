@@ -85,7 +85,7 @@ services:
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
       PG_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
       ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true' # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false' # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
@@ -124,159 +124,42 @@ services:
   #     HASURA_GRAPHQL_JWT_SECRET: '{"claims_format":"json","audience":"http://local.sample.jp:4001/","claims_namespace":"https://hasura.io/jwt/claims","type":"HS256","key":"3jhgs8idsu9832GYas912tgaqsdjuidsDFVGTRiwi329jfdqiuehjfa","issuer":"http://local-api.sample.jp:8080/miniauth"}'
 
   # 🔽🔽🔽🔽🔽🔽🔽🔽🔽 Nuxt3 🔽🔽🔽🔽🔽🔽🔽🔽🔽
-  # furukawa-sample-nuxt:
-  #   # user: 1000:1000
-  #   container_name: furukawa-sample-nuxt
-  #   tty: true
-  #   stdin_open: true
-  #   build:
-  #     context: ./furukawa-sample-nuxt
-  #     dockerfile: Dockerfile
-  #     target: dev
-  #   healthcheck:
-  #     # test: curl -I 127.0.0.1:4200/health_check
-  #     test: lsof -i:4200
-  #     interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
-  #     timeout: 2s # 応答が2秒以上かかっても許さない
-  #     retries: 999999 # 100回ぐらい失敗応答したら許さない
-  #     # start_period: 30s # 立ち上がるのに、10秒かかりそう
-  #     # args:
-  #     #   - MODE_LOCAL=true
-  #     #   - API_HOST=http://my-rails:3000
-  #   ports:
-  #     - '4200:4200'
-  #   depends_on:
-  #     my-rails:
-  #       condition: service_healthy
-  #       # condition: service_started
-  #   volumes:
-  #     - ./furukawa-sample-nuxt:/app
-  #     - furukawa-sample-nuxt-node_modules-volume:/app/node_modules
-  #   environment:
-  #     - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
-  #     - NUXT_PUBLIC_DOCKER_MODE=true
-  #     - NUXT_PUBLIC_SSR_MODE=true
-  #     - NUXT_PUBLIC_API_HOST=local-api.sample.jp
-  #     - NUXT_PUBLIC_API_PROTOCOL=https
-  #     - NUXT_PUBLIC_API_WS_PROTOCOL=wss
-  #     - NUXT_PUBLIC_API_PATH=graphql_myapp
-  #     # - NUXT_PUBLIC_API_PATH=v1/graphql
-  #     - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
-  #     # - NUXT_PUBLIC_WYSIWYG_EDITOR_API_KEY=aaaa
-  #     - NUXT_PUBLIC_WYSIWYG_EDITOR_API_KEY=aaaa
-  #     - NUXT_X_HASURA_ADMIN_SECRET=aaaa
-  #     - NUXT_SLACK_API_TOKEN=aaaa
-  #     - NUXT_PUBLIC_MOCK_API_HOST=http://localhost:3001
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  # # sample-app:
-  # #   # user: 1000:1000
-  # #   container_name: sample-myapp
-  # #   tty: true
-  # #   stdin_open: true
-  # #   build:
-  # #     context: ./packages/myapp
-  # #     dockerfile: Dockerfile
-  # #   healthcheck:
-  # #     # test: curl -I 127.0.0.1:4200/health_check
-  # #     test: lsof -i:4200
-  # #     interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
-  # #     timeout: 2s # 応答が2秒以上かかっても許さない
-  # #     retries: 999999 # 100回ぐらい失敗応答したら許さない
-  # #     # start_period: 30s # 立ち上がるのに、10秒かかりそう
-  # #     # args:
-  # #     #   - MODE_LOCAL=true
-  # #     #   - API_HOST=http://my-rails:3000
-  # #   ports:
-  # #     - '4200:4200'
-  # #   depends_on:
-  # #     sample-api-hasura:
-  # #       condition: service_healthy
-  # #       # condition: service_started
-  # #   volumes:
-  # #     - sample-app-volume:/app
-  # #   environment:
-  # #     - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
-  # #     - NUXT_PUBLIC_DOCKER_MODE=true
-  # #     - NUXT_PUBLIC_SSR_MODE=true
-  # #     - NUXT_PUBLIC_API_HOST=local-api.sample.jp
-  # #     - NUXT_PUBLIC_API_PROTOCOL=https
-  # #     - NUXT_PUBLIC_API_WS_PROTOCOL=wss
-  # #     - NUXT_PUBLIC_API_PATH=v1/graphql
-  # #     - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
-  # #     - NUXT_PUBLIC_WYSIWYG_EDITOR_API_KEY=95a7u2rbfi0iww6s8hbqm8t8ksdt824g0alm8j3dw7kguiah
-  # #     - NUXT_X_HASURA_ADMIN_SECRET=majidehayofrontengineerkonaikana
-
-  # # 🔽🔽🔽🔽🔽🔽🔽🔽🔽 アプリへ接続するためのプロキシサーバ 🔽🔽🔽🔽🔽🔽🔽🔽🔽
-  # sample-nginx:
-  #   container_name: sample-nginx
-  #   build:
-  #     context: ./packages/nginx
-  #     dockerfile: Dockerfile
-  #   tty: true
-  #   stdin_open: true
-  #   healthcheck:
-  #     #test: wget -O - http://localhost:3000 &>/dev/null || exit 1
-  #     test: service nginx status || exit 1
-  #     interval: 1s # ヘルスチェックは1秒に1度ぐらいに押さえておきたい
-  #     timeout: 1s # 応答が1秒以上かかっても許さない
-  #     retries: 999999 # 10回ぐらい失敗応答したら許さない
-  #     # start_period: 10s # 立ち上がるのに、10秒かかりそう
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./packages/nginx/conf.d:/etc/nginx/conf.d
-  #     - sample-nginx-log-volume:/var/log/nginx
-  #     - ./packages/nginx/sites-available:/etc/nginx/sites-available
-  #   depends_on:
-  #     sample-api-hasura:
-  #       condition: service_started
-  #     # sample-sample:
-  #     #   condition: service_started
-  #     # sample-myapp:
-  #     #   condition: service_started
-
-  # # jwtmaker:
-  # #   container_name: sample-jwtmaker
-  # #   build:
-  # #     context: ./packages/jwtmaker
-  # #     dockerfile: Dockerfile
-  # #   ports:
-  # #     - '28080:18080'
-  # #   depends_on:
-  # #     sample-api-hasura:
-  # #       condition: service_started
+  furukawa-sample-nuxt:
+    # user: 1000:1000
+    container_name: furukawa-sample-nuxt
+    tty: true
+    stdin_open: true
+    build:
+      context: ./furukawa-sample-nuxt
+      dockerfile: Dockerfile
+      target: dev
+    healthcheck:
+      # test: curl -I 127.0.0.1:2000/health_check
+      test: lsof -i:2000
+      interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
+      timeout: 2s # 応答が2秒以上かかっても許さない
+      retries: 999999 # 100回ぐらい失敗応答したら許さない
+      # start_period: 30s # 立ち上がるのに、10秒かかりそう
+      # args:
+      #   - MODE_LOCAL=true
+      #   - API_HOST=http://my-rails:3000
+    ports:
+      - '2000:2000'
+    depends_on:
+      furukawa-sample-hasura:
+        condition: service_healthy
+        # condition: service_started
+    volumes:
+      - ./furukawa-sample-nuxt:/app
+      - furukawa-sample-nuxt-node_modules-volume:/app/node_modules
+    environment:
+      - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
+      - NUXT_PUBLIC_DOCKER_MODE=true
+      - NUXT_PUBLIC_SSR_MODE=true
+      - NUXT_PUBLIC_API_HOST=localhost:8080
+      - NUXT_PUBLIC_API_PROTOCOL=http
+      - NUXT_PUBLIC_API_WS_PROTOCOL=ws
+      - NUXT_PUBLIC_API_PATH=v1/graphql
+      - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
+      - NUXT_X_HASURA_ADMIN_SECRET=hogehoge
+      - NUXT_X_HASURA_ACTION_SECRET=hogehoge
