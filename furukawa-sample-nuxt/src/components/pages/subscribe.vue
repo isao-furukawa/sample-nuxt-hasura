@@ -39,7 +39,6 @@ const route = useRoute();
 const nuxt = useNuxtApp();
 const runtimeConfig = useRuntimeConfig();
 
-
 // 🔽🔽🔽🔽🔽🔽 ここから、Query 🔽🔽🔽🔽🔽🔽
 const useSearchProductsQueryVariables = reactive({
   where: {} as Products_Bool_Exp,
@@ -184,5 +183,4 @@ const doIt5 = () => {
 };
 
 const translate = (value: any) => value[nuxt.$i18n.locale.value];
-
 </script>
