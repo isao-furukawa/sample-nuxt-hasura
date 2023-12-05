@@ -40,17 +40,30 @@ docker compose up
 pushd ./furukawa-sample-hasura/hasura; and hasura seed apply; popd
 ```
 
+> [!TIP]
+> 開発が進み、新たに増えたテーブルに初期データを投入したい場合等も hasura seed apply を利用する事になる。
+
 #### 5. ブラウザでアクセスするとデモアプリの動作が確認できる
 
 http://localhost:2000 ← Nuxt のアプリのホーム画面
 
 #### 6. ハスラの管理コンソールを起動するにはこちら
 
+```
+# Hasuraの設定ファイル config.yaml があるディレクトに移動する
+cd ./furukawa-sample-hasura/hasura
+
+# 管理コンソールを起動する(※勝手にブラウザが起動するはず)
+hasura console
+```
+
+http://localhost:9695/console ← 管理コンソールの URL
+
 > [!NOTE]
 > DB に対する操作(※テーブルやビュー、ファンクションの作成など)はこの管理コンソール上で行う。そうすることによって、/hasura ディレクトリ配下に自動でマイグレーションファイルが同期されていくので、それを github で管理する事によって全員共通の環境を維持することが出来る。マイグレーションファイルは docker compose up 時に自動で読み込まれ環境に適用される。
 
 > [!CAUTION]
-> Hasura の Docker 版を起動すると環境変数の HASURA_GRAPHQL_ENABLE_CONSOLE(※デフォルトは true)の状態の場合 http:/localhost:8080/console でアクセス出来る管理コンソールが起動するが、この管理コンソールから DB に対する変更を行ってもマイグレーションファイルは同期生成されない。そのため誤解を招かない用に false を設定して起動出来ないようにしてあるので注意!
+> Hasura の Docker 版を起動すると環境変数の HASURA_GRAPHQL_ENABLE_CONSOLE(※デフォルトは true)が true の場合 http:/localhost:8080/console でアクセス出来る管理コンソールが起動するが、この管理コンソールから DB に対する変更を行ってもマイグレーションファイルは同期生成されない。そのため誤解を招かない用に false を設定して起動出来ないようにしてあるので注意!
 
 > [!TIP]
 > Optional information to help a user be more successful.
@@ -63,16 +76,6 @@ http://localhost:2000 ← Nuxt のアプリのホーム画面
 
 > [!CAUTION]
 > Negative potential consequences of an action.
-
-```
-# Hasuraの設定ファイル config.yaml があるディレクトに移動する
-cd ./furukawa-sample-hasura/hasura
-
-# 管理コンソールを起動する(※勝手にブラウザが起動するはず)
-hasura console
-```
-
-http://localhost:9695/console ← 管理コンソールの URL
 
 ## ディレクトリの説明
 
