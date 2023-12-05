@@ -39,13 +39,13 @@ docker compose up
 ↓↓↓ bash 用
 
 ```
-(cd ./furukawa-sample-hasura/hasura && hasura seed apply)
+(cd ./furukawa-sample-hasura/hasura && hasura seed apply --database-name sample)
 ```
 
 ↓↓↓ fish 用
 
 ```fish
-pushd ./furukawa-sample-hasura/hasura; and hasura seed apply; popd
+pushd ./furukawa-sample-hasura/hasura; and hasura seed apply --database-name sample; popd
 ```
 
 > [!NOTE]
