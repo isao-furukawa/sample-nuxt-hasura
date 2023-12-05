@@ -26,11 +26,37 @@ cd sample-nuxt-hasura
 docker compose up
 ```
 
-#### 4. ブラウザでアクセスするとアプリの動作が確認できる
+#### 4. 初期データ投入(※初回のみ sample-nuxt-hasura をカレントディレクトリにして実行)
 
-http://localhost:8080/console ← Hasura の管理コンソール(Admin Secret 求められたら hogehoge で OK)
+↓↓↓ bash 用
+
+```
+(cd ./furukawa-sample-hasura/hasura && hasura seed apply)
+```
+
+↓↓↓ fish 用
+
+```fish
+pushd ./furukawa-sample-hasura/hasura; and hasura seed apply; popd
+```
+
+#### 4. ブラウザでアクセスするとデモアプリの動作が確認できる
 
 http://localhost:2000 ← Nuxt のアプリのホーム画面
+
+#### 5. ハスラの管理コンソールを起動するにはこちら
+
+> [!NOTE] ※今後 DB に Table を追加したり、View や Function を作る場合も管理コンソールから行う
+
+```
+# Hasuraの設定ファイル config.yaml があるディレクトに移動する
+cd ./furukawa-sample-hasura/hasura
+
+# 管理コンソールを起動する(※勝手にブラウザが起動するはず)
+hasura console
+```
+
+http://localhost:9695/console ← 管理コンソールの URL
 
 ## ディレクトリの説明
 
