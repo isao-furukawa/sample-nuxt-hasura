@@ -3,8 +3,15 @@
 ## 概要説明
 
 Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
-で動作するサンプルアプリ  
-docker compose up すると最初に postgresql が起動し、サンプル用の初期データが投入される。その後 Hasura がその postgresql をデータ元の DB として利用しながら起動する。両方が起動し終わったら Nuxt のアプリが起動する。
+で動作するサンプルアプリ
+
+今のところ確認出来るもの
+
+1. 多言語対応(nuxt-i18n)
+1. apollo-client の組み込み方法(ssr+csr の universal モードでの組み込み方法)
+1. apollo-composable による reactive な nuxt との連動
+1. jsonb 型を利用した DB の永続化データ側での多言語対応
+1. timestamptz 型による UTC に統一された日時データとゾーン毎のサンプル処理
 
 ## 実行方法
 
