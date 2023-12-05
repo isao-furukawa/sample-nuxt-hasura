@@ -4,8 +4,8 @@ volumes:
   # sample-api-db-init:
   # sample-api-db-volume:
   # sample-api-hasura-volume:
-  # # sample-myapp-volume:
-  # # sample-sample-volume:
+  # sample-myapp-volume:
+  # sample-sample-volume:
   # sample-nginx-conf-volume:
   # sample-nginx-sites-available-volume:
   # sample-nginx-log-volume:
@@ -34,13 +34,10 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: sample
-      # POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      # POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-please-change-postgres-password}"
     ports:
       - "5432:5432"
     healthcheck:
       test: pg_isready --username root --dbname sample
-      # test: pg_isready -U example_user -postgres-example-password
       interval: 3s
       timeout: 2s
       retries: 999999
@@ -78,10 +75,16 @@ services:
       - ./furukawa-sample-hasura/hasura:/hasura
     environment:
       # Hasuraが利用するDB接続先URL
+      # (※もちろん本番インフラでは AWS Parameter Store から Secrets Managerとかを使う)
       HASURA_GRAPHQL_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
 
-      # メタデータの出力先のDB接続先URL(※設定しない場合はHASURA_GRAPHQL_DATABASE_URLと同じ接続先が使用される)
+      # Hasuraのメタデータの出力先のDB接続先URL(※設定しない場合はHASURA_GRAPHQL_DATABASE_URLと同じ接続先が使用される)
+      # (※もちろん本番インフラでは AWS Parameter Store から Secrets Managerとかを使う)
       # HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
+
+      # Hasuraのメタデータの出力先
+      HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura/migrations
+      HASURA_GRAPHQL_METADATA_DIR: /hasura/metadata
 
       # DBの操作がメタデータファイルに同期されない管理コンソールを起動出来るかどうか？
       # "true"に設定するとhttp://localhost:8080/consoleで接続出来るURLも展開されるが
@@ -100,32 +103,15 @@ services:
       # (※参考 https://hasura.io/docs/latest/deployment/logging/ )
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
 
-      ## uncomment next line to set an admin secret
+      # HasuraのAdmin権限でアクセスする際に必要なパスワード
+      # (※もちろん本番インフラでは AWS Parameter Store から Secrets Managerとかを使う)
       HASURA_GRAPHQL_ADMIN_SECRET: hogehoge
 
-      # HASURA_GRAPHQL_ASYNC_ACTIONS_FETCH_BATCH_SIZE: ???
+      # JWTで認証する場合
+      # HASURA_GRAPHQL_JWT_SECRET: '{"claims_format":"json","audience":"http://local.sample.jp:4001/","claims_namespace":"https://hasura.io/jwt/claims","type":"HS256","key":"3jhgs8idsu9832GYas912tgaqsdjuidsDFVGTRiwi329jfdqiuehjfa","issuer":"http://local-api.sample.jp:8080/miniauth"}'
 
-      # HASURA経由でアクション発火時に渡す情報
-      HASURA_ACTION_SECRET_ENV: jojo
-      HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura/migrations
-      HASURA_GRAPHQL_METADATA_DIR: /hasura/metadata
-
-      # ↓ こういうのがほしいけど存在しない
-      # HASURA_GRAPHQL_URL_ROOT: api
-
-      # Hasuraから各アプリに対してのWebHookを飛ばすためのベースURL
-      NUXT_API_BASE_SCHEDULE: http://host.docker.internal:4200/myapp/api/webhook/schedule
-      NUXT_API_BASE_EVENT: http://host.docker.internal:4200/myapp/api/webhook/event
-      NUXT_API_BASE_SAMPLE: http://host.docker.internal:4100/sample/api/webhook/action
-      NUXT_API_BASE_myapp: http://host.docker.internal:4200/myapp/api/webhook/action
-      NUXT_API_BASE_COMPANY: http://host.docker.internal:4300/company/api/webhook/action
-      NUXT_API_BASE_STUDENT: http://host.docker.internal:4400/student/api/webhook/action
-      NUXT_API_BASE_ASSISTANT: http://host.docker.internal:4500/assistant/api/webhook/action
-
-      # HASURA_GRAPHQL_AUTH_HOOK: http://172.29.0.1:8080/miniauth/api/auth
-      # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
-
-      # HASURA_GRAPHQL_CORS_DOMAIN: "https://*.foo.bar.com:8080, http://*.localhost, http://localhost:3000, http://example.com"
+      # Webブラウザに対しての【Cross-Origin Resource Sharing】のセキュリティ設定
+      # "https://*.foo.bar.com:8080, http://*.localhost, http://localhost:3000, http://example.com"
       HASURA_GRAPHQL_CORS_DOMAIN: "*"
 
       # CORS が無効な場合でも、WebSocket の初期ハンドシェイクで Cookie を読み取ることができます。
@@ -133,7 +119,19 @@ services:
       # この設定は、CORSが無効な場合にのみ適用されます。
       # HASURA_GRAPHQL_WS_READ_COOKIE: true
 
-  #     HASURA_GRAPHQL_JWT_SECRET: '{"claims_format":"json","audience":"http://local.sample.jp:4001/","claims_namespace":"https://hasura.io/jwt/claims","type":"HS256","key":"3jhgs8idsu9832GYas912tgaqsdjuidsDFVGTRiwi329jfdqiuehjfa","issuer":"http://local-api.sample.jp:8080/miniauth"}'
+      # Hasuraから各アプリに対してのWebHookを飛ばすためのベースURL
+      # (※Nuxtのサーバミドルウェアでwebhookを受ける場合にHasura側で一本一本のカスタムwebhookのベースURLを持ってときたい時に設定する)
+      # {{NUXT_API_BASE_SCHEDULE}}/xxx みたいなエンドポイントをHasuraの管理コンソールでwebhookのURLに設定する
+      # NUXT_API_BASE_SCHEDULE: http://host.docker.internal:4200/myapp/api/webhook/schedule
+      # NUXT_API_BASE_EVENT: http://host.docker.internal:4200/myapp/api/webhook/event
+      # NUXT_API_BASE_SAMPLE: http://host.docker.internal:4100/sample/api/webhook/action
+      # NUXT_API_BASE_myapp: http://host.docker.internal:4200/myapp/api/webhook/action
+      # NUXT_API_BASE_COMPANY: http://host.docker.internal:4300/company/api/webhook/action
+      # NUXT_API_BASE_STUDENT: http://host.docker.internal:4400/student/api/webhook/action
+      # NUXT_API_BASE_ASSISTANT: http://host.docker.internal:4500/assistant/api/webhook/action
+
+      # HASURA_GRAPHQL_AUTH_HOOK: http://172.29.0.1:8080/miniauth/api/auth
+      # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
 
   # 🔽🔽🔽🔽🔽🔽🔽🔽🔽 Nuxt3 🔽🔽🔽🔽🔽🔽🔽🔽🔽
   furukawa-sample-nuxt:
