@@ -1,4 +1,4 @@
-# sample-nuxt-hasura
+# furukawa-sample-app
 
 ## 概要説明
 
@@ -19,13 +19,13 @@ Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
 #### 1. とりあえず git clone してくる
 
 ```
-git clone git@github.com:skydisc-laine/sample-nuxt-hasura.git
+git clone git@github.com:skydisc-laine/furukawa-sample-app.git
 ```
 
 #### 2. 落としてきたディレクトリに移動する
 
 ```
-cd sample-nuxt-hasura
+cd furukawa-sample-app
 ```
 
 #### 3. 実行する(※サンプルが起動する)
@@ -34,7 +34,7 @@ cd sample-nuxt-hasura
 docker compose up
 ```
 
-#### 4. 初期データ投入(※初回のみ sample-nuxt-hasura をカレントディレクトリにして実行)
+#### 4. 初期データ投入(※初回のみ furukawa-sample-app をカレントディレクトリにして実行)
 
 ↓↓↓ bash 用
 
