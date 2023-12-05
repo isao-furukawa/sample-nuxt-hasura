@@ -37,17 +37,15 @@ http://localhost:2000 ← Nuxt のアプリのホーム画面
 furukawa-sample-postgresql
 
 ```
-└── docker-entrypoint-initdb.d
-    ├── 01_create_tables.sql ← テーブル作成のSQL
-    └── 02_insert_data.sql   ← 少量のサンプルデータインサート用のSQL
+└── docker-entrypoint-initdb.d ← 一応用意したが初回もそれ以降も使わない
 ```
 
 furukawa-sample-hasura
 
 ```
 ├── Dockerfile
-└── hasura ← このディレクトリ以下がHasuraのメタデータフォルダ
-    ├── config.yaml
+└── hasura ← このディレクトリ以下がHasuraと同期している
+    ├── config.yaml ← これが基本の設定ファイル
     ├── metadata
     │   ├── actions.graphql
     │   ├── actions.yaml
@@ -56,9 +54,11 @@ furukawa-sample-hasura
     │   ├── backend_configs.yaml
     │   ├── cron_triggers.yaml
     │   ├── databases
-    │   │   ├── databases.yaml
+    │   │   ├── databases.yaml ← DBの接続先情報
     │   │   └── sample
     │   │       └── tables
+    │   │           ├── public_my_sample_1.yaml
+    │   │           ├── public_my_sample_2.yaml
     │   │           ├── public_products.yaml
     │   │           ├── public_receipt_items.yaml
     │   │           ├── public_receipts.yaml
@@ -73,8 +73,22 @@ furukawa-sample-hasura
     │   ├── remote_schemas.yaml
     │   ├── rest_endpoints.yaml
     │   └── version.yaml
-    └── migrations
+    ├── migrations ← DBへの操作RailsとかにもあるMigrationでバージョン指定してロールバック出来たりする
+    │   └── sample
+    │       ├── 1701710768951_init ← それぞれのマイグレーション設定
+    │       │   └── up.sql
+    │       ├── 1701753412816_create_my_sample_1 ← それぞれのマイグレーション設定
+    │       │   ├── down.sql
+    │       │   └── up.sql
+    │       └── 1701753453636_create_my_sample_2 ← それぞれのマイグレーション設定
+    │           ├── down.sql
+    │           └── up.sql
+    └── seeds ← DBの型定義じゃなくて実データを投入するファイル郡
         └── sample
+            ├── 1701711144637_products.sql
+            ├── 1701711204164_users.sql
+            ├── 1701711245017_receipts.sql
+            └── 1701711262867_receipt_items.sql
 ```
 
 furukawa-sample-nuxt
