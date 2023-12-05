@@ -48,6 +48,21 @@ http://localhost:2000 ← Nuxt のアプリのホーム画面
 
 > [!NOTE] ※今後 DB に Table を追加したり、View や Function を作る場合も管理コンソールから行う
 
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+
 ```
 # Hasuraの設定ファイル config.yaml があるディレクトに移動する
 cd ./furukawa-sample-hasura/hasura
