@@ -12,6 +12,7 @@ Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
 1. apollo-composable による reactive な nuxt との連動
 1. jsonb 型を利用した DB の永続化データ側での多言語対応
 1. timestamptz 型による UTC に統一された日時データとゾーン毎のサンプル処理
+1. subscription による websocket でのリアルタイム状態更新
 
 ## 実行方法
 
