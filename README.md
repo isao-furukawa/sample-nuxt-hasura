@@ -11,7 +11,7 @@ Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
 1. apollo-client の組み込み方法(ssr+csr の universal モードでの組み込み方法)
 1. apollo-composable による reactive な nuxt との連動
 1. jsonb 型を利用した DB の永続化データ側での多言語対応
-1. timestamptz 型による UTC に統一された日時データとゾーン毎のサンプル処理
+1. timestamptz 型による UTC に統一された日時データとゾーン毎の処理サンプル
 1. subscription による websocket でのリアルタイム状態更新
 
 ## 実行方法
@@ -48,7 +48,7 @@ docker compose up
 pushd ./furukawa-sample-hasura/hasura; and hasura seed apply; popd
 ```
 
-> [!TIP]
+> [!NOTE]
 > 開発が進み、新たに増えたテーブルに初期データを投入したい場合等も hasura seed apply を利用する事になる。
 
 #### 5. ブラウザでアクセスするとデモアプリの動作が確認できる
@@ -114,7 +114,7 @@ furukawa-sample-hasura
     │   ├── remote_schemas.yaml
     │   ├── rest_endpoints.yaml
     │   └── version.yaml
-    ├── migrations ← DBへの操作RailsとかにもあるMigrationでバージョン指定してロールバック出来たりする
+    ├── migrations ← DBへの操作、RailsにもあるヤツMigrationでバージョン指定してロールバック出来たりする
     │   └── sample
     │       ├── 1701710768951_init ← それぞれのマイグレーション設定
     │       │   └── up.sql
@@ -196,3 +196,6 @@ furukawa-sample-nuxt
 │       └── create-apollo-client.ts ← apollo-clientインスタンスの生成処理を共通で切り出してある(※後でnuxtのserver middlewareで使うから)
 └── tsconfig.json
 ```
+
+> [!TIP]
+> とりあえず、管理コンソールに入って画面からテーブルを作ったり、既存のテーブルのカラムを変更したりしてみてください。何か変更を行ったら、プロジェクトディレクトリで git diff してみてください。Hasura の管理コンソールで行った変更が、furukawa-sample-hasura/hasura ディレクトリにメタデータとして同期されてくるはずです。
