@@ -40,16 +40,14 @@ docker compose up
 pushd ./furukawa-sample-hasura/hasura; and hasura seed apply; popd
 ```
 
-#### 4. ブラウザでアクセスするとデモアプリの動作が確認できる
+#### 5. ブラウザでアクセスするとデモアプリの動作が確認できる
 
 http://localhost:2000 ← Nuxt のアプリのホーム画面
 
-#### 5. ハスラの管理コンソールを起動するにはこちら
+#### 6. ハスラの管理コンソールを起動するにはこちら
 
-> [!NOTE] ※今後 DB に Table を追加したり、View や Function を作る場合も管理コンソールから行う
-
-> [!NOTE]  
-> Highlights information that users should take into account, even when skimming.
+> [!NOTE]
+> 今後 DB に Table を追加したり、View や Function を作る場合も管理コンソールから行う
 
 > [!TIP]
 > Optional information to help a user be more successful.
