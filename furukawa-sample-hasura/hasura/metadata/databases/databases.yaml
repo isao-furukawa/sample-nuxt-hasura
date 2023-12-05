@@ -2,13 +2,7 @@
   kind: postgres
   configuration:
     connection_info:
-      database_url:
-        connection_parameters:
-          database: sample
-          host: furukawa-sample-postgresql
-          password: pass
-          port: 5432
-          username: root
+      database_url: "{{HASURA_GRAPHQL_DATABASE_URL}}"
       isolation_level: read-committed
       use_prepared_statements: false
   tables: "!include sample/tables/tables.yaml"

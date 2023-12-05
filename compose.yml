@@ -76,23 +76,33 @@ services:
 
     volumes:
       - ./furukawa-sample-hasura/hasura:/hasura
-    #   - ./packages/api-hasura/migrations:/hasura-migrations
-    #   - ./packages/api-hasura/metadata:/hasura-metadata
     environment:
-      ## postgres database to store Hasura metadata
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
-      ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
-      ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "false" # http://localhost:8080/consoleで動作する管理コンソールはmigrationファイルの同期生成がされないので使わせない(※ややこしいから)
-      ## enable debugging mode. It is recommended to disable this in production
+      # Hasuraが利用するDB接続先URL
+      HASURA_GRAPHQL_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
+
+      # メタデータの出力先のDB接続先URL(※設定しない場合はHASURA_GRAPHQL_DATABASE_URLと同じ接続先が使用される)
+      # HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://root:pass@furukawa-sample-postgresql:5432/sample
+
+      # DBの操作がメタデータファイルに同期されない管理コンソールを起動出来るかどうか？
+      # "true"に設定するとhttp://localhost:8080/consoleで接続出来るURLも展開されるが
+      # このエンドポイントで動作する管理コンソールはmigrationファイルの同期生成がされないので使わせない(※ややこしいから)
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+
+      # このモードが有効になると、レスポンスの errors オブジェクトに extensions キーが追加されます。
+      # この internal キーには、生成されたSQLステートメントやPostgresからの例外情報などのエラー情報が含まれます。
+      # (※開発中のみ有効にするべきで、本番環境では false にしないとセキュリティホールになる)
       HASURA_GRAPHQL_DEV_MODE: "true"
+
+      # ログレベルの設定 debug > info > warn > error
+      HASURA_GRAPHQL_LOG_LEVEL: error
+
+      # 有効化するログの種類
+      # (※参考 https://hasura.io/docs/latest/deployment/logging/ )
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      #  jwk-refresh-log
+
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: hogehoge
 
-      HASURA_GRAPHQL_LOG_LEVEL: error
       # HASURA_GRAPHQL_ASYNC_ACTIONS_FETCH_BATCH_SIZE: ???
 
       # HASURA経由でアクション発火時に渡す情報
