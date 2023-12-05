@@ -71,19 +71,7 @@ http://localhost:9695/console ← 管理コンソールの URL
 > DB に対する操作(※テーブルやビュー、ファンクションの作成など)はこの管理コンソール上で行う。そうすることによって、/hasura ディレクトリ配下に自動でマイグレーションファイルが同期されていくので、それを github で管理する事によって全員共通の環境を維持することが出来る。マイグレーションファイルは docker compose up 時に自動で読み込まれ環境に適用される。
 
 > [!CAUTION]
-> Hasura の Docker 版を起動すると環境変数の HASURA_GRAPHQL_ENABLE_CONSOLE(※デフォルトは true)が true の場合 http:/localhost:8080/console でアクセス出来る管理コンソールが起動するが、この管理コンソールから DB に対する変更を行ってもマイグレーションファイルは同期生成されない。そのため誤解を招かない用に false を設定して起動出来ないようにしてあるので注意!
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]  
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]  
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.
+> Hasura の Docker 版を起動すると環境変数の HASURA_GRAPHQL_ENABLE_CONSOLE(※デフォルトは true)が true の場合 http:/localhost:8080/console でアクセス出来る管理コンソールが起動するが、この管理コンソールから DB に対する変更を行ってもマイグレーションファイルは同期生成されない。そのため誤解を招かない用に false を設定して起動出来ないようにしてあるので使用しないように！！
 
 ## ディレクトリの説明
 
@@ -208,20 +196,3 @@ furukawa-sample-nuxt
 │       └── create-apollo-client.ts ← apollo-clientインスタンスの生成処理を共通で切り出してある(※後でnuxtのserver middlewareで使うから)
 └── tsconfig.json
 ```
-
-## Hasura の開発の方法
-
-1. 管理コンソールでテーブル作ったりカラム作ったりする
-2. docker exec -it (docker ps -aqlf "name=furukawa-sample-hasura") /bin/fish みたいな感じでコンテナの中に入る
-3. コンテナの中で Hasura の CLI コマンドを実行する
-
-```
-# 移動
-cd /hasura
-
-# メタデータ設定ファイルの出力
-hasura metadata export
-```
-
-4. furukawa-sample-hasura の hasura ディレクトリに出力される。
-5. 普通に git で管理すれば良い(コミット,push)
