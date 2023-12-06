@@ -14,6 +14,17 @@ Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
 1. timestamptz 型による UTC に統一された日時データとゾーン毎の処理サンプル
 1. subscription による websocket でのリアルタイム状態更新
 
+## 前提条件
+
+docker と hasura-cli がホスト OS へのインストールは必須
+
+```
+brew install hasura-cli
+brew install orbstack ← オススメのdocker基盤
+brew install brew install --cask docker ← orbstackを入れないならコレ(※重たいのでオススメしない)
+brew install docker-compose
+```
+
 ## 実行方法
 
 #### 1. とりあえず git clone してくる
