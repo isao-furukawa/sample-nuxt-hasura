@@ -21,7 +21,7 @@ docker と hasura-cli がホスト OS へのインストールは必須
 ```
 brew install hasura-cli
 brew install orbstack ← オススメのdocker基盤
-brew install brew install --cask docker ← orbstackを入れないならコレ(※重たいのでオススメしない)
+brew install --cask docker ← orbstackを入れないならコレ(※重たいのでオススメしない)
 brew install docker-compose
 ```
 
