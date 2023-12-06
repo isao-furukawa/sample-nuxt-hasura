@@ -1,4 +1,4 @@
-# furukawa-sample-app
+# sample-nuxt-hasura
 
 ## 概要説明
 
@@ -34,7 +34,7 @@ cd sample-nuxt-hasura
 docker compose up
 ```
 
-#### 4. 初期データ投入(※初回のみ furukawa-sample-app をカレントディレクトリにして実行)
+#### 4. 初期データ投入(※初回のみ sample-nuxt-hasura をカレントディレクトリにして実行)
 
 ↓↓↓ bash 用
 
