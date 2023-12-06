@@ -19,13 +19,13 @@ Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
 #### 1. とりあえず git clone してくる
 
 ```
-git clone git@github.com:skydisc-laine/furukawa-sample-app.git
+git@github.com:isao-furukawa/sample-nuxt-hasura.git
 ```
 
 #### 2. 落としてきたディレクトリに移動する
 
 ```
-cd furukawa-sample-app
+cd sample-nuxt-hasura
 ```
 
 #### 3. 実行する(※サンプルが起動する)
