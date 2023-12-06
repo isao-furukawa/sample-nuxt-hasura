@@ -19,10 +19,10 @@ Nuxt3 + apollo-client(graphql client) + Hasura(graphql server)
 docker と hasura-cli がホスト OS へのインストールは必須
 
 ```
-brew install hasura-cli
-brew install orbstack ← オススメのdocker基盤
-brew install --cask docker ← orbstackを入れないならコレ(※重たいのでオススメしない)
-brew install docker-compose
+brew install hasura-cli     ← Hasuraの各種コマンドを実行するため
+brew install orbstack       ← オススメのdocker基盤
+brew install --cask docker  ← orbstackを入れないならコレ(※重たいのでオススメしない)
+brew install docker-compose ← プロジェクトはcompose.ymlに纏めてあるので
 ```
 
 ## 実行方法
