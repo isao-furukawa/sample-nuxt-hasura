@@ -26,6 +26,21 @@ console.warn(path.replaceAll('/', '.'));
 // console.warn(i18n.t(`menu${route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/)/, '').replaceAll('/', '.')}`));
 // console.warn(localePath());
 
+//    確認
+//     "editor.guides.bracketPairs": true,
+//     "editor.bracketPairColorization.enabled": true
+// const aaa = () => {
+//   console.warn('sss');
+
+//   const bbb = () => {
+//     console.warn('あああ');
+
+//     const ccc = () => {
+//       console.warn('あｄｓふぁ');
+//     };
+//   };
+// };
+
 const title = computed(() =>
   i18n.t(
     `menu${
