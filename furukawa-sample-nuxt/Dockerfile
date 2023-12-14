@@ -1,6 +1,6 @@
 # 🔽🔽🔽 ここから、Nodeベースイメージの作成 🔽🔽🔽
 # Nodeの公式イメージを元にベースを作成する
-FROM node:18.18.2 AS base
+FROM node:20.10.0 AS base
 
 # タイムゾーンを設定
 ENV TZ=Asia/Tokyo
@@ -41,7 +41,7 @@ RUN chsh -s /usr/local/bin/fish && echo exec fish >> ~/.bashrc
 RUN fish -l
 
 # pnpm と ni コマンドをglobalインストール
-RUN npm install -g pnpm@8.11.0 @antfu/ni
+RUN npm install -g pnpm@8.12.1 @antfu/ni
 
 # pnpmのstoreの位置を明示的に設定しておく
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
