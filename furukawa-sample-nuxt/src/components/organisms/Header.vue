@@ -1,5 +1,4 @@
 <template lang="pug">
-
 n-space(justify="space-around" size="large" align="center")
   img.logo(
     width="32"
@@ -26,7 +25,56 @@ console.warn(path.replaceAll('/', '.'));
 // console.warn(i18n.t(`menu${route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/)/, '').replaceAll('/', '.')}`));
 // console.warn(localePath());
 
-//    確認
+// TODO: とーどー１qwerqwerqwerqwerqwerqwerqre
+//       aaaa
+//       bbbb
+//       cccc
+// todo: とーどー２wtryuetyurtyurytiryiryituyityuityuityu
+
+/**
+ * TODO: ういあ
+ *       あああ
+ *         あｓｄふぃじゅ
+ * aaa
+ */
+
+/**
+ * BUG: aaa
+ * adsfads
+ *
+ * asdfasdf
+ * asdfa
+ */
+
+/**
+ * aaaa
+ * fff
+ * BUG: aaa
+ * dsafasdf
+ */
+/**
+ * あいうえお
+ * TODO: ああああ
+ *       aaa
+ *       ccc
+ *       ddd
+ * ここは違う
+ * ここも違うでや
+ */
+// TODO: とーどやでーーーーえええええ
+// todo: やっっｄあｆだｆさｄｆｓｄｆ
+// HACK: はっく1tyuityutityuityuityuityuityuityuituy
+// hack: はっく2ryuiuyityuityuituyotloiutoyiu
+// FIXME: ふぃくすみ１h;hio;yio;yio;io;yio;oi;oiu;uio;
+// fixme: ふぃすみ２34563456634563456345634563546
+// CHECK: ちぇっく１rtygrgsfetgsert5
+// check: ちぇｃく２e56he56u65u65u465u456u
+// NOTE: のーと１e56u456iu467u456u465utr
+// note: のーと２erdthertuertrty
+// BUG: ばぐ１35673567356uy65y56y456
+// bug: ばぐ２etryertyertyery6356u
+// [ ]: dsafadsfertyertyertyerty
+// [x]: 888838u3u5eyeuyy56
 //     "editor.guides.bracketPairs": true,
 //     "editor.bracketPairColorization.enabled": true
 // const aaa = () => {
@@ -39,7 +87,14 @@ console.warn(path.replaceAll('/', '.'));
 //       console.warn('あｄｓふぁ');
 //     };
 //   };
-// };
+// }
+
+const data = [
+  'aaaあ1', // hack: prettier
+  'aaaあ2',
+  'aaaあ3',
+  'aaaあ4',
+];
 
 const title = computed(() =>
   i18n.t(
