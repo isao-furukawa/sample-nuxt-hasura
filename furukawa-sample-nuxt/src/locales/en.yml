@@ -16,6 +16,8 @@ price: price
 validation:
   name: Name
   age: Age
+  password1: Password
+  password2: Confirm
   date_enrollment: Enrollment Date
   date_graduation: Graduation Date
   submit: Submit

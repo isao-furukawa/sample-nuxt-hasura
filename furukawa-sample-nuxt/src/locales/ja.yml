@@ -16,6 +16,8 @@ price: 価格
 validation:
   name: 名前
   age: 年齢
+  password1: パスワード入力
+  password2: パスワード確認
   date_enrollment: 入学日
   date_graduation: 卒業日
   submit: 送信

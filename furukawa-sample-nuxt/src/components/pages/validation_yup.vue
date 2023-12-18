@@ -11,6 +11,16 @@ form(@submit.prevent="validate")
     span.error(v-if="errors.age") {{ errors.age }}
 
   div.field
+    label(for="password1")  {{ $t('validation.password1') }}
+    input(v-model="password1" type="text" name="password1")
+    span.error(v-if="errors.password1") {{ errors.password1 }}
+  
+  div.field
+    label(for="password2")  {{ $t('validation.password2') }}
+    input(v-model="password2" type="text" name="password2")
+    span.error(v-if="errors.password2") {{ errors.password2 }}
+
+  div.field
     label(for="dateEnrollment") {{ $t('validation.date_enrollment') }}
     input(v-model="dateEnrollment" type="text" name="dateEnrollment")
     span.error(v-if="errors.dateEnrollment") {{ errors.dateEnrollment }}
@@ -39,10 +49,15 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .number()
       .label(i18n.t('validation.age'))
       // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
-      .integer()
-      .min(0)
+      .integer('整数しかあかんで')
+      .min(0, '最低1以上やないとおかしいで')
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
+    password1: yup.string().required(),
+    password2: yup
+      .string()
+      .required()
+      .oneOf([yup.ref('password1')], 'パスワードが一致しません'),
     dateEnrollment: yup
       .date() // hack: pretter
       .label(i18n.t('validation.date_enrollment'))
@@ -75,6 +90,8 @@ const { defineField, errors, handleSubmit, meta } = useForm({
 
 const { value: name, meta: metaName } = useField('name');
 const { value: age, meta: metaAge } = useField('age');
+const { value: password1, meta: metaPassword1 } = useField('password1');
+const { value: password2, meta: metaPassword2 } = useField('password2');
 const { value: dateEnrollment, meta: metaDateEnrollment } = useField('dateEnrollment');
 const { value: dateGraduation, meta: metaDateGraduation } = useField('dateGraduation');
 
