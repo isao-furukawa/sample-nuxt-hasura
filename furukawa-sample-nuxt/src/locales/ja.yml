@@ -7,6 +7,19 @@ menu:
   home: ホーム
   subscribe: サブスクリプション
   update: 更新ミューテーション
+  validate_yup: バリデーション(Yup)
+  validate_zod: バリデーション(Zod)
 
 product_name: 商品名
 price: 価格
+
+validation:
+  name: 名前
+  age: 年齢
+  date_enrollment: 入学日
+  date_graduation: 卒業日
+  submit: 送信
+
+message:
+  error:
+    from_to: '{to}は{from}より後の日付を入力してください。'

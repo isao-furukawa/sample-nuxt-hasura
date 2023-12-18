@@ -7,6 +7,19 @@ menu:
   home: Home
   subscribe: Subscription
   update: Update Mutation
+  validate_yup: Validation(Yup)
+  validate_zod: Validation(Zod)
 
 product_name: product name
 price: price
+
+validation:
+  name: Name
+  age: Age
+  date_enrollment: Enrollment Date
+  date_graduation: Graduation Date
+  submit: Submit
+
+message:
+  error:
+    from_to: 'Enter a {to} that is later than the {from}.'

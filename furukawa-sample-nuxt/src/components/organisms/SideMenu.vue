@@ -93,6 +93,16 @@ const menuOptions: MenuOption[] = [
     label: () => menuItemRender('/subscribe', 'menu.subscribe'),
     icon: renderIcon('material-icons-outlined', 'subscriptions'),
   },
+  {
+    key: 'validation_yup',
+    label: () => menuItemRender('/validation_yup', 'menu.validate_yup'),
+    icon: renderIcon('material-icons-outlined', 'done'),
+  },
+  {
+    key: 'validation_zod',
+    label: () => menuItemRender('/validation_zod', 'menu.validate_zod'),
+    icon: renderIcon('material-icons-outlined', 'done'),
+  },
 ];
 </script>
 <style lang="scss" scoped>

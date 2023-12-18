@@ -7,6 +7,15 @@ menu:
   home: Trang chủ
   subscribe: Đăng ký
   update: Cập nhật đột biến
+  validate_yup: Thẩm định(Yup)
+  validate_zod: Thẩm định(Zod)
 
 product_name: Sản phẩm
 price: Giá
+
+validation:
+  name: Tên
+  age: Tuổi
+  date_enrollment: Ngày nhập học
+  date_graduation: Ngày lễ tốt nghiệp
+  submit: Gửi
