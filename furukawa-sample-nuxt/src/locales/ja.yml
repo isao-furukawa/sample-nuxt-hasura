@@ -25,3 +25,11 @@ validation:
 message:
   error:
     from_to: '{to}は{from}より後の日付を入力してください。'
+
+hoge:
+  the_world: 'the world'
+  dio: ９９９９
+  label: '【ういあ】|a'
+  linked: '@:hoge.dio @:hoge.the_world !!!!'
+  linked2: '@:hoge.label だよ'
+  greeting: (ctx) => 'hello!'

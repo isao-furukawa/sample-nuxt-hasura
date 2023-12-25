@@ -32,6 +32,9 @@ dependencies:
   yup-locale-ja:
     specifier: ^1.0.0
     version: 1.0.0(yup@1.3.3)
+  yup-universal-locale:
+    specifier: ^0.1.2
+    version: 0.1.2(yup@1.3.3)
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -11838,6 +11841,14 @@ packages:
     resolution: {integrity: sha512-HTlHQUIC1KzvZw3xYfeDEpS68hSEE3PcvJXJwmQ1uPAJkTyAAZ+9LgQwwS8yTr4IfuDa3niuOUhExihewNcl1g==}
     peerDependencies:
       yup: 0.x || 1.x
+    dependencies:
+      yup: 1.3.3
+    dev: false
+
+  /yup-universal-locale@0.1.2(yup@1.3.3):
+    resolution: {integrity: sha512-swMd8bE8a96y7D89qYPplmmAXrcC8vxZ6RlQNbctz58cgnP0eAGnJyQV/F+KgXnh15sVrQvC4PQ/sVxMa2o9Rw==}
+    peerDependencies:
+      yup: ^0.26.0
     dependencies:
       yup: 1.3.3
     dev: false

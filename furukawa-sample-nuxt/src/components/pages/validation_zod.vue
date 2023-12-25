@@ -99,9 +99,8 @@ const { defineField, errors, handleSubmit, meta } = useForm({
             invalid_type_error: '型違う',
             required_error: '必須やで',
           })
-          .nonnegative('マイナスの値は無理')
-          .int('整数しか無理')
-          .optional(),
+          .positive('0より大きく無いと無理')
+          .int('整数しか無理'),
         password1: z.string().min(1, '必須です'),
         password2: z.string().min(1, '必須です'),
         // dateEnrollment: z
@@ -125,7 +124,7 @@ const { defineField, errors, handleSubmit, meta } = useForm({
 
         // 注：この下にも他のValidation項目が続きます。
       })
-      .superRefine(({ password1, password2 }, ctx) => {
+      .refine(({ password1, password2 }, ctx) => {
         // 問題のメールの再確認
         if (password1 !== password2) {
           ctx.addIssue({

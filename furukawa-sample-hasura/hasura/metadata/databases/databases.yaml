@@ -2,7 +2,7 @@
   kind: postgres
   configuration:
     connection_info:
-      database_url: "{{HASURA_GRAPHQL_DATABASE_URL}}"
+      database_url: '{{HASURA_GRAPHQL_DATABASE_URL}}'
       isolation_level: read-committed
       use_prepared_statements: false
   tables: "!include sample/tables/tables.yaml"

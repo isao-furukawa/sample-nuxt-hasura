@@ -1,4 +1,8 @@
 <template lang="pug">
+div {{ $t('hoge.linked') }}
+div {{ $t('hoge.linked2') }}
+div {{ $t('hoge.greeting', { label: 'DIO' }) }}
+div {{ $t('hoge.greeting2', { label: 'DIO', min: 9 }) }}
 form(@submit.prevent="validate")
   div.field
     label(for="name") {{ $t('validation.name') }}
@@ -26,8 +30,8 @@ form(@submit.prevent="validate")
     span.error(v-if="errors.dateEnrollment") {{ errors.dateEnrollment }}
 
   div.field
-    label(for="graduationDate") {{ $t('validation.date_graduation') }}
-    input(v-model="dateGraduation" type="text" name="graduationDate")
+    label(for="dateGraduation") {{ $t('validation.date_graduation') }}
+    input(v-model="dateGraduation" type="text" name="dateGraduation")
     span.error(v-if="errors.dateGraduation") {{ errors.dateGraduation }}
 
   button(type="submit") {{ $t('validation.submit') }}
@@ -44,16 +48,17 @@ const { defineField, errors, handleSubmit, meta } = useForm({
     name: yup
       .string() // hack: pretter
       .label(i18n.t('validation.name'))
+      .min(9)
       .required(),
     age: yup
       .number()
       .label(i18n.t('validation.age'))
       // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
-      .integer('整数しかあかんで')
-      .min(0, '最低1以上やないとおかしいで')
+      .integer()
+      .min(0)
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
-    password1: yup.string().required(),
+    password1: yup.string(),
     password2: yup
       .string()
       .required()

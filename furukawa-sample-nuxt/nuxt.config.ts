@@ -112,7 +112,8 @@ export default defineNuxtConfig({
    * ⭐⭐⭐ ??????
    */
   modules: [
-    // This comment is for "prettier" array line break hacking
+    // HACK: This comment is for "prettier" array line break hacking
+    // i18nModule,
     '@vueuse/nuxt',
     '@nuxtjs/robots',
     '@nuxtjs/i18n',
@@ -189,7 +190,7 @@ export default defineNuxtConfig({
       {
         code: 'ja',
         iso: 'ja-JP',
-        file: 'ja.yml', // ← 通常は静的ファイル(json)を指定するがymlの言語ファイルを読みたいので独自実装
+        file: 'ja.ts', // ← 通常は静的ファイル(json)を指定するがymlの言語ファイルを読みたいので独自実装
       },
       {
         code: 'en',
