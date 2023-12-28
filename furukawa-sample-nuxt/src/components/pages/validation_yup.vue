@@ -15,6 +15,11 @@ form(@submit.prevent="validate")
     span.error(v-if="errors.age") {{ errors.age }}
 
   div.field
+    label(for="phone") {{ $t('validation.phone') }}
+    input(v-model="phone" type="text" name="phone")
+    span.error(v-if="errors.phone") {{ errors.phone }}
+
+  div.field
     label(for="password1")  {{ $t('validation.password1') }}
     input(v-model="password1" type="text" name="password1")
     span.error(v-if="errors.password1") {{ errors.password1 }}
@@ -48,14 +53,24 @@ const { defineField, errors, handleSubmit, meta } = useForm({
     name: yup
       .string() // hack: pretter
       .label(i18n.t('validation.name'))
-      .min(9)
-      .required(),
+      .nullable()
+      .phone()
+      .nullable()
+      .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
     age: yup
       .number()
       .label(i18n.t('validation.age'))
       // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
       .integer()
-      .min(0)
+      .between(5, 8)
+      //.between(5, 10, 'めっせだが')
+      .nullable()
+      .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
+    phone: yup
+      .string() // hack: pretter
+      .label(i18n.t('validation.phone'))
+      .nullable()
+      .phone()
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
     password1: yup.string(),
@@ -95,6 +110,7 @@ const { defineField, errors, handleSubmit, meta } = useForm({
 
 const { value: name, meta: metaName } = useField('name');
 const { value: age, meta: metaAge } = useField('age');
+const { value: phone, meta: metaPhone } = useField('phone');
 const { value: password1, meta: metaPassword1 } = useField('password1');
 const { value: password2, meta: metaPassword2 } = useField('password2');
 const { value: dateEnrollment, meta: metaDateEnrollment } = useField('dateEnrollment');

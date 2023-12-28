@@ -16,6 +16,7 @@ export default {
   validation: {
     name: '名前',
     age: '年齢',
+    phone: '電話番号',
     password1: 'パスワード入力',
     password2: 'パスワード確認',
     date_enrollment: '入学日',
@@ -64,6 +65,7 @@ export default {
       trim: ({ named }: any) => (named('label') ? named('label') + 'の' : '') + '前後の空白を取り除いてください',
       lowercase: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '小文字のみ入力してください',
       uppercase: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '大文字のみ入力してください',
+      phone: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + 'XXX-XXX-XXXの形式で入力してください',
     },
     number: {
       min: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + `${named('min')}以上にしてください`,
@@ -74,6 +76,8 @@ export default {
       positive: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '正の数にしてください',
       negative: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '負の数にしてください',
       integer: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '整数を入力してください',
+      between: ({ named }: any) =>
+        (named('label') ? named('label') + 'は' : '') + `${named('a')}から${named('b')}の間で入力してください`,
     },
     date: {
       min: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + `${named('min')}以降の日付を入力してください`,

@@ -1,3 +1,4 @@
+import type { between } from '@vee-validate/rules';
 import * as yup from 'yup';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -55,15 +56,44 @@ export default defineNuxtPlugin((nuxtApp) => {
    * 全角カタカナ
    * (※但し、半角全角スペースは許可する)
    */
-  yup.addMethod(yup.string, 'zenKataKana', function (errorMessage: string) {
-    return this.test('zenKataKana', errorMessage, function (value = '') {
-      const { path, createError } = this;
+  //   yup.addMethod(yup.string, 'zenKataKana', function (message, max) {
+  //     return this.test(
+  //       'zenKataKana',
+  //       (context) => {
+  //         console.warn(context);
 
-      // console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
-      // console.warn(JSON.stringify(this.schema.spec.label));
+  //         return 'めっせ';
+  //       },
+  //       function (value = '') {
+  //         const { path, createError } = this;
 
-      return /^[ァ-ヶー\u{20}\u{3000}]+$/u.test(value) || createError({ path, message: errorMessage });
-    });
+  //         console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
+  //         console.warn(context);
+  //         // console.warn(JSON.stringify(this.schema.spec.label));
+
+  //         return /^[ァ-ヶー\u{20}\u{3000}]+$/u.test(value) || createError({ path, message: context });
+  //       }
+  //     );
+  //   });
+
+  yup.addMethod(yup.string, 'zenKataKana', function (context: any) {
+    return this.test(
+      'zenKataKana',
+      (context) => {
+        console.warn(context);
+
+        return 'めっせ';
+      },
+      function (value = '') {
+        const { path, createError } = this;
+
+        console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
+        console.warn(context);
+        // console.warn(JSON.stringify(this.schema.spec.label));
+
+        return /^[ァ-ヶー\u{20}\u{3000}]+$/u.test(value) || createError({ path, message: context });
+      }
+    );
   });
 
   /**
@@ -96,16 +126,72 @@ export default defineNuxtPlugin((nuxtApp) => {
    * 電話番号
    * （※「010-1-212-000-0000」のような国際番号もOK)
    */
-  yup.addMethod(yup.string, 'phone', function (errorMessage: string) {
-    return this.test('phone', errorMessage, function (value = '') {
-      const { path, createError } = this;
+  //   yup.addMethod(yup.string, 'phone', function (errorMessage: string) {
+  //     return this.test('phone', errorMessage, function (value = '') {
+  //       const { path, createError } = this;
 
-      // console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
-      // console.warn(JSON.stringify(this.schema.spec.label));
+  //       // console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
+  //       // console.warn(JSON.stringify(this.schema.spec.label));
 
-      return /^\+?\d(\d|-|\u{20})*\d$/u.test(value) || createError({ path, message: errorMessage || 'でふぉるとやで！！' });
+  //       return /^\+?\d(\d|-|\u{20})*\d$/u.test(value) || createError({ path, message: errorMessage || 'でふぉるとやで！！' });
+  //     });
+  //   });
+
+  yup.addMethod(yup.string, 'phone', function (message?: string) {
+    return this.test({
+      message: message,
+      name: 'phone',
+      exclusive: true,
+      skipAbsent: true,
+      test(value, ctx) {
+        return (
+          /^\+?\d(\d|-|\u{20})*\d$/u.test(value || '') ||
+          ctx.createError({
+            path: ctx.path,
+            message: message || i18n.t('yup.string.phone', { label: ctx.schema.spec.label }),
+          })
+        );
+      },
     });
   });
+
+  /**
+   * 数値が範囲に収まっているかどうか？
+   */
+  yup.addMethod(yup.number, 'between', function (a: number, b: number, message?: string) {
+    return this.test({
+      message: message,
+      name: 'between',
+      exclusive: true,
+      skipAbsent: true,
+      params: {
+        a,
+        b,
+      },
+      test(value, ctx) {
+        return (
+          (value !== undefined && value >= a && value <= b) ||
+          ctx.createError({
+            path: ctx.path,
+            message: message || i18n.t('yup.number.between', { label: ctx.schema.spec.label, a: a, b: b }),
+          })
+        );
+      },
+    });
+  });
+
+  // return this.test({
+  //   message,
+  //   name: 'min',
+  //   exclusive: true,
+  //   params: {
+  //     min,
+  //   },
+  //   skipAbsent: true,
+  //   test(value) {
+  //     return value.length >= this.resolve(min);
+  //   },
+  // });
 
   return {
     // provide: {
@@ -138,6 +224,9 @@ declare module 'yup' {
     // usernameMax(this: StringSchema): StringSchema;
     // onlyAlphaNumAndDotUnderbar(this: StringSchema): StringSchema;
     // notLastPeriod(this: StringSchema): StringSchema;
+  }
+  interface NumberSchema {
+    between(this: NumberSchema, a: number, b: number, message?: string): NumberSchema;
   }
 }
 
