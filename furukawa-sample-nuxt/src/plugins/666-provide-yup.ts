@@ -14,7 +14,26 @@ export default defineNuxtPlugin((nuxtApp) => {
       oneOf: ({ label, values }) => i18n.t('yup.mixed.oneOf', { label, values }),
       notOneOf: ({ label, values }) => i18n.t('yup.mixed.notOneOf', { label, values }),
       defined: ({ label }) => i18n.t('yup.mixed.defined', { label }),
-      notType: ({ label }) => i18n.t('yup.mixed.notType', { label }),
+      // notType: ({ label }) => i18n.t('yup.mixed.notType', { label }),
+      notType: (context: any) => {
+        console.warn('🍙🍙🍙🍙🍙🍙🍙🍙');
+        console.warn(context);
+        console.warn('▲▲▲🍙🍙🍙🍙🍙🍙🍙🍙' + context.label);
+        // switch (context.type) {
+        //   case 'number':
+        //     break;
+        //   case 'date':
+        //     break;
+        // }
+        // if (prm.type === 'number') {
+        //   return `${labelText(prm)}数値を入力してください。`;
+        // }
+        // if (prm.type === 'date') {
+        //   return `${labelText(prm)}日付を入力してください。`;
+        // }
+        // return i18n.t('yup.mixed.notType', { label }),;
+        return 'いじじじじじじじｊ';
+      },
     },
     string: {
       length: ({ label, length }) => i18n.t('yup.string.length', { label, length }),

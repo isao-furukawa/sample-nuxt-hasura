@@ -20,6 +20,11 @@ form(@submit.prevent="validate")
     span.error(v-if="errors.phone") {{ errors.phone }}
 
   div.field
+    label(for="birth") {{ $t('validation.birth') }}
+    input(v-model="birth" type="date" name="birth")
+    span.error(v-if="errors.birth") {{ errors.birth }}
+
+  div.field
     label(for="password1")  {{ $t('validation.password1') }}
     input(v-model="password1" type="text" name="password1")
     span.error(v-if="errors.password1") {{ errors.password1 }}
@@ -41,7 +46,7 @@ form(@submit.prevent="validate")
 
   button(type="submit") {{ $t('validation.submit') }}
 
-  div {{ meta }}
+  div {{ metaBirth }}
 </template>
 
 <script setup>
@@ -73,6 +78,13 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .phone()
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
+
+    birth: yup
+      .date()
+      .label(i18n.t('validation.birth'))
+      .nullable()
+      .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
+
     password1: yup.string(),
     password2: yup
       .string()
@@ -111,6 +123,7 @@ const { defineField, errors, handleSubmit, meta } = useForm({
 const { value: name, meta: metaName } = useField('name');
 const { value: age, meta: metaAge } = useField('age');
 const { value: phone, meta: metaPhone } = useField('phone');
+const { value: birth, meta: metaBirth } = useField('birth');
 const { value: password1, meta: metaPassword1 } = useField('password1');
 const { value: password2, meta: metaPassword2 } = useField('password2');
 const { value: dateEnrollment, meta: metaDateEnrollment } = useField('dateEnrollment');

@@ -17,6 +17,7 @@ export default {
     name: '名前',
     age: '年齢',
     phone: '電話番号',
+    birth: '誕生日',
     password1: 'パスワード入力',
     password2: 'パスワード確認',
     date_enrollment: '入学日',
@@ -51,6 +52,7 @@ export default {
       notOneOf: ({ named }: any) =>
         (named('label') ? named('label') + 'には' : '') + `${named('values')}以外のものを入力してください`,
       defined: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '値を入力してください',
+      // notType: ({ named }: any) => (named('label') ? named('label') + 'に' : '') + '異常な値が入力されています',
       notType: ({ named }: any) => (named('label') ? named('label') + 'に' : '') + '異常な値が入力されています',
     },
     string: {
