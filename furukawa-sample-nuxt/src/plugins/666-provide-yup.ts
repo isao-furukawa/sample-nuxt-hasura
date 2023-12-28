@@ -65,56 +65,45 @@ export default defineNuxtPlugin((nuxtApp) => {
   // NOTE: ▼▼▼ ここから、Yupに独自判定メソッド追加 ▼▼▼
   /**
    * 全角カタカナ
-   * (※但し、半角全角スペースは許可する)
+   * (※但し、半角スペースと「-(ハイフン)」は許可する)
    */
-  //   yup.addMethod(yup.string, 'zenKataKana', function (message, max) {
-  //     return this.test(
-  //       'zenKataKana',
-  //       (context) => {
-  //         console.warn(context);
-
-  //         return 'めっせ';
-  //       },
-  //       function (value = '') {
-  //         const { path, createError } = this;
-
-  //         console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
-  //         console.warn(context);
-  //         // console.warn(JSON.stringify(this.schema.spec.label));
-
-  //         return /^[ァ-ヶー\u{20}\u{3000}]+$/u.test(value) || createError({ path, message: context });
-  //       }
-  //     );
-  //   });
-
-  yup.addMethod(yup.string, 'zenKataKana', function (context: any) {
-    return this.test(
-      'zenKataKana',
-      (context) => {
-        console.warn(context);
-
-        return 'めっせ';
+  yup.addMethod(yup.string, 'zenKataKana', function (message?: string) {
+    return this.test({
+      message: message,
+      name: 'zenKataKana',
+      exclusive: true,
+      skipAbsent: true,
+      test(value, ctx) {
+        return (
+          /^[ァ-ヶー\u{20}\u{3000}]+$/u.test(value || '') ||
+          ctx.createError({
+            path: ctx.path,
+            message: message || i18n.t('yup.string.zenKataKana', { label: ctx.schema.spec.label }),
+          })
+        );
       },
-      function (value = '') {
-        const { path, createError } = this;
-
-        console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
-        console.warn(context);
-        // console.warn(JSON.stringify(this.schema.spec.label));
-
-        return /^[ァ-ヶー\u{20}\u{3000}]+$/u.test(value) || createError({ path, message: context });
-      }
-    );
+    });
   });
 
   /**
    * 半角カタカナ
    * (※但し、半角スペースと「-(ハイフン)」は許可する)
    */
-  yup.addMethod(yup.string, 'hanKataKana', function (errorMessage: string) {
-    return this.test('hanKataKana', errorMessage, function (value = '') {
-      const { path, createError } = this;
-      return /^[ｦ-ﾟ- ]+$/u.test(value) || createError({ path, message: errorMessage });
+  yup.addMethod(yup.string, 'hanKataKana', function (message?: string) {
+    return this.test({
+      message: message,
+      name: 'hanKataKana',
+      exclusive: true,
+      skipAbsent: true,
+      test(value, ctx) {
+        return (
+          /^[ｦ-ﾟ- ]+$/u.test(value || '') ||
+          ctx.createError({
+            path: ctx.path,
+            message: message || i18n.t('yup.string.hanKataKana', { label: ctx.schema.spec.label }),
+          })
+        );
+      },
     });
   });
 
@@ -122,14 +111,21 @@ export default defineNuxtPlugin((nuxtApp) => {
    * 全角ひらがな
    * (※但し、半角全角スペースは許可する)
    */
-  yup.addMethod(yup.string, 'zenHiraKana', function (errorMessage: string) {
-    return this.test('zenHiraKana', errorMessage, function (value = '') {
-      const { path, createError } = this;
-
-      // console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
-      // console.warn(JSON.stringify(this.schema.spec.label));
-
-      return /^[ぁ-ゖー\u{20}\u{3000}]+$/u.test(value) || createError({ path, message: errorMessage });
+  yup.addMethod(yup.string, 'zenHiraKana', function (message?: string) {
+    return this.test({
+      message: message,
+      name: 'zenHiraKana',
+      exclusive: true,
+      skipAbsent: true,
+      test(value, ctx) {
+        return (
+          /^[ぁ-ゖー\u{20}\u{3000}]+$/u.test(value || '') ||
+          ctx.createError({
+            path: ctx.path,
+            message: message || i18n.t('yup.string.zenHiraKana', { label: ctx.schema.spec.label }),
+          })
+        );
+      },
     });
   });
 

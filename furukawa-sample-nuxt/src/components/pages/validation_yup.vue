@@ -86,10 +86,7 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
 
     password1: yup.string(),
-    password2: yup
-      .string()
-      .required()
-      .oneOf([yup.ref('password1')], 'パスワードが一致しません'),
+    password2: yup.string().oneOf([yup.ref('password1')], 'パスワードが一致しません'),
     dateEnrollment: yup
       .date() // hack: pretter
       .label(i18n.t('validation.date_enrollment'))
