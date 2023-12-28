@@ -1,8 +1,4 @@
 <template lang="pug">
-div {{ $t('hoge.linked') }}
-div {{ $t('hoge.linked2') }}
-div {{ $t('hoge.greeting', { label: 'DIO' }) }}
-div {{ $t('hoge.greeting2', { label: 'DIO', min: 9 }) }}
 form(@submit.prevent="validate")
   div.field
     label(for="name") {{ $t('validation.name') }}
@@ -46,6 +42,7 @@ form(@submit.prevent="validate")
 
   button(type="submit") {{ $t('validation.submit') }}
 
+  div {{ meta }}
   div {{ metaBirth }}
 </template>
 
@@ -68,7 +65,6 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
       .integer()
       .between(5, 8)
-      //.between(5, 10, 'めっせだが')
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
     phone: yup
@@ -78,7 +74,6 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .phone()
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
-
     birth: yup
       .date()
       .label(i18n.t('validation.birth'))
