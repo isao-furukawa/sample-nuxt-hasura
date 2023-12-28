@@ -21,7 +21,7 @@ form(@submit.prevent="validate")
 
   div.field
     label(for="birth") {{ $t('validation.birth') }}
-    input(v-model="birth" type="date" name="birth")
+    input(v-model="birth" type="text" name="birth")
     span.error(v-if="errors.birth") {{ errors.birth }}
 
   div.field

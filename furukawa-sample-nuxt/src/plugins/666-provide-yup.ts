@@ -14,25 +14,17 @@ export default defineNuxtPlugin((nuxtApp) => {
       oneOf: ({ label, values }) => i18n.t('yup.mixed.oneOf', { label, values }),
       notOneOf: ({ label, values }) => i18n.t('yup.mixed.notOneOf', { label, values }),
       defined: ({ label }) => i18n.t('yup.mixed.defined', { label }),
-      // notType: ({ label }) => i18n.t('yup.mixed.notType', { label }),
       notType: (context: any) => {
-        console.warn('🍙🍙🍙🍙🍙🍙🍙🍙');
-        console.warn(context);
-        console.warn('▲▲▲🍙🍙🍙🍙🍙🍙🍙🍙' + context.label);
+        // NOTE: もしも細かく最初に指定した型毎にエラーメッセージを出したければcontext.typeで見分けて処理する
         // switch (context.type) {
         //   case 'number':
+        //     i18n.t('yup.mixed.notType', { label: context.label });
         //     break;
         //   case 'date':
+        //     i18n.t('yup.mixed.notType', { label: context.label });
         //     break;
         // }
-        // if (prm.type === 'number') {
-        //   return `${labelText(prm)}数値を入力してください。`;
-        // }
-        // if (prm.type === 'date') {
-        //   return `${labelText(prm)}日付を入力してください。`;
-        // }
-        // return i18n.t('yup.mixed.notType', { label }),;
-        return 'いじじじじじじじｊ';
+        return i18n.t('yup.mixed.notType', { label: context.label });
       },
     },
     string: {
@@ -145,17 +137,6 @@ export default defineNuxtPlugin((nuxtApp) => {
    * 電話番号
    * （※「010-1-212-000-0000」のような国際番号もOK)
    */
-  //   yup.addMethod(yup.string, 'phone', function (errorMessage: string) {
-  //     return this.test('phone', errorMessage, function (value = '') {
-  //       const { path, createError } = this;
-
-  //       // console.warn('🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷🐷');
-  //       // console.warn(JSON.stringify(this.schema.spec.label));
-
-  //       return /^\+?\d(\d|-|\u{20})*\d$/u.test(value) || createError({ path, message: errorMessage || 'でふぉるとやで！！' });
-  //     });
-  //   });
-
   yup.addMethod(yup.string, 'phone', function (message?: string) {
     return this.test({
       message: message,
@@ -198,19 +179,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
     });
   });
-
-  // return this.test({
-  //   message,
-  //   name: 'min',
-  //   exclusive: true,
-  //   params: {
-  //     min,
-  //   },
-  //   skipAbsent: true,
-  //   test(value) {
-  //     return value.length >= this.resolve(min);
-  //   },
-  // });
 
   return {
     // provide: {
