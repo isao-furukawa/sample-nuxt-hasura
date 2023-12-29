@@ -195,12 +195,12 @@ export default defineNuxtConfig({
       {
         code: 'en',
         iso: 'en-US',
-        file: 'en.yml', // ← 通常は静的ファイル(json)を指定するがymlの言語ファイルを読みたいので独自実装
+        file: 'en.ts', // ← 通常は静的ファイル(json)を指定するがymlの言語ファイルを読みたいので独自実装
       },
       {
         code: 'vi',
         iso: 'vi-VN',
-        file: 'vi.yml', // ← 通常は静的ファイル(json)を指定するがymlの言語ファイルを読みたいので独自実装
+        file: 'vi.ts', // ← 通常は静的ファイル(json)を指定するがymlの言語ファイルを読みたいので独自実装
       },
     ],
 

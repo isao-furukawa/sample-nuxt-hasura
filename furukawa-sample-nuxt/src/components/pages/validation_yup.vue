@@ -55,15 +55,14 @@ const { defineField, errors, handleSubmit, meta } = useForm({
     name: yup
       .string() // hack: pretter
       .label(i18n.t('validation.name'))
-      .nullable()
-      .phone()
-      .nullable()
-      .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
+      .required()
+      .nullable(),
     age: yup
       .number()
       .label(i18n.t('validation.age'))
       // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
       .integer()
+      .positive()
       .between(5, 8)
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),

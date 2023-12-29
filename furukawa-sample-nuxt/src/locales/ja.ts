@@ -1,3 +1,4 @@
+// NOTE: 日本語語用言語ファイル
 export default {
   language: {
     ja: '日本語',
