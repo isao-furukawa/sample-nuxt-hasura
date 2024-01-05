@@ -51,11 +51,11 @@
     "graphql-ws": "^5.14.3",
     "naive-ui": "^2.36.0",
     "nuxt": "^3.9.0",
-    "nuxt-simple-sitemap": "^4.2.3",
+    "nuxt-simple-sitemap": "^4.4.1",
     "prettier": "3.1.1",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
-    "sass": "^1.69.6",
+    "sass": "^1.69.7",
     "vite-plugin-eslint": "^1.8.1"
   },
   "dependencies": {

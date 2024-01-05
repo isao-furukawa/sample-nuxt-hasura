@@ -93,14 +93,17 @@ const { defineField, errors, handleSubmit, meta } = useForm({
   validationSchema: toTypedSchema(
     z
       .object({
-        name: z.string().min(1, '必須です').email({ message: 'Must be a valid email' }),
-        age: z.coerce
-          .number({
-            invalid_type_error: '型違う',
-            required_error: '必須やで',
-          })
-          .positive('0より大きく無いと無理')
-          .int('整数しか無理'),
+        // name: z.string('文字列').min(1, '必須です'),
+        // name: z.string().min(1, '必須です').email({ message: 'Must be a valid email' }),
+        name: z.string().min(1, '１文字椅子お').email({ message: 'Must be a valid email' }),
+        // age: z.coerce
+        //   .number({
+        //     invalid_type_error: '型違う',
+        //     required_error: '必須やで',
+        //   })
+        //   .positive('0より大きく無いと無理')
+        //   .int('整数しか無理'),
+        age: z.coerce.number().positive().int(),
         password1: z.string().min(1, '必須です'),
         password2: z.string().min(1, '必須です'),
         // dateEnrollment: z
