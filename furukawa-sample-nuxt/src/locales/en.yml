@@ -4,7 +4,9 @@ language:
   vi: Vietnamese
 
 menu:
+  login: Login
   home: Home
+  query: Query
   subscribe: Subscription
   update: Update Mutation
   validate_yup: Validation(Yup)
@@ -12,6 +14,11 @@ menu:
 
 product_name: product name
 price: price
+first_name: First Name
+family_name: Family Name
+gender: gender
+birthday: Birthday
+is_logged_in: Is Logged In
 
 validation:
   name: Name
@@ -21,6 +28,7 @@ validation:
   date_enrollment: Enrollment Date
   date_graduation: Graduation Date
   submit: Submit
+  email: Email
 
 message:
   error:

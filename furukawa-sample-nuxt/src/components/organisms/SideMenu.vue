@@ -79,9 +79,19 @@ const menuItemRender = (path: string, labelKey: string) => {
 // </span>
 const menuOptions: MenuOption[] = [
   {
+    key: 'login',
+    label: () => menuItemRender('/login', 'menu.login'),
+    icon: renderIcon('material-icons-outlined', 'login'),
+  },
+  {
     key: 'index',
     label: () => menuItemRender('/', 'menu.home'),
     icon: renderIcon('material-icons-outlined', 'home'),
+  },
+  {
+    key: 'select',
+    label: () => menuItemRender('/query_user', 'menu.query'),
+    icon: renderIcon('material-icons-outlined', 'how_to_reg'),
   },
   {
     key: 'update',

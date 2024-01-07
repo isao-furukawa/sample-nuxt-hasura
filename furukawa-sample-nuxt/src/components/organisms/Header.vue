@@ -11,10 +11,14 @@ n-space(justify="space-around" size="large" align="center")
     NuxtLink(:to='switchLocalePath("en")') {{ $t('language.en') }}
   n-button(size="tiny")
     NuxtLink(:to='switchLocalePath("vi")') {{ $t('language.vi') }}
+  div.login-user(v-if="user && user.name")
+    | {{ user.name }}  {{ $t('is_logged_in') }}
+    n-button.log-out(strong secondary type="error" @click="logout") Logout
 </template>
 <script lang="ts" setup>
 import { NH1, NH2, NText, NImage, NSpace, NButton } from 'naive-ui';
 const route = useRoute();
+const router = useRouter();
 const localePath = useLocalePath();
 const i18n = useI18n();
 console.warn('🌹🌹🌹🌹🌹🌹🌹🌹🌹');
@@ -22,6 +26,25 @@ console.warn(route.path);
 let path = route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/|$)/, '');
 path = path.length <= 1 ? '/home' : path;
 console.warn(path.replaceAll('/', '.'));
+
+const user = ref(null);
+
+onMounted(() => {
+  const savedUser = sessionStorage.getItem('user');
+  if (savedUser) {
+    user.value = JSON.parse(savedUser);
+  }
+  console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹', user.value);
+});
+
+const logout = () => {
+  sessionStorage.removeItem('jwt');
+  sessionStorage.removeItem('user');
+  user.value = null;
+  router.push('/login');
+};
+
+
 // console.warn(i18n.t(`menu${route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/)/, '').replaceAll('/', '.')}`));
 // console.warn(localePath());
 
@@ -121,5 +144,13 @@ const title = computed(() =>
 
 .hoge {
   height: 100vh;
+}
+.login-user {
+  padding: 0.5rem;
+  color: orange;
+  font-size: large;
+}
+.log-out {
+  margin-left: 2rem;
 }
 </style>

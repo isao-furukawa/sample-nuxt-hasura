@@ -9,3 +9,11 @@ array_relationships:
         table:
           name: receipts
           schema: public
+select_permissions:
+  - role: worker
+    permission:
+      columns:
+        - family_name
+        - first_name
+      filter: {}
+    comment: ""

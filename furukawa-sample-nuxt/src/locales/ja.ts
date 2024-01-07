@@ -6,7 +6,9 @@ export default {
     vi: 'ベトナム語',
   },
   menu: {
+    login: 'ログイン',
     home: 'ホーム',
+    query: 'クエリ',
     subscribe: 'サブスクリプション',
     update: '更新ミューテーション',
     validate_yup: 'バリデーション(Yup)',
@@ -14,6 +16,12 @@ export default {
   },
   product_name: '商品名',
   price: '価格',
+  first_name: '名',
+  family_name: '姓',
+  gender: '性別',
+  birthday: '生年月日',
+  is_logged_in: 'がログイン中。',
+
   validation: {
     name: '名前',
     age: '年齢',
@@ -24,6 +32,7 @@ export default {
     date_enrollment: '入学日',
     date_graduation: '卒業日',
     submit: '送信',
+    email: 'メールアドレス',
   },
   message: {
     error: {

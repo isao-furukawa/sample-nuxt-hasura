@@ -6,7 +6,9 @@ export default {
     vi: 'Tiếng Việt',
   },
   menu: {
+    login: 'Đăng Nhập',
     home: 'Trang Chủ',
+    query: 'Truy Vấn',
     subscribe: 'Đăng Ký',
     update: 'Cập Nhật Mutation',
     validate_yup: 'Xác Thực (Yup)',
@@ -14,6 +16,13 @@ export default {
   },
   product_name: 'Tên Sản Phẩm',
   price: 'Giá',
+
+  first_name: 'Tên',
+  family_name: 'Họ',
+  gender: 'Giới Tính',
+  birthday: 'Ngày Sinh',
+  is_logged_in: 'đang đăng nhập.',
+
   validation: {
     name: 'Tên',
     age: 'Tuổi',
@@ -24,6 +33,7 @@ export default {
     date_enrollment: 'Ngày Nhập Học',
     date_graduation: 'Ngày Tốt Nghiệp',
     submit: 'Gửi',
+    email: 'Địa Chỉ Email',
   },
   message: {
     error: {

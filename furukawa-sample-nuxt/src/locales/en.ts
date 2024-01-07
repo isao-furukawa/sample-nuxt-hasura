@@ -6,7 +6,9 @@ export default {
     vi: 'Vietnamese',
   },
   menu: {
+    login: 'Login',
     home: 'Home',
+    query: 'Query',
     subscribe: 'Subscription',
     update: 'Update Mutation',
     validate_yup: 'Validation (Yup)',
@@ -14,6 +16,12 @@ export default {
   },
   product_name: 'Product Name',
   price: 'Price',
+  first_name: 'First Name',
+  family_name: 'Family Name',
+  gender: 'gender',
+  birth: 'Birthday',
+  is_logged_in: 'is logged in.',
+
   validation: {
     name: 'Name',
     age: 'Age',
@@ -24,6 +32,7 @@ export default {
     date_enrollment: 'Enrollment Date',
     date_graduation: 'Graduation Date',
     submit: 'Submit',
+    email: 'Email',
   },
   message: {
     error: {

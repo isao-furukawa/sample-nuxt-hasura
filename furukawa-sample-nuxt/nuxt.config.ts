@@ -105,6 +105,8 @@ export default defineNuxtConfig({
     // GraphqlのAPIサーバ、ACTION経由か判別するキー
     X_HASURA_ACTION_SECRET: process.env.NUXT_X_HASURA_ACTION_SECRET,
 
+    jwtSecretKey: process.env.JWT_SECRET_KEY,
+
     // 🔼🔼🔼 ここまで、privateな区画なのでここに記述したものはサーバサイドでしか参照できない(※ブラウザ露出しないので安全) 🔼🔼🔼
   },
 
@@ -118,6 +120,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/i18n',
     'nuxt-simple-sitemap',
+    '@sidebase/nuxt-auth',
   ],
 
   /**
@@ -134,6 +137,7 @@ export default defineNuxtConfig({
       target.push('@apollo/client');
       target.push('ts-invariant/process');
       target.push('@vue/apollo-composable');
+      target.push('jsonwebtoken');
       // target.push('@vee-validate/rules');
       // target.push(/echarts/);
       // 🔽echartsのresize()が走るときに必須pkg
@@ -264,5 +268,32 @@ export default defineNuxtConfig({
    */
   robots: {
     configPath: 'config/robots.config.ts',
+  },
+  auth: {
+    provider: {
+      type: 'local',
+      endpoints: {
+        getSession: { path: '/user' },
+      },
+      pages: {
+        login: '/login',
+      },
+      token: {
+        signInResponseTokenPointer: '/token/accessToken',
+      },
+      sessionDataType: {
+        id: 'string',
+        email: 'string',
+        name: 'string',
+        role: 'admin | manager | worker',
+      },
+    },
+    session: {
+      enableRefreshOnWindowFocus: true,
+      enableRefreshPeriodically: 5000,
+    },
+    // globalAppMiddleware: {
+    //   isEnabled: true,
+    // },
   },
 });

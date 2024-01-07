@@ -108,8 +108,8 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: hogehoge
 
       # JWTで認証する場合
+      HASURA_GRAPHQL_JWT_SECRET: '{"claims_format":"json","audience":"http://localhost:8080/","claims_namespace":"https://hasura.io/jwt/claims","type":"RS256","key":"-----BEGIN RSA PUBLIC KEY-----\nMIICCgKCAgEAx2eCqn/RseBaMyw4/zzAIFsRYSESCxDyzuglS1D6U4jm+/+fV7L5M8tWvhzCJbE0PCWCUUGR6P0W5oWepeHOmummNed1oQG8nOW3wflPwdk/AK3JNn2GipYHutetf5ziNC9qFlRAZONyvQspcdQz9oFVy0rQHt97e5fw7Mys7xKKkwew2ED2fUrjBdOfH+TTpLx6PU7mZdse5jGkPQ5LW5EJ0a7YBLiAlqP7iIOsu9L8spj23lLQPnk2LBazljMe20eSlwOH+o9FHGMqSJ7CUTvkRKLPt2gqSK/gTDvj+61OXGKcjjkDdchbwjDQ2wECofxUH8EgK9QVij6GQOvn8nLNAbPekFBOBqoQAdHritVhQaL0RKJI9MCsusmZ0v451BQRcjmB8mZieX1ABvZqelcUAEIzuM1sZaZVSeCyEUeTOOVY+wNcSbWG8vY1HARlbhWuVJyJ3AuAUzGfSAby+UBG+Ej87sj9ktIBwvkwWwVhDcmfiUZB4qm4bBeG4/pEuQpD232Zq5WGS79y3b1Rdj9sonBmR+HutcXAp50sh2X/lJSqvsTvSaWO3UiIAd5z1xp3ps2jNO8XAAFhU0YcXiIRiVN32dCKn+RXmsLN3ks3LxT583jSmrDXRS+zlBPBtKbbzk7gpJpb6VPR0P3SI7njfOm8XQp9FaSmOWTlu7cCAwEAAQ==\n-----END RSA PUBLIC KEY-----","issuer":"MyLocalAuthServer"}'
       # HASURA_GRAPHQL_JWT_SECRET: '{"claims_format":"json","audience":"http://local.sample.jp:4001/","claims_namespace":"https://hasura.io/jwt/claims","type":"HS256","key":"3jhgs8idsu9832GYas912tgaqsdjuidsDFVGTRiwi329jfdqiuehjfa","issuer":"http://local-api.sample.jp:8080/miniauth"}'
-
       # Webブラウザに対しての【Cross-Origin Resource Sharing】のセキュリティ設定
       # "https://*.foo.bar.com:8080, http://*.localhost, http://localhost:3000, http://example.com"
       HASURA_GRAPHQL_CORS_DOMAIN: "*"
@@ -134,42 +134,42 @@ services:
       # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
 
   # 🔽🔽🔽🔽🔽🔽🔽🔽🔽 Nuxt3 🔽🔽🔽🔽🔽🔽🔽🔽🔽
-  # furukawa-sample-nuxt:
-  #   # user: 1000:1000
-  #   container_name: furukawa-sample-nuxt
-  #   tty: true
-  #   stdin_open: true
-  #   build:
-  #     context: ./furukawa-sample-nuxt
-  #     dockerfile: Dockerfile
-  #     target: dev
-  #   healthcheck:
-  #     # test: curl -I 127.0.0.1:2000/health_check
-  #     test: lsof -i:2000
-  #     interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
-  #     timeout: 2s # 応答が2秒以上かかっても許さない
-  #     retries: 999999 # 100回ぐらい失敗応答したら許さない
-  #     # start_period: 30s # 立ち上がるのに、10秒かかりそう
-  #     # args:
-  #     #   - MODE_LOCAL=true
-  #     #   - API_HOST=http://my-rails:3000
-  #   ports:
-  #     - "2000:2000"
-  #   depends_on:
-  #     furukawa-sample-hasura:
-  #       condition: service_healthy
-  #       # condition: service_started
-  #   volumes:
-  #     - ./furukawa-sample-nuxt:/app
-  #     - furukawa-sample-nuxt-node_modules-volume:/app/node_modules
-  #   environment:
-  #     - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
-  #     - NUXT_PUBLIC_DOCKER_MODE=true
-  #     - NUXT_PUBLIC_SSR_MODE=true
-  #     - NUXT_PUBLIC_API_HOST=furukawa-sample-hasura:8080
-  #     - NUXT_PUBLIC_API_PROTOCOL=http
-  #     - NUXT_PUBLIC_API_WS_PROTOCOL=ws
-  #     - NUXT_PUBLIC_API_PATH=v1/graphql
-  #     - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
-  #     - NUXT_X_HASURA_ADMIN_SECRET=hogehoge
-  #     - NUXT_X_HASURA_ACTION_SECRET=hogehoge
+  furukawa-sample-nuxt:
+    # user: 1000:1000
+    container_name: furukawa-sample-nuxt
+    tty: true
+    stdin_open: true
+    build:
+      context: ./furukawa-sample-nuxt
+      dockerfile: Dockerfile
+      target: dev
+    healthcheck:
+      # test: curl -I 127.0.0.1:2000/health_check
+      test: lsof -i:2000
+      interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
+      timeout: 2s # 応答が2秒以上かかっても許さない
+      retries: 999999 # 100回ぐらい失敗応答したら許さない
+      # start_period: 30s # 立ち上がるのに、10秒かかりそう
+      # args:
+      #   - MODE_LOCAL=true
+      #   - API_HOST=http://my-rails:3000
+    ports:
+      - "2000:2000"
+    depends_on:
+      furukawa-sample-hasura:
+        condition: service_healthy
+        # condition: service_started
+    volumes:
+      - ./furukawa-sample-nuxt:/app
+      - furukawa-sample-nuxt-node_modules-volume:/app/node_modules
+    environment:
+      - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
+      - NUXT_PUBLIC_DOCKER_MODE=true
+      - NUXT_PUBLIC_SSR_MODE=true
+      - NUXT_PUBLIC_API_HOST=furukawa-sample-hasura:8080
+      - NUXT_PUBLIC_API_PROTOCOL=http
+      - NUXT_PUBLIC_API_WS_PROTOCOL=ws
+      - NUXT_PUBLIC_API_PATH=v1/graphql
+      - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
+      - NUXT_X_HASURA_ADMIN_SECRET=hogehoge
+      - NUXT_X_HASURA_ACTION_SECRET=hogehoge
