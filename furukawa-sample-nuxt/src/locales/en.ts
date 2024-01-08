@@ -95,5 +95,8 @@ export default {
       max: ({ named }: any) => (named('label') ? named('label') + ' must have no more than' : '') + ` ${named('max')} items`,
       length: ({ named }: any) => (named('label') ? named('label') + ' must have exactly' : '') + ` ${named('length')} items`,
     },
+    relevance: {
+      email_confirm: ({ named }: any) => (named('label') ? named('label') + ' and ' : '') + `${named('email')} do not match`,
+    },
   },
 };

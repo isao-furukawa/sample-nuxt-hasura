@@ -95,5 +95,8 @@ export default {
       max: ({ named }: any) => (named('label') ? named('label') + ' không được quá' : '') + ` ${named('max')} mục`,
       length: ({ named }: any) => (named('label') ? named('label') + ' phải có chính xác' : '') + ` ${named('length')} mục`,
     },
+    relevance: {
+      email_confirm: ({ named }: any) => (named('label') ? named('label') + ' và ' : '') + `${named('email')} không khớp`,
+    },
   },
 };

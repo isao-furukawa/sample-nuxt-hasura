@@ -88,7 +88,12 @@ const i18n = useI18n();
 //       ),
 //   }),
 // });
-
+// 名前
+// 年齢
+// 電話番号
+// メールアドレス
+// 確認メールアドレス
+//
 const { defineField, errors, handleSubmit, meta } = useForm({
   validationSchema: toTypedSchema(
     z

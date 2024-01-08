@@ -25,6 +25,38 @@ export default {
     date_graduation: '卒業日',
     submit: '送信',
   },
+
+  label: {
+    item: {
+      name: '名前',
+      age: '年齢',
+      phone: '電話番号',
+      birth: '誕生日',
+      email: 'メールアドレス',
+      email_confirm: 'メールアドレス(確認)',
+    },
+    action: {
+      submit: '送信',
+    },
+  },
+  item: {
+    name: '名前',
+    age: '年齢',
+    phone: '電話番号',
+    birth: '誕生日',
+    email: 'メールアドレス',
+    email_confirm: 'メールアドレス(確認)',
+    password1: 'パスワード入力',
+    password2: 'パスワード確認',
+    date_enrollment: '入学日',
+    date_graduation: '卒業日',
+    submit: '送信',
+  },
+  // 名前
+  // 年齢
+  // 電話番号
+  // メールアドレス
+  // 確認メールアドレス
   message: {
     error: {
       from_to: '{to}は{from}より後の日付を入力してください。',
@@ -100,6 +132,11 @@ export default {
       min: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + `${named('min')}つ以上入力してください`,
       max: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + `${named('max')}つ以下にしてください`,
       length: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + `${named('length')}つにしてください`,
+    },
+
+    // NOTE: ここから、独自作成の関連バリデーション用
+    relevance: {
+      email_confirm: ({ named }: any) => (named('label') ? named('label') + 'と' : '') + `${named('email')}が一致しません`,
     },
   },
 };
