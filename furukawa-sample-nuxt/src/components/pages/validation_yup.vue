@@ -49,8 +49,8 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .nullable(),
     age: yup
       .number()
-      .label(i18n.t('label.item.age'))
-      // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
+      .label(i18n.t('label.item.age')) // ← label() に文字列を渡すとエラーメッセージを変化させることが出来るしくみがある(※この行をコメントアウトすると変わる)
+      // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`) // ←型エラーのメッセージをその場で変更する場合
       .integer()
       .positive()
       .between(5, 8)
@@ -66,7 +66,7 @@ const { defineField, errors, handleSubmit, meta } = useForm({
     birth: yup
       .date()
       .label(i18n.t('label.item.birth'))
-      .min(new Date('2024-01-05'))
+      .min(new Date('2024-01-05')) // TODO: 日付に関するエラメッセージの多言語化はまだ未対応
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
     email: yup // hack: prettier
@@ -80,7 +80,8 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .email()
       .required()
       .test(
-        'メールアドレスとメールアドレス(確認)の一致', // hack: prettier
+        'メールアドレスとメールアドレス(確認)の一致',
+        // ↓↓↓ 関連バリデーションの場合も「nuxtI18n」用の同じ多言語化ファイルを利用していける
         i18n.t('yup.relevance.email_confirm', {
           // label: i18n.t('label.item.email_confirm'),
           email: i18n.t('label.item.email'),
