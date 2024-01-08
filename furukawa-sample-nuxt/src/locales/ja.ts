@@ -14,17 +14,6 @@ export default {
   },
   product_name: '商品名',
   price: '価格',
-  validation: {
-    name: '名前',
-    age: '年齢',
-    phone: '電話番号',
-    birth: '誕生日',
-    password1: 'パスワード入力',
-    password2: 'パスワード確認',
-    date_enrollment: '入学日',
-    date_graduation: '卒業日',
-    submit: '送信',
-  },
 
   label: {
     item: {
@@ -39,41 +28,19 @@ export default {
       submit: '送信',
     },
   },
-  item: {
-    name: '名前',
-    age: '年齢',
-    phone: '電話番号',
-    birth: '誕生日',
-    email: 'メールアドレス',
-    email_confirm: 'メールアドレス(確認)',
-    password1: 'パスワード入力',
-    password2: 'パスワード確認',
-    date_enrollment: '入学日',
-    date_graduation: '卒業日',
-    submit: '送信',
-  },
-  // 名前
-  // 年齢
-  // 電話番号
-  // メールアドレス
-  // 確認メールアドレス
-  message: {
-    error: {
-      from_to: '{to}は{from}より後の日付を入力してください。',
-    },
-  },
-  hoge: {
-    the_world: 'the world',
-    dio: '９９９９',
-    label: '【ういあ】|a',
-    linked: '@:hoge.dio @:hoge.the_world !!!!',
-    linked2: '@:hoge.label だよ',
-    // greeting: (ctx: any) => `hello, ${ctx.named('name')}!`,
-    greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
-    // greeting: ({ named }: any) => `hello, ${named('name') ? 'あああ' : 'いいい'}!`,
-    greeting2: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + `${named('min')}文字以上のみ入力できます`,
-    // min: ({ label, min }) => (label ? label + 'は' : '') + `${min}文字以上のみ入力できます`,
-  },
+
+  // hoge: {
+  //   the_world: 'the world',
+  //   dio: '９９９９',
+  //   label: '【ういあ】|a',
+  //   linked: '@:hoge.dio @:hoge.the_world !!!!',
+  //   linked2: '@:hoge.label だよ',
+  //   // greeting: (ctx: any) => `hello, ${ctx.named('name')}!`,
+  //   greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
+  //   // greeting: ({ named }: any) => `hello, ${named('name') ? 'あああ' : 'いいい'}!`,
+  //   greeting2: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + `${named('min')}文字以上のみ入力できます`,
+  //   // min: ({ label, min }) => (label ? label + 'は' : '') + `${min}文字以上のみ入力できます`,
+  // },
 
   // yupで利用するバリデーションエラー時のメッセージ
   yup: {

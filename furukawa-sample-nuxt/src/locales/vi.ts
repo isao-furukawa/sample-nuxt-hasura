@@ -14,32 +14,31 @@ export default {
   },
   product_name: 'Tên Sản Phẩm',
   price: 'Giá',
-  validation: {
-    name: 'Tên',
-    age: 'Tuổi',
-    phone: 'Số Điện Thoại',
-    birth: 'Ngày Sinh',
-    password1: 'Nhập Mật Khẩu',
-    password2: 'Xác Nhận Mật Khẩu',
-    date_enrollment: 'Ngày Nhập Học',
-    date_graduation: 'Ngày Tốt Nghiệp',
-    submit: 'Gửi',
-  },
-  message: {
-    error: {
-      from_to: 'Vui lòng nhập ngày sau {from} cho {to}.',
+
+  label: {
+    item: {
+      name: 'Tên',
+      age: 'Tuổi',
+      phone: 'Số Điện Thoại',
+      birth: 'Ngày Sinh',
+      email: 'email',
+      email_confirm: 'email(xác nhận)',
+    },
+    action: {
+      submit: 'Gửi',
     },
   },
-  hoge: {
-    the_world: 'thế giới',
-    dio: '9999',
-    label: '【uiwa】|a',
-    linked: '@:hoge.dio @:hoge.the_world !!!!',
-    linked2: 'Đó là @:hoge.label',
-    greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
-    greeting2: ({ named }: any) =>
-      (named('label') ? named('label') + ' chỉ' : '') + ` chấp nhận nhiều hơn ${named('min')} ký tự`,
-  },
+
+  //   hoge: {
+  //     the_world: 'thế giới',
+  //     dio: '9999',
+  //     label: '【uiwa】|a',
+  //     linked: '@:hoge.dio @:hoge.the_world !!!!',
+  //     linked2: 'Đó là @:hoge.label',
+  //     greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
+  //     greeting2: ({ named }: any) =>
+  //       (named('label') ? named('label') + ' chỉ' : '') + ` chấp nhận nhiều hơn ${named('min')} ký tự`,
+  //   },
 
   // Messages for validation errors in yup
   yup: {
