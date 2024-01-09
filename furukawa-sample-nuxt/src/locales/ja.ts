@@ -67,7 +67,7 @@ export default {
       trim: ({ named }: any) => (named('label') ? named('label') + 'の' : '') + '前後の空白を取り除いてください',
       lowercase: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '小文字のみ入力してください',
       uppercase: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '大文字のみ入力してください',
-      // NOTE: 以下、カスタムメソッド用
+      // NOTE: 以下、stringに追加したカスタムメソッド用
       zenKataKana: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '全角カタカナで入力してください',
       hanKataKana: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '半角カタカナで入力してください',
       zenHiraKana: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '全角ひらがなで入力してください',
@@ -82,6 +82,7 @@ export default {
       positive: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '正の数にしてください',
       negative: ({ named }: any) => (named('label') ? named('label') + 'は' : '') + '負の数にしてください',
       integer: ({ named }: any) => (named('label') ? named('label') + 'には' : '') + '整数を入力してください',
+      // NOTE: 以下、numberに追加したカスタムメソッド用
       between: ({ named }: any) =>
         (named('label') ? named('label') + 'は' : '') + `${named('a')}から${named('b')}の間で入力してください`,
     },

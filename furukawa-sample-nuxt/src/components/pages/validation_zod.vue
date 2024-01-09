@@ -1,106 +1,55 @@
 <template lang="pug">
 form(@submit.prevent="validate")
   div.field
-    label(for="name") {{ $t('validation.name') }}
+    label(for="name") {{ $t('label.item.name') }}
     input(v-model="name" type="text" name="name")
     span.error(v-if="errors.name") {{ errors.name }}
 
   div.field
-    label(for="age")  {{ $t('validation.age') }}
+    label(for="age")  {{ $t('label.item.age') }}
     input(v-model="age" type="text" name="age")
     span.error(v-if="errors.age") {{ errors.age }}
 
   div.field
-    label(for="password1")  {{ $t('validation.password1') }}
-    input(v-model="password1" type="text" name="password1")
-    span.error(v-if="errors.password1") {{ errors.password1 }}
+    label(for="phone") {{ $t('label.item.phone') }}
+    input(v-model="phone" type="text" name="phone")
+    span.error(v-if="errors.phone") {{ errors.phone }}
+
+  div.field
+    label(for="birth") {{ $t('label.item.birth') }}
+    input(v-model="birth" type="text" name="birth")
+    span.error(v-if="errors.birth") {{ errors.birth }}
+
+  div.field
+    label(for="email")  {{ $t('label.item.email') }}
+    input(v-model="email" type="text" name="email")
+    span.error(v-if="errors.email") {{ errors.email }}
   
   div.field
-    label(for="password2")  {{ $t('validation.password2') }}
-    input(v-model="password2" type="text" name="password2")
-    span.error(v-if="errors.password2") {{ errors.password2 }}
+    label(for="email_confirm")  {{ $t('label.item.email_confirm') }}
+    input(v-model="email_confirm" type="text" name="email_confirm")
+    span.error(v-if="errors.email_confirm") {{ errors.email_confirm }}
 
-  //- div.field
-  //-   label(for="dateEnrollment") {{ $t('validation.date_enrollment') }}
-  //-   input(v-model="dateEnrollment" type="text" name="dateEnrollment")
-  //-   span.error(v-if="errors.dateEnrollment") {{ errors.dateEnrollment }}
-
-  //- div.field
-  //-   label(for="graduationDate") {{ $t('validation.date_graduation') }}
-  //-   input(v-model="dateGraduation" type="text" name="graduationDate")
-  //-   span.error(v-if="errors.dateGraduation") {{ errors.dateGraduation }}
-
-  button(type="submit") {{ $t('validation.submit') }}
+  button(type="submit") {{ $t('label.action.submit') }}
 
   //- div {{ meta }}
-  div {{ metaDateEnrollment }}
+  //- div {{ metaDateEnrollment }}
 </template>
 
 <script setup>
 import { useForm, useField, defineRule } from 'vee-validate';
-import * as yup from 'yup';
-
 import { z } from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
 
 const i18n = useI18n();
-
-// const { defineField, errors, handleSubmit, meta } = useForm({
-//   validationSchema: yup.object({
-//     name: yup
-//       .string() // hack: pretter
-//       .label(i18n.t('validation.name'))
-//       .required(),
-//     age: yup
-//       .number()
-//       .label(i18n.t('validation.age'))
-//       // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
-//       .integer()
-//       .min(0)
-//       .nullable()
-//       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
-//     dateEnrollment: yup
-//       .date() // hack: pretter
-//       .label(i18n.t('validation.date_enrollment'))
-//       .min(new Date())
-//       .required(),
-//     dateGraduation: yup
-//       .date()
-//       .label(i18n.t('validation.date_graduation'))
-//       .required()
-//       .test(
-//         '入学日と卒業日の前後テスト', // hack: prettier
-//         i18n.t('message.error.from_to', {
-//           from: i18n.t('validation.date_enrollment'),
-//           to: i18n.t('validation.date_graduation'),
-//         }),
-//         (dateGraduation, context) => {
-//           console.warn('🦋🦋🦋🦋🦋🦋🦋🦋');
-//           console.warn(context);
-//           const { name, age } = context.parent;
-//           console.warn(name);
-//           console.warn(age);
-//           if (dateGraduation === undefined || context.parent.dateEnrollment === undefined) {
-//             return false;
-//           }
-//           return dateGraduation > context.parent.dateEnrollment;
-//         }
-//       ),
-//   }),
-// });
-// 名前
-// 年齢
-// 電話番号
-// メールアドレス
-// 確認メールアドレス
-//
 const { defineField, errors, handleSubmit, meta } = useForm({
   validationSchema: toTypedSchema(
     z
       .object({
         // name: z.string('文字列').min(1, '必須です'),
         // name: z.string().min(1, '必須です').email({ message: 'Must be a valid email' }),
-        name: z.string().min(1, '１文字椅子お').email({ message: 'Must be a valid email' }),
+        // name: z.string().min(1, '１文字椅子お').email({ message: 'Must be a valid email' }),
+        name: z.string().min(1),
         // age: z.coerce
         //   .number({
         //     invalid_type_error: '型違う',
@@ -108,9 +57,44 @@ const { defineField, errors, handleSubmit, meta } = useForm({
         //   })
         //   .positive('0より大きく無いと無理')
         //   .int('整数しか無理'),
-        age: z.coerce.number().positive().int(),
-        password1: z.string().min(1, '必須です'),
-        password2: z.string().min(1, '必須です'),
+        age: z.coerce
+          .number()
+          .int({ message: i18n.t('validation.age') })
+          .positive()
+          .min(5, { message: i18n.t('yup.number.min', { label: i18n.t('label.item.age'), min: 5 }) })
+          .max(8, { message: i18n.t('yup.number.max', { label: i18n.t('label.item.age'), max: 8 }) })
+          .optional()
+          .nullable(),
+        phone: z.coerce //
+          .number()
+          .int()
+          .positive()
+          .optional(),
+        // .refine(({ phone }, ctx) => {
+        //   if (phone < 5) {
+        //     ctx.addIssue({
+        //       path: ['phone'],
+        //       code: 'custom',
+        //       message: '5以下ダメ',
+        //     });
+        //   }
+        // })
+        // .refine(({ phone }, ctx) => {
+        //   if (val > 8) {
+        //     ctx.addIssue({
+        //       path: ['phone'],
+        //       code: 'custom',
+        //       message: '8以上ダメ',
+        //     });
+        //   }
+        // }),
+        birth: z.union([
+          // a
+          z.optional(),
+          z.coerce.number().int().positive().min(5),
+        ]),
+        email: z.string().min(1, '必須です'),
+        email_confirm: z.string().min(1, '必須です'),
         // dateEnrollment: z
         //   // .preprocess((val) => {
         //   //   if (typeof val === 'string') {
@@ -147,55 +131,10 @@ const { defineField, errors, handleSubmit, meta } = useForm({
 
 const { value: name, meta: metaName } = useField('name');
 const { value: age, meta: metaAge } = useField('age');
-const { value: password1, meta: metaPassword1 } = useField('password1');
-const { value: password2, meta: metaPassword2 } = useField('password2');
-// const { value: dateEnrollment, meta: metaDateEnrollment } = useField('dateEnrollment');
-// const { value: dateGraduation, meta: metaDateGraduation } = useField('dateGraduation');
-
-// import { ref } from 'vue';
-// import { useForm, useField, defineRule } from 'vee-validate';
-// // import { required, integer } from '@vee-validate/rules';
-
-// const positive = (value) => {
-//   if (!value || value > 0) {
-//     return '正の整数でなければいけません';
-//   }
-
-//   return true;
-// };
-
-// // defineRule('required', required);
-// // defineRule('integer', integer);
-// // defineRule('positive', positive);
-
-// defineRule('adult', (value) => {
-//   if (!value || value < 18) {
-//     return '年齢は18歳以上でなければなりません。';
-//   }
-
-//   return true;
-// });
-
-// const { handleSubmit, errors } = useForm();
-// const { value: name } = useField('name', 'required');
-// const { value: age } = useField('age', { integer: true, positive: true });
-// const { value: enrollmentDate } = useField('enrollmentDate');
-// const { value: graduationDate } = useField('graduationDate');
-
-// const form = ref({
-//   name,
-//   age,
-//   enrollmentDate,
-//   graduationDate,
-// });
-
-// const validateField = (field) => {
-//   // Field specific validation can be added here
-// };
-
-// const validate = handleSubmit((values) => {
-//   console.log(values);
-// });
+const { value: phone, meta: metaPhone } = useField('phone');
+const { value: birth, meta: metaBirth } = useField('birth');
+const { value: email, meta: metaEmail } = useField('email');
+const { value: email_confirm, meta: metaConfirm } = useField('email_confirm');
 </script>
 
 <style scoped>
