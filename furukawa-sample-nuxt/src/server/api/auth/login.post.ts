@@ -1,10 +1,10 @@
 import { sign } from 'jsonwebtoken';
 import { sampleUsers } from '~/plugins/sample-user';
+export const { jwtSecretKey } = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   const { email, password } = await readBody(event);
-  const { jwtSecretKey } = useRuntimeConfig();
-  // const jwtSecretKey = process.env.JWT_SECRET_KEY;
+  // const { jwtSecretKey } = useRuntimeConfig();
   if (!jwtSecretKey) {
     throw new Error('JWT secret key is not defined');
   }
@@ -15,10 +15,8 @@ export default defineEventHandler(async (event) => {
   if (user) {
     const customClaims = {
       'https://hasura.io/jwt/claims': {
-        'x-hasura-default-role': 'admin',
-        'x-hasura-allowed-roles': ['admin', 'manager', 'worker'],
-        'x-hasura-role': user.role,
-        'x-hasura-user-id': user.email,
+        'x-hasura-default-role': 'anonymous',
+        'x-hasura-allowed-roles': ['admin', 'viewer', 'anonymous'],
       },
     };
     const accessToken = sign(

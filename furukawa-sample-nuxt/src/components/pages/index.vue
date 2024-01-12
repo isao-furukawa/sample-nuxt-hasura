@@ -6,6 +6,11 @@ div
 </template>
 
 <script lang="ts" setup>
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+  },
+});
 const route = useRoute();
 const nuxt = useNuxtApp();
 const runtimeConfig = useRuntimeConfig();

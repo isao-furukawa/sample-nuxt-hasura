@@ -10,10 +10,16 @@ array_relationships:
           name: receipts
           schema: public
 select_permissions:
-  - role: worker
+  - role: anonymous
+    permission:
+      columns: []
+      filter: {}
+    comment: ""
+  - role: viewer
     permission:
       columns:
         - family_name
         - first_name
+        - id
       filter: {}
     comment: ""

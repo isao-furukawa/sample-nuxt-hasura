@@ -17,9 +17,29 @@ n-space(vertical)
 import { NH1, NText, NSpace, useMessage } from 'naive-ui';
 import { useForm, useField, defineRule } from 'vee-validate';
 import * as yup from 'yup';
+import { definePageMeta, useAuth } from '#imports';
+import { useLoginUserState } from '~/composables/store/loginUser';
+import { updateAuthHeaders } from '~/utils/create-apollo-client';
+const {
+  status,
+  data,
+  token,
+  lastRefreshedAt,
+  getSession,
+  signUp,
+  signIn,
+  signOut,
+} = useAuth();
+
+// definePageMeta({
+//   auth: {
+//     unauthenticatedOnly: true,
+//     // navigateAuthenticatedTo: '/',
+//   },
+// });
 
 const router = useRouter();
-interface User {
+type User = {
   email: string;
   name: string;
   role: string;
@@ -59,14 +79,18 @@ const valid = (field: string) => {
   });
 };
 const message = useMessage();
-interface LoginResponse {
+type LoginResponse = {
   accessToken: string;
   user: User;
 }
+
+const userState = useLoginUserState();
+
 const validate = async () => {
   try {
     // バリデーション処理
     await validationSchema.validate(loginFormData);
+    // await signIn({ email: loginFormData.email, password: loginFormData.password1 });
 
     // バックエンドのログインエンドポイントにリクエストを送信
     const response = await $fetch<LoginResponse>('/api/auth/login', {
@@ -82,12 +106,16 @@ const validate = async () => {
     sessionStorage.setItem('jwt', accessToken);
     sessionStorage.setItem('user', JSON.stringify(userData));
     console.log('user💛:', userData);
+    userState.value = userData;
+    updateAuthHeaders();
 
     loginFormData.email = '';
     loginFormData.password1 = '';
 
-    router.push('/');
+    message.success('ログインしました。');
 
+    router.push('/');
+    console.log('data:', data);
     console.log('ログイン成功。🌟JWTトークン🌟:', accessToken);
   } catch (error) {
     console.error('ログイン失敗またはバリデーションエラー', error);

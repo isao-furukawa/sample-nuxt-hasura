@@ -9,13 +9,3 @@ array_relationships:
         table:
           name: receipt_items
           schema: public
-select_permissions:
-  - role: worker
-    permission:
-      columns:
-        - name
-        - price
-      filter:
-        id:
-          _eq: aaaaa
-    comment: ""

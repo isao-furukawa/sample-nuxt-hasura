@@ -19,7 +19,7 @@ export default {
   first_name: 'First Name',
   family_name: 'Family Name',
   gender: 'gender',
-  birth: 'Birthday',
+  birthday: 'Birthday',
   is_logged_in: 'is logged in.',
 
   validation: {

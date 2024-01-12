@@ -4,12 +4,17 @@ query SearchUsers(
   $order_by: [users_order_by!]
   $limit: Int
   $offset: Int
+  $isAdmin: Boolean!
 ) {
   users(where: $where, order_by: $order_by, limit: $limit, offset: $offset) {
     id
-    gender
-    birthday
     first_name
     family_name
+    ...searchUsersByRolesAttributes @include(if: $isAdmin)
   }
+}
+
+fragment searchUsersByRolesAttributes on users {
+  gender
+  birthday
 }

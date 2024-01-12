@@ -17,6 +17,8 @@ n-space(justify="space-around" size="large" align="center")
 </template>
 <script lang="ts" setup>
 import { NH1, NH2, NText, NImage, NSpace, NButton } from 'naive-ui';
+// import { useLoginUserState } from '~/composables/store/loginUser';
+
 const route = useRoute();
 const router = useRouter();
 const localePath = useLocalePath();
@@ -27,14 +29,17 @@ let path = route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/|$)/, '');
 path = path.length <= 1 ? '/home' : path;
 console.warn(path.replaceAll('/', '.'));
 
-const user = ref(null);
+const user = useLoginUserState();
 
-onMounted(() => {
+function loadUser() {
   const savedUser = sessionStorage.getItem('user');
   if (savedUser) {
     user.value = JSON.parse(savedUser);
   }
-  console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹', user.value);
+}
+
+onMounted(() => {
+  loadUser();
 });
 
 const logout = () => {

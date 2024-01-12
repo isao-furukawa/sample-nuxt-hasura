@@ -19,6 +19,19 @@ export type Scalars = {
   uuid: { input: any; output: any; }
 };
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']['input']>;
+  _gt?: InputMaybe<Scalars['Boolean']['input']>;
+  _gte?: InputMaybe<Scalars['Boolean']['input']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['Boolean']['input']>;
+  _lte?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Scalars['Boolean']['input']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']['input']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']['input']>;
@@ -137,6 +150,14 @@ export type Jsonb_Comparison_Exp = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "my_sample_1" */
+  delete_my_sample_1?: Maybe<My_Sample_1_Mutation_Response>;
+  /** delete single row from the table: "my_sample_1" */
+  delete_my_sample_1_by_pk?: Maybe<My_Sample_1>;
+  /** delete data from the table: "my_sample_2" */
+  delete_my_sample_2?: Maybe<My_Sample_2_Mutation_Response>;
+  /** delete single row from the table: "my_sample_2" */
+  delete_my_sample_2_by_pk?: Maybe<My_Sample_2>;
   /** delete data from the table: "products" */
   delete_products?: Maybe<Products_Mutation_Response>;
   /** delete single row from the table: "products" */
@@ -153,6 +174,14 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "my_sample_1" */
+  insert_my_sample_1?: Maybe<My_Sample_1_Mutation_Response>;
+  /** insert a single row into the table: "my_sample_1" */
+  insert_my_sample_1_one?: Maybe<My_Sample_1>;
+  /** insert data into the table: "my_sample_2" */
+  insert_my_sample_2?: Maybe<My_Sample_2_Mutation_Response>;
+  /** insert a single row into the table: "my_sample_2" */
+  insert_my_sample_2_one?: Maybe<My_Sample_2>;
   /** insert data into the table: "products" */
   insert_products?: Maybe<Products_Mutation_Response>;
   /** insert a single row into the table: "products" */
@@ -169,6 +198,18 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "my_sample_1" */
+  update_my_sample_1?: Maybe<My_Sample_1_Mutation_Response>;
+  /** update single row of the table: "my_sample_1" */
+  update_my_sample_1_by_pk?: Maybe<My_Sample_1>;
+  /** update multiples rows of table: "my_sample_1" */
+  update_my_sample_1_many?: Maybe<Array<Maybe<My_Sample_1_Mutation_Response>>>;
+  /** update data of the table: "my_sample_2" */
+  update_my_sample_2?: Maybe<My_Sample_2_Mutation_Response>;
+  /** update single row of the table: "my_sample_2" */
+  update_my_sample_2_by_pk?: Maybe<My_Sample_2>;
+  /** update multiples rows of table: "my_sample_2" */
+  update_my_sample_2_many?: Maybe<Array<Maybe<My_Sample_2_Mutation_Response>>>;
   /** update data of the table: "products" */
   update_products?: Maybe<Products_Mutation_Response>;
   /** update single row of the table: "products" */
@@ -193,6 +234,30 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_My_Sample_1Args = {
+  where: My_Sample_1_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_My_Sample_1_By_PkArgs = {
+  ID: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_My_Sample_2Args = {
+  where: My_Sample_2_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_My_Sample_2_By_PkArgs = {
+  ID: Scalars['uuid']['input'];
 };
 
 
@@ -241,6 +306,34 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_My_Sample_1Args = {
+  objects: Array<My_Sample_1_Insert_Input>;
+  on_conflict?: InputMaybe<My_Sample_1_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_My_Sample_1_OneArgs = {
+  object: My_Sample_1_Insert_Input;
+  on_conflict?: InputMaybe<My_Sample_1_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_My_Sample_2Args = {
+  objects: Array<My_Sample_2_Insert_Input>;
+  on_conflict?: InputMaybe<My_Sample_2_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_My_Sample_2_OneArgs = {
+  object: My_Sample_2_Insert_Input;
+  on_conflict?: InputMaybe<My_Sample_2_On_Conflict>;
 };
 
 
@@ -297,6 +390,48 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_My_Sample_1Args = {
+  _inc?: InputMaybe<My_Sample_1_Inc_Input>;
+  _set?: InputMaybe<My_Sample_1_Set_Input>;
+  where: My_Sample_1_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_My_Sample_1_By_PkArgs = {
+  _inc?: InputMaybe<My_Sample_1_Inc_Input>;
+  _set?: InputMaybe<My_Sample_1_Set_Input>;
+  pk_columns: My_Sample_1_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_My_Sample_1_ManyArgs = {
+  updates: Array<My_Sample_1_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_My_Sample_2Args = {
+  _set?: InputMaybe<My_Sample_2_Set_Input>;
+  where: My_Sample_2_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_My_Sample_2_By_PkArgs = {
+  _set?: InputMaybe<My_Sample_2_Set_Input>;
+  pk_columns: My_Sample_2_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_My_Sample_2_ManyArgs = {
+  updates: Array<My_Sample_2_Updates>;
 };
 
 
@@ -401,6 +536,359 @@ export type Mutation_RootUpdate_Users_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Users_ManyArgs = {
   updates: Array<Users_Updates>;
+};
+
+/** columns and relationships of "my_sample_1" */
+export type My_Sample_1 = {
+  __typename?: 'my_sample_1';
+  ID: Scalars['uuid']['output'];
+  hogehoge?: Maybe<Scalars['Int']['output']>;
+  jojo?: Maybe<Scalars['Boolean']['output']>;
+  val: Scalars['String']['output'];
+};
+
+/** aggregated selection of "my_sample_1" */
+export type My_Sample_1_Aggregate = {
+  __typename?: 'my_sample_1_aggregate';
+  aggregate?: Maybe<My_Sample_1_Aggregate_Fields>;
+  nodes: Array<My_Sample_1>;
+};
+
+/** aggregate fields of "my_sample_1" */
+export type My_Sample_1_Aggregate_Fields = {
+  __typename?: 'my_sample_1_aggregate_fields';
+  avg?: Maybe<My_Sample_1_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<My_Sample_1_Max_Fields>;
+  min?: Maybe<My_Sample_1_Min_Fields>;
+  stddev?: Maybe<My_Sample_1_Stddev_Fields>;
+  stddev_pop?: Maybe<My_Sample_1_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<My_Sample_1_Stddev_Samp_Fields>;
+  sum?: Maybe<My_Sample_1_Sum_Fields>;
+  var_pop?: Maybe<My_Sample_1_Var_Pop_Fields>;
+  var_samp?: Maybe<My_Sample_1_Var_Samp_Fields>;
+  variance?: Maybe<My_Sample_1_Variance_Fields>;
+};
+
+
+/** aggregate fields of "my_sample_1" */
+export type My_Sample_1_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<My_Sample_1_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type My_Sample_1_Avg_Fields = {
+  __typename?: 'my_sample_1_avg_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "my_sample_1". All fields are combined with a logical 'AND'. */
+export type My_Sample_1_Bool_Exp = {
+  ID?: InputMaybe<Uuid_Comparison_Exp>;
+  _and?: InputMaybe<Array<My_Sample_1_Bool_Exp>>;
+  _not?: InputMaybe<My_Sample_1_Bool_Exp>;
+  _or?: InputMaybe<Array<My_Sample_1_Bool_Exp>>;
+  hogehoge?: InputMaybe<Int_Comparison_Exp>;
+  jojo?: InputMaybe<Boolean_Comparison_Exp>;
+  val?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "my_sample_1" */
+export enum My_Sample_1_Constraint {
+  /** unique or primary key constraint on columns "ID" */
+  MySample_1Pkey = 'my_sample_1_pkey'
+}
+
+/** input type for incrementing numeric columns in table "my_sample_1" */
+export type My_Sample_1_Inc_Input = {
+  hogehoge?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "my_sample_1" */
+export type My_Sample_1_Insert_Input = {
+  ID?: InputMaybe<Scalars['uuid']['input']>;
+  hogehoge?: InputMaybe<Scalars['Int']['input']>;
+  jojo?: InputMaybe<Scalars['Boolean']['input']>;
+  val?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type My_Sample_1_Max_Fields = {
+  __typename?: 'my_sample_1_max_fields';
+  ID?: Maybe<Scalars['uuid']['output']>;
+  hogehoge?: Maybe<Scalars['Int']['output']>;
+  val?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type My_Sample_1_Min_Fields = {
+  __typename?: 'my_sample_1_min_fields';
+  ID?: Maybe<Scalars['uuid']['output']>;
+  hogehoge?: Maybe<Scalars['Int']['output']>;
+  val?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "my_sample_1" */
+export type My_Sample_1_Mutation_Response = {
+  __typename?: 'my_sample_1_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<My_Sample_1>;
+};
+
+/** on_conflict condition type for table "my_sample_1" */
+export type My_Sample_1_On_Conflict = {
+  constraint: My_Sample_1_Constraint;
+  update_columns?: Array<My_Sample_1_Update_Column>;
+  where?: InputMaybe<My_Sample_1_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "my_sample_1". */
+export type My_Sample_1_Order_By = {
+  ID?: InputMaybe<Order_By>;
+  hogehoge?: InputMaybe<Order_By>;
+  jojo?: InputMaybe<Order_By>;
+  val?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: my_sample_1 */
+export type My_Sample_1_Pk_Columns_Input = {
+  ID: Scalars['uuid']['input'];
+};
+
+/** select columns of table "my_sample_1" */
+export enum My_Sample_1_Select_Column {
+  /** column name */
+  Id = 'ID',
+  /** column name */
+  Hogehoge = 'hogehoge',
+  /** column name */
+  Jojo = 'jojo',
+  /** column name */
+  Val = 'val'
+}
+
+/** input type for updating data in table "my_sample_1" */
+export type My_Sample_1_Set_Input = {
+  ID?: InputMaybe<Scalars['uuid']['input']>;
+  hogehoge?: InputMaybe<Scalars['Int']['input']>;
+  jojo?: InputMaybe<Scalars['Boolean']['input']>;
+  val?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type My_Sample_1_Stddev_Fields = {
+  __typename?: 'my_sample_1_stddev_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type My_Sample_1_Stddev_Pop_Fields = {
+  __typename?: 'my_sample_1_stddev_pop_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type My_Sample_1_Stddev_Samp_Fields = {
+  __typename?: 'my_sample_1_stddev_samp_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "my_sample_1" */
+export type My_Sample_1_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: My_Sample_1_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type My_Sample_1_Stream_Cursor_Value_Input = {
+  ID?: InputMaybe<Scalars['uuid']['input']>;
+  hogehoge?: InputMaybe<Scalars['Int']['input']>;
+  jojo?: InputMaybe<Scalars['Boolean']['input']>;
+  val?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate sum on columns */
+export type My_Sample_1_Sum_Fields = {
+  __typename?: 'my_sample_1_sum_fields';
+  hogehoge?: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "my_sample_1" */
+export enum My_Sample_1_Update_Column {
+  /** column name */
+  Id = 'ID',
+  /** column name */
+  Hogehoge = 'hogehoge',
+  /** column name */
+  Jojo = 'jojo',
+  /** column name */
+  Val = 'val'
+}
+
+export type My_Sample_1_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<My_Sample_1_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<My_Sample_1_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: My_Sample_1_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type My_Sample_1_Var_Pop_Fields = {
+  __typename?: 'my_sample_1_var_pop_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type My_Sample_1_Var_Samp_Fields = {
+  __typename?: 'my_sample_1_var_samp_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type My_Sample_1_Variance_Fields = {
+  __typename?: 'my_sample_1_variance_fields';
+  hogehoge?: Maybe<Scalars['Float']['output']>;
+};
+
+/** columns and relationships of "my_sample_2" */
+export type My_Sample_2 = {
+  __typename?: 'my_sample_2';
+  ID: Scalars['uuid']['output'];
+  val: Scalars['String']['output'];
+};
+
+/** aggregated selection of "my_sample_2" */
+export type My_Sample_2_Aggregate = {
+  __typename?: 'my_sample_2_aggregate';
+  aggregate?: Maybe<My_Sample_2_Aggregate_Fields>;
+  nodes: Array<My_Sample_2>;
+};
+
+/** aggregate fields of "my_sample_2" */
+export type My_Sample_2_Aggregate_Fields = {
+  __typename?: 'my_sample_2_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<My_Sample_2_Max_Fields>;
+  min?: Maybe<My_Sample_2_Min_Fields>;
+};
+
+
+/** aggregate fields of "my_sample_2" */
+export type My_Sample_2_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<My_Sample_2_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "my_sample_2". All fields are combined with a logical 'AND'. */
+export type My_Sample_2_Bool_Exp = {
+  ID?: InputMaybe<Uuid_Comparison_Exp>;
+  _and?: InputMaybe<Array<My_Sample_2_Bool_Exp>>;
+  _not?: InputMaybe<My_Sample_2_Bool_Exp>;
+  _or?: InputMaybe<Array<My_Sample_2_Bool_Exp>>;
+  val?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "my_sample_2" */
+export enum My_Sample_2_Constraint {
+  /** unique or primary key constraint on columns "ID" */
+  MySample_2Pkey = 'my_sample_2_pkey'
+}
+
+/** input type for inserting data into table "my_sample_2" */
+export type My_Sample_2_Insert_Input = {
+  ID?: InputMaybe<Scalars['uuid']['input']>;
+  val?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type My_Sample_2_Max_Fields = {
+  __typename?: 'my_sample_2_max_fields';
+  ID?: Maybe<Scalars['uuid']['output']>;
+  val?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type My_Sample_2_Min_Fields = {
+  __typename?: 'my_sample_2_min_fields';
+  ID?: Maybe<Scalars['uuid']['output']>;
+  val?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "my_sample_2" */
+export type My_Sample_2_Mutation_Response = {
+  __typename?: 'my_sample_2_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<My_Sample_2>;
+};
+
+/** on_conflict condition type for table "my_sample_2" */
+export type My_Sample_2_On_Conflict = {
+  constraint: My_Sample_2_Constraint;
+  update_columns?: Array<My_Sample_2_Update_Column>;
+  where?: InputMaybe<My_Sample_2_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "my_sample_2". */
+export type My_Sample_2_Order_By = {
+  ID?: InputMaybe<Order_By>;
+  val?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: my_sample_2 */
+export type My_Sample_2_Pk_Columns_Input = {
+  ID: Scalars['uuid']['input'];
+};
+
+/** select columns of table "my_sample_2" */
+export enum My_Sample_2_Select_Column {
+  /** column name */
+  Id = 'ID',
+  /** column name */
+  Val = 'val'
+}
+
+/** input type for updating data in table "my_sample_2" */
+export type My_Sample_2_Set_Input = {
+  ID?: InputMaybe<Scalars['uuid']['input']>;
+  val?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "my_sample_2" */
+export type My_Sample_2_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: My_Sample_2_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type My_Sample_2_Stream_Cursor_Value_Input = {
+  ID?: InputMaybe<Scalars['uuid']['input']>;
+  val?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "my_sample_2" */
+export enum My_Sample_2_Update_Column {
+  /** column name */
+  Id = 'ID',
+  /** column name */
+  Val = 'val'
+}
+
+export type My_Sample_2_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<My_Sample_2_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: My_Sample_2_Bool_Exp;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
@@ -738,6 +1226,18 @@ export type Products_Variance_Fields = {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "my_sample_1" */
+  my_sample_1: Array<My_Sample_1>;
+  /** fetch aggregated fields from the table: "my_sample_1" */
+  my_sample_1_aggregate: My_Sample_1_Aggregate;
+  /** fetch data from the table: "my_sample_1" using primary key columns */
+  my_sample_1_by_pk?: Maybe<My_Sample_1>;
+  /** fetch data from the table: "my_sample_2" */
+  my_sample_2: Array<My_Sample_2>;
+  /** fetch aggregated fields from the table: "my_sample_2" */
+  my_sample_2_aggregate: My_Sample_2_Aggregate;
+  /** fetch data from the table: "my_sample_2" using primary key columns */
+  my_sample_2_by_pk?: Maybe<My_Sample_2>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
@@ -762,6 +1262,52 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Query_RootMy_Sample_1Args = {
+  distinct_on?: InputMaybe<Array<My_Sample_1_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_1_Order_By>>;
+  where?: InputMaybe<My_Sample_1_Bool_Exp>;
+};
+
+
+export type Query_RootMy_Sample_1_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<My_Sample_1_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_1_Order_By>>;
+  where?: InputMaybe<My_Sample_1_Bool_Exp>;
+};
+
+
+export type Query_RootMy_Sample_1_By_PkArgs = {
+  ID: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootMy_Sample_2Args = {
+  distinct_on?: InputMaybe<Array<My_Sample_2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_2_Order_By>>;
+  where?: InputMaybe<My_Sample_2_Bool_Exp>;
+};
+
+
+export type Query_RootMy_Sample_2_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<My_Sample_2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_2_Order_By>>;
+  where?: InputMaybe<My_Sample_2_Bool_Exp>;
+};
+
+
+export type Query_RootMy_Sample_2_By_PkArgs = {
+  ID: Scalars['uuid']['input'];
 };
 
 
@@ -1403,6 +1949,22 @@ export type Receipts_Updates = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "my_sample_1" */
+  my_sample_1: Array<My_Sample_1>;
+  /** fetch aggregated fields from the table: "my_sample_1" */
+  my_sample_1_aggregate: My_Sample_1_Aggregate;
+  /** fetch data from the table: "my_sample_1" using primary key columns */
+  my_sample_1_by_pk?: Maybe<My_Sample_1>;
+  /** fetch data from the table in a streaming manner: "my_sample_1" */
+  my_sample_1_stream: Array<My_Sample_1>;
+  /** fetch data from the table: "my_sample_2" */
+  my_sample_2: Array<My_Sample_2>;
+  /** fetch aggregated fields from the table: "my_sample_2" */
+  my_sample_2_aggregate: My_Sample_2_Aggregate;
+  /** fetch data from the table: "my_sample_2" using primary key columns */
+  my_sample_2_by_pk?: Maybe<My_Sample_2>;
+  /** fetch data from the table in a streaming manner: "my_sample_2" */
+  my_sample_2_stream: Array<My_Sample_2>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
@@ -1435,6 +1997,66 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+
+export type Subscription_RootMy_Sample_1Args = {
+  distinct_on?: InputMaybe<Array<My_Sample_1_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_1_Order_By>>;
+  where?: InputMaybe<My_Sample_1_Bool_Exp>;
+};
+
+
+export type Subscription_RootMy_Sample_1_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<My_Sample_1_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_1_Order_By>>;
+  where?: InputMaybe<My_Sample_1_Bool_Exp>;
+};
+
+
+export type Subscription_RootMy_Sample_1_By_PkArgs = {
+  ID: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootMy_Sample_1_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<My_Sample_1_Stream_Cursor_Input>>;
+  where?: InputMaybe<My_Sample_1_Bool_Exp>;
+};
+
+
+export type Subscription_RootMy_Sample_2Args = {
+  distinct_on?: InputMaybe<Array<My_Sample_2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_2_Order_By>>;
+  where?: InputMaybe<My_Sample_2_Bool_Exp>;
+};
+
+
+export type Subscription_RootMy_Sample_2_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<My_Sample_2_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<My_Sample_2_Order_By>>;
+  where?: InputMaybe<My_Sample_2_Bool_Exp>;
+};
+
+
+export type Subscription_RootMy_Sample_2_By_PkArgs = {
+  ID: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootMy_Sample_2_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<My_Sample_2_Stream_Cursor_Input>>;
+  where?: InputMaybe<My_Sample_2_Bool_Exp>;
 };
 
 

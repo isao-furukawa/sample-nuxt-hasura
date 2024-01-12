@@ -66,7 +66,7 @@ function createLink(authHeaders: { [key: string]: string }) {
       // uri: nuxt.$config.API_ENDPOINT,
 
       // TODO: とりあえずベタ書きしておくけど後で良い方法考える
-      uri: process.server 
+      uri: process.server
             ? `${runtimeConfig.public.API_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`
             : `${runtimeConfig.public.API_PROTOCOL}://localhost:8080/${runtimeConfig.public.API_PATH}`,
       credentials: 'include', // withCredentials = true 設定
@@ -91,7 +91,7 @@ function createLink(authHeaders: { [key: string]: string }) {
             //     'wss://qas-api.sample.jp/v1/graphql',
 
             // TODO: とりあえずベタ書きしておくけど後で良い方法考える
-            url: process.server 
+            url: process.server
             ? `${runtimeConfig.public.API_WS_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`
             : `${runtimeConfig.public.API_WS_PROTOCOL}://localhost:8080/${runtimeConfig.public.API_PATH}`,
             // url: `${runtimeConfig.public.API_WS_PROTOCOL}://${runtimeConfig.public.API_HOST}/${runtimeConfig.public.API_PATH}`,
@@ -147,8 +147,28 @@ function createLink(authHeaders: { [key: string]: string }) {
 // TODO: とりあえずアドミンシークレットを入れておくが、ここはログインするユーザによって認証情報が変更されるような仕組みが必要
 //       たぶん useAuthenticationHeaders みたいな感じになるかな？？？
 const authHeaders = reactive<{ [key: string]: string }>({
-  'x-hasura-admin-secret': 'hogehoge',
+  // 'x-hasura-admin-secret': 'hogehoge',
 });
+
+function updateAuthHeaders() {
+  const token = process.client ? sessionStorage.getItem('jwt') : null;
+  const userItem = process.client ? sessionStorage.getItem('user') : null;
+  const user = userItem ? JSON.parse(userItem) : null;
+
+  if (token) {
+    console.log('token', token);
+    authHeaders.Authorization = `Bearer ${token}`;
+    if (user && user.role) {
+      authHeaders['X-Hasura-Role'] = user.role;
+    }
+    console.log('authHeaders🍋', authHeaders.Authorization);
+  } else {
+    delete authHeaders.Authorization;
+    delete authHeaders['X-Hasura-Role'];
+    console.log('Authorization header removed');
+  }
+  console.log('authHeaders🍑', authHeaders);
+}
 
 /**
  * ApolloClientを生成して返却する
@@ -184,4 +204,4 @@ function createApolloClient(isCacheable = true) {
   return client;
 }
 
-export { createApolloClient, authHeaders };
+export { createApolloClient, authHeaders, updateAuthHeaders };

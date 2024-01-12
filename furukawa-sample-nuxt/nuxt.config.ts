@@ -107,6 +107,8 @@ export default defineNuxtConfig({
 
     jwtSecretKey: process.env.JWT_SECRET_KEY,
 
+    
+
     // 🔼🔼🔼 ここまで、privateな区画なのでここに記述したものはサーバサイドでしか参照できない(※ブラウザ露出しないので安全) 🔼🔼🔼
   },
 
@@ -285,13 +287,13 @@ export default defineNuxtConfig({
         id: 'string',
         email: 'string',
         name: 'string',
-        role: 'admin | manager | worker',
+        role: 'admin | viewer | anonymous',
       },
     },
-    session: {
-      enableRefreshOnWindowFocus: true,
-      enableRefreshPeriodically: 5000,
-    },
+    // session: {
+    //   enableRefreshOnWindowFocus: true,
+    //   enableRefreshPeriodically: 5000,
+    // },
     // globalAppMiddleware: {
     //   isEnabled: true,
     // },
