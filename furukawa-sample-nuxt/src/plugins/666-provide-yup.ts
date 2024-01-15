@@ -152,6 +152,29 @@ export default defineNuxtPlugin((nuxtApp) => {
   });
 
   /**
+   * E-Mail
+   * (※過去にNTTドコモが発行してしまっている "docomo..ab1234yz@docomo.ne.jp", "docomo-ab1234yz.@docomo.ne.jp" 等のRFC違反のアドレスも許容)
+   * NOTE: このカスタムメソッドはyupに元から存在している email() というメソッドを override している
+   */
+  yup.addMethod(yup.string, 'email', function (message?: string) {
+    return this.test({
+      message: message,
+      name: 'email',
+      exclusive: true,
+      skipAbsent: true,
+      test(value, ctx) {
+        return (
+          /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/u.test(value || '') ||
+          ctx.createError({
+            path: ctx.path,
+            message: message || i18n.t('yup.string.email', { label: ctx.schema.spec.label }),
+          })
+        );
+      },
+    });
+  });
+
+  /**
    * 数値が範囲に収まっているかどうか？
    */
   yup.addMethod(yup.number, 'between', function (a: number, b: number, message?: string) {
@@ -175,6 +198,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       },
     });
   });
+
+  //
 
   return {
     // provide: {

@@ -25,33 +25,32 @@ export default {
   access_denied: 'Access Denied',
   organization_id: 'Organization ID',
 
-  validation: {
-    name: 'Name',
-    age: 'Age',
-    phone: 'Phone Number',
-    birth: 'Birthday',
-    password1: 'Enter Password',
-    password2: 'Confirm Password',
-    date_enrollment: 'Enrollment Date',
-    date_graduation: 'Graduation Date',
-    submit: 'Submit',
+
+  label: {
+    item: {
+      name: 'Name',
+      age: 'Age',
+      phone: 'Phone Number',
+      birth: 'Birthday',
+      email: 'email',
+      email_confirm: 'confirm',
+    },
+    action: {
+      submit: 'Submit',
     email: 'Email',
-  },
-  message: {
-    error: {
-      from_to: 'Please enter a date after {from} for {to}.',
     },
   },
-  hoge: {
-    the_world: 'the world',
-    dio: '9999',
-    label: '【uiwa】|a',
-    linked: '@:hoge.dio @:hoge.the_world !!!!',
-    linked2: "It's @:hoge.label",
-    greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
-    greeting2: ({ named }: any) =>
-      (named('label') ? named('label') + ' is' : '') + ` only allowed with more than ${named('min')} characters`,
-  },
+
+  //   hoge: {
+  //     the_world: 'the world',
+  //     dio: '9999',
+  //     label: '【uiwa】|a',
+  //     linked: '@:hoge.dio @:hoge.the_world !!!!',
+  //     linked2: "It's @:hoge.label",
+  //     greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
+  //     greeting2: ({ named }: any) =>
+  //       (named('label') ? named('label') + ' is' : '') + ` only allowed with more than ${named('min')} characters`,
+  //   },
 
   // Messages for validation errors in yup
   yup: {
@@ -106,6 +105,9 @@ export default {
       min: ({ named }: any) => (named('label') ? named('label') + ' must have at least' : '') + ` ${named('min')} items`,
       max: ({ named }: any) => (named('label') ? named('label') + ' must have no more than' : '') + ` ${named('max')} items`,
       length: ({ named }: any) => (named('label') ? named('label') + ' must have exactly' : '') + ` ${named('length')} items`,
+    },
+    relevance: {
+      email_confirm: ({ named }: any) => (named('label') ? named('label') + ' and ' : '') + `${named('email')} do not match`,
     },
   },
 };

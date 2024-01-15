@@ -26,33 +26,32 @@ export default {
   access_denied: 'Truy cập bị từ chối',
   organization_id: 'ID Tổ Chức',
 
-  validation: {
-    name: 'Tên',
-    age: 'Tuổi',
-    phone: 'Số Điện Thoại',
-    birth: 'Ngày Sinh',
-    password1: 'Nhập Mật Khẩu',
-    password2: 'Xác Nhận Mật Khẩu',
-    date_enrollment: 'Ngày Nhập Học',
-    date_graduation: 'Ngày Tốt Nghiệp',
-    submit: 'Gửi',
+
+  label: {
+    item: {
+      name: 'Tên',
+      age: 'Tuổi',
+      phone: 'Số Điện Thoại',
+      birth: 'Ngày Sinh',
+      email: 'email',
+      email_confirm: 'email(xác nhận)',
+    },
+    action: {
+      submit: 'Gửi',
     email: 'Địa Chỉ Email',
-  },
-  message: {
-    error: {
-      from_to: 'Vui lòng nhập ngày sau {from} cho {to}.',
     },
   },
-  hoge: {
-    the_world: 'thế giới',
-    dio: '9999',
-    label: '【uiwa】|a',
-    linked: '@:hoge.dio @:hoge.the_world !!!!',
-    linked2: 'Đó là @:hoge.label',
-    greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
-    greeting2: ({ named }: any) =>
-      (named('label') ? named('label') + ' chỉ' : '') + ` chấp nhận nhiều hơn ${named('min')} ký tự`,
-  },
+
+  //   hoge: {
+  //     the_world: 'thế giới',
+  //     dio: '9999',
+  //     label: '【uiwa】|a',
+  //     linked: '@:hoge.dio @:hoge.the_world !!!!',
+  //     linked2: 'Đó là @:hoge.label',
+  //     greeting: (ctx: any) => JSON.stringify(ctx.named('label')),
+  //     greeting2: ({ named }: any) =>
+  //       (named('label') ? named('label') + ' chỉ' : '') + ` chấp nhận nhiều hơn ${named('min')} ký tự`,
+  //   },
 
   // Messages for validation errors in yup
   yup: {
@@ -107,6 +106,9 @@ export default {
       min: ({ named }: any) => (named('label') ? named('label') + ' phải có ít nhất' : '') + ` ${named('min')} mục`,
       max: ({ named }: any) => (named('label') ? named('label') + ' không được quá' : '') + ` ${named('max')} mục`,
       length: ({ named }: any) => (named('label') ? named('label') + ' phải có chính xác' : '') + ` ${named('length')} mục`,
+    },
+    relevance: {
+      email_confirm: ({ named }: any) => (named('label') ? named('label') + ' và ' : '') + `${named('email')} không khớp`,
     },
   },
 };

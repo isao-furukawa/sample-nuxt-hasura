@@ -1,49 +1,39 @@
 <template lang="pug">
 form(@submit.prevent="validate")
   div.field
-    label(for="name") {{ $t('validation.name') }}
+    label(for="name") {{ $t('label.item.name') }}
     input(v-model="name" type="text" name="name")
     span.error(v-if="errors.name") {{ errors.name }}
 
   div.field
-    label(for="age")  {{ $t('validation.age') }}
+    label(for="age")  {{ $t('label.item.age') }}
     input(v-model="age" type="text" name="age")
     span.error(v-if="errors.age") {{ errors.age }}
 
   div.field
-    label(for="phone") {{ $t('validation.phone') }}
+    label(for="phone") {{ $t('label.item.phone') }}
     input(v-model="phone" type="text" name="phone")
     span.error(v-if="errors.phone") {{ errors.phone }}
 
   div.field
-    label(for="birth") {{ $t('validation.birth') }}
+    label(for="birth") {{ $t('label.item.birth') }}
     input(v-model="birth" type="text" name="birth")
     span.error(v-if="errors.birth") {{ errors.birth }}
 
   div.field
-    label(for="password1")  {{ $t('validation.password1') }}
-    input(v-model="password1" type="text" name="password1")
-    span.error(v-if="errors.password1") {{ errors.password1 }}
+    label(for="email")  {{ $t('label.item.email') }}
+    input(v-model="email" type="text" name="email")
+    span.error(v-if="errors.email") {{ errors.email }}
   
   div.field
-    label(for="password2")  {{ $t('validation.password2') }}
-    input(v-model="password2" type="text" name="password2")
-    span.error(v-if="errors.password2") {{ errors.password2 }}
+    label(for="email_confirm")  {{ $t('label.item.email_confirm') }}
+    input(v-model="email_confirm" type="text" name="email_confirm")
+    span.error(v-if="errors.email_confirm") {{ errors.email_confirm }}
 
-  div.field
-    label(for="dateEnrollment") {{ $t('validation.date_enrollment') }}
-    input(v-model="dateEnrollment" type="text" name="dateEnrollment")
-    span.error(v-if="errors.dateEnrollment") {{ errors.dateEnrollment }}
+  button(type="submit") {{ $t('label.action.submit') }}
 
-  div.field
-    label(for="dateGraduation") {{ $t('validation.date_graduation') }}
-    input(v-model="dateGraduation" type="text" name="dateGraduation")
-    span.error(v-if="errors.dateGraduation") {{ errors.dateGraduation }}
-
-  button(type="submit") {{ $t('validation.submit') }}
-
-  div {{ meta }}
-  div {{ metaBirth }}
+  div(style="border: solid 2px red; margin: 50px 0 50px 0") {{ meta }}
+  div(style="border: solid 2px blue; margin: 50px 0 50px 0")  {{ metaBirth }}
 </template>
 
 <script setup>
@@ -54,13 +44,13 @@ const { defineField, errors, handleSubmit, meta } = useForm({
   validationSchema: yup.object({
     name: yup
       .string() // hack: pretter
-      .label(i18n.t('validation.name'))
+      .label(i18n.t('label.item.name'))
       .required()
       .nullable(),
     age: yup
       .number()
-      .label(i18n.t('validation.age'))
-      // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`)
+      .label(i18n.t('label.item.age')) // ← label() に文字列を渡すとエラーメッセージを変化させることが出来るしくみがある(※この行をコメントアウトすると変わる)
+      // .typeError(`${i18n.t('validation.age')}には半角数字を入力してください`) // ←型エラーのメッセージをその場で変更する場合
       .integer()
       .positive()
       .between(5, 8)
@@ -68,44 +58,47 @@ const { defineField, errors, handleSubmit, meta } = useForm({
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
     phone: yup
       .string() // hack: pretter
-      .label(i18n.t('validation.phone'))
+      .label(i18n.t('label.item.phone'))
       .nullable()
       .phone()
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
     birth: yup
       .date()
-      .label(i18n.t('validation.birth'))
+      .label(i18n.t('label.item.birth'))
+      .min(new Date('2024-01-05')) // TODO: 日付に関するエラメッセージの多言語化はまだ未対応
       .nullable()
       .transform((value, originalValue) => (String(originalValue).trim() === '' ? null : value)),
-
-    password1: yup.string(),
-    password2: yup.string().oneOf([yup.ref('password1')], 'パスワードが一致しません'),
-    dateEnrollment: yup
-      .date() // hack: pretter
-      .label(i18n.t('validation.date_enrollment'))
-      .min(new Date())
+    email: yup // hack: prettier
+      .string()
+      .label(i18n.t('label.item.email'))
+      .email()
       .required(),
-    dateGraduation: yup
-      .date()
-      .label(i18n.t('validation.date_graduation'))
+    email_confirm: yup
+      .string()
+      .label(i18n.t('label.item.email_confirm'))
+      .email()
       .required()
       .test(
-        '入学日と卒業日の前後テスト', // hack: prettier
-        i18n.t('message.error.from_to', {
-          from: i18n.t('validation.date_enrollment'),
-          to: i18n.t('validation.date_graduation'),
+        'メールアドレスとメールアドレス(確認)の一致',
+        // ↓↓↓ 関連バリデーションの場合も「nuxtI18n」用の同じ多言語化ファイルを利用していける
+        i18n.t('yup.relevance.email_confirm', {
+          // label: i18n.t('label.item.email_confirm'),
+          email: i18n.t('label.item.email'),
         }),
-        (dateGraduation, context) => {
+        (val, context) => {
           console.warn('🦋🦋🦋🦋🦋🦋🦋🦋');
           console.warn(context);
-          const { name, age } = context.parent;
-          console.warn(name);
-          console.warn(age);
-          if (dateGraduation === undefined || context.parent.dateEnrollment === undefined) {
-            return false;
-          }
-          return dateGraduation > context.parent.dateEnrollment;
+
+          // 対象の入力値は第一引数の「val」に入ってくるが、第二引数のコンテキストから取り出すことも出来る
+          // (※valとemail_confirmは同じものという意味)
+          const { email, email_confirm } = context.parent;
+          console.warn('email', email);
+          console.warn('email_confirm', email_confirm);
+          console.warn('val', val);
+
+          // メールアドレスとメールアドレス(確認)の一致を確認
+          return val === email;
         }
       ),
   }),
@@ -115,55 +108,8 @@ const { value: name, meta: metaName } = useField('name');
 const { value: age, meta: metaAge } = useField('age');
 const { value: phone, meta: metaPhone } = useField('phone');
 const { value: birth, meta: metaBirth } = useField('birth');
-const { value: password1, meta: metaPassword1 } = useField('password1');
-const { value: password2, meta: metaPassword2 } = useField('password2');
-const { value: dateEnrollment, meta: metaDateEnrollment } = useField('dateEnrollment');
-const { value: dateGraduation, meta: metaDateGraduation } = useField('dateGraduation');
-
-// import { ref } from 'vue';
-// import { useForm, useField, defineRule } from 'vee-validate';
-// // import { required, integer } from '@vee-validate/rules';
-
-// const positive = (value) => {
-//   if (!value || value > 0) {
-//     return '正の整数でなければいけません';
-//   }
-
-//   return true;
-// };
-
-// // defineRule('required', required);
-// // defineRule('integer', integer);
-// // defineRule('positive', positive);
-
-// defineRule('adult', (value) => {
-//   if (!value || value < 18) {
-//     return '年齢は18歳以上でなければなりません。';
-//   }
-
-//   return true;
-// });
-
-// const { handleSubmit, errors } = useForm();
-// const { value: name } = useField('name', 'required');
-// const { value: age } = useField('age', { integer: true, positive: true });
-// const { value: enrollmentDate } = useField('enrollmentDate');
-// const { value: graduationDate } = useField('graduationDate');
-
-// const form = ref({
-//   name,
-//   age,
-//   enrollmentDate,
-//   graduationDate,
-// });
-
-// const validateField = (field) => {
-//   // Field specific validation can be added here
-// };
-
-// const validate = handleSubmit((values) => {
-//   console.log(values);
-// });
+const { value: email, meta: metaEmail } = useField('email');
+const { value: email_confirm, meta: metaConfirm } = useField('email_confirm');
 </script>
 
 <style scoped>
