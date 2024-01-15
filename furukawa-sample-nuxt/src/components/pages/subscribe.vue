@@ -1,26 +1,29 @@
 <template lang="pug">
-div サブスクリプションのサンプル
-  n-table(:single-line='false')
-    n-thead
-      n-tr
-        //- th 期
-        n-th ID
-        n-th {{ $t('product_name') }}
-        n-th {{ $t('price') }}
-    n-tbody
-      template(v-if="searchProductsQueryLoading")
-        n-tr: n-td ロード中
-      template(v-else)
-        n-tr(v-for='item in searchProductsQueryResult.products', :key='item.id')
-          n-td(valign="top" align="left" ) {{ item.id }}
-          n-td(valign="top" align="left") {{ translate(item.name) }}
-          n-td(valign="top" align="right") {{ item.price }}
+div(v-if="isAuthorized")
+  div サブスクリプションのサンプル
+    n-table(:single-line='false')
+      n-thead
+        n-tr
+          //- th 期
+          n-th ID
+          n-th {{ $t('product_name') }}
+          n-th {{ $t('price') }}
+      n-tbody
+        template(v-if="searchProductsQueryLoading")
+          n-tr: n-td ロード中
+        template(v-else)
+          n-tr(v-for='item in searchProductsQueryResult.products', :key='item.id')
+            n-td(valign="top" align="left" ) {{ item.id }}
+            n-td(valign="top" align="left") {{ translate(item.name) }}
+            n-td(valign="top" align="right") {{ item.price }}
 
-  p: button( @click="doIt1") りんごの在庫をランダム変化
-  p: button( @click="doIt2") みかんの在庫をランダム変化
-  p: button( @click="doIt3") バナナの在庫をランダム変化
-  //- p: button( @click="doIt4") 言語Cookie確認
-  //- p: button( @click="doIt5") Apolloキャッシュ
+    p: button( @click="doIt1") りんごの在庫をランダム変化
+    p: button( @click="doIt2") みかんの在庫をランダム変化
+    p: button( @click="doIt3") バナナの在庫をランダム変化
+    //- p: button( @click="doIt4") 言語Cookie確認
+    //- p: button( @click="doIt5") Apolloキャッシュ
+div(v-else)
+  p {{ $t('access_denied') }}
 
 </template>
 <script lang="ts" setup>
@@ -34,6 +37,15 @@ import {
   useUpdateProductsMutation,
 } from '@/graphql/generated/graphqlOperations';
 import type { Products_Bool_Exp, Products_Order_By, Products_Set_Input } from '@/graphql/generated/graphqlOperations';
+import { useAuth, definePageMeta } from '#imports';
+
+definePageMeta({ middleware: 'auth' });
+
+const { data, getSession } = useAuth();
+await getSession();
+
+const isAuthorized = computed(() => data.value?.role === 'admin' || data.value?.role === 'editor');
+
 
 const route = useRoute();
 const nuxt = useNuxtApp();

@@ -8,7 +8,8 @@ export default {
   menu: {
     login: 'ログイン',
     home: 'ホーム',
-    query: 'クエリ',
+    user_query: 'ユーザークエリ',
+    product_query: '商品クエリ',
     subscribe: 'サブスクリプション',
     update: '更新ミューテーション',
     validate_yup: 'バリデーション(Yup)',
@@ -21,6 +22,8 @@ export default {
   gender: '性別',
   birthday: '生年月日',
   is_logged_in: 'がログイン中。',
+  access_denied: 'アクセスが拒否されました',
+  organization_id: '組織ID',
 
   validation: {
     name: '名前',

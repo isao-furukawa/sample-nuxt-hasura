@@ -8,7 +8,8 @@ export default {
   menu: {
     login: 'Login',
     home: 'Home',
-    query: 'Query',
+    user_query: 'User Query',
+    product_query: 'Product Query',
     subscribe: 'Subscription',
     update: 'Update Mutation',
     validate_yup: 'Validation (Yup)',
@@ -21,6 +22,8 @@ export default {
   gender: 'gender',
   birthday: 'Birthday',
   is_logged_in: 'is logged in.',
+  access_denied: 'Access Denied',
+  organization_id: 'Organization ID',
 
   validation: {
     name: 'Name',

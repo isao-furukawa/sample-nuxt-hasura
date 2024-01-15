@@ -14,6 +14,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   bpchar: { input: any; output: any; }
   jsonb: { input: any; output: any; }
+  name: { input: any; output: any; }
   numeric: { input: any; output: any; }
   timestamptz: { input: any; output: any; }
   uuid: { input: any; output: any; }
@@ -158,6 +159,10 @@ export type Mutation_Root = {
   delete_my_sample_2?: Maybe<My_Sample_2_Mutation_Response>;
   /** delete single row from the table: "my_sample_2" */
   delete_my_sample_2_by_pk?: Maybe<My_Sample_2>;
+  /** delete data from the table: "organizations" */
+  delete_organizations?: Maybe<Organizations_Mutation_Response>;
+  /** delete single row from the table: "organizations" */
+  delete_organizations_by_pk?: Maybe<Organizations>;
   /** delete data from the table: "products" */
   delete_products?: Maybe<Products_Mutation_Response>;
   /** delete single row from the table: "products" */
@@ -182,6 +187,10 @@ export type Mutation_Root = {
   insert_my_sample_2?: Maybe<My_Sample_2_Mutation_Response>;
   /** insert a single row into the table: "my_sample_2" */
   insert_my_sample_2_one?: Maybe<My_Sample_2>;
+  /** insert data into the table: "organizations" */
+  insert_organizations?: Maybe<Organizations_Mutation_Response>;
+  /** insert a single row into the table: "organizations" */
+  insert_organizations_one?: Maybe<Organizations>;
   /** insert data into the table: "products" */
   insert_products?: Maybe<Products_Mutation_Response>;
   /** insert a single row into the table: "products" */
@@ -210,6 +219,12 @@ export type Mutation_Root = {
   update_my_sample_2_by_pk?: Maybe<My_Sample_2>;
   /** update multiples rows of table: "my_sample_2" */
   update_my_sample_2_many?: Maybe<Array<Maybe<My_Sample_2_Mutation_Response>>>;
+  /** update data of the table: "organizations" */
+  update_organizations?: Maybe<Organizations_Mutation_Response>;
+  /** update single row of the table: "organizations" */
+  update_organizations_by_pk?: Maybe<Organizations>;
+  /** update multiples rows of table: "organizations" */
+  update_organizations_many?: Maybe<Array<Maybe<Organizations_Mutation_Response>>>;
   /** update data of the table: "products" */
   update_products?: Maybe<Products_Mutation_Response>;
   /** update single row of the table: "products" */
@@ -258,6 +273,18 @@ export type Mutation_RootDelete_My_Sample_2Args = {
 /** mutation root */
 export type Mutation_RootDelete_My_Sample_2_By_PkArgs = {
   ID: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_OrganizationsArgs = {
+  where: Organizations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Organizations_By_PkArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -334,6 +361,20 @@ export type Mutation_RootInsert_My_Sample_2Args = {
 export type Mutation_RootInsert_My_Sample_2_OneArgs = {
   object: My_Sample_2_Insert_Input;
   on_conflict?: InputMaybe<My_Sample_2_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_OrganizationsArgs = {
+  objects: Array<Organizations_Insert_Input>;
+  on_conflict?: InputMaybe<Organizations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Organizations_OneArgs = {
+  object: Organizations_Insert_Input;
+  on_conflict?: InputMaybe<Organizations_On_Conflict>;
 };
 
 
@@ -432,6 +473,28 @@ export type Mutation_RootUpdate_My_Sample_2_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_My_Sample_2_ManyArgs = {
   updates: Array<My_Sample_2_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_OrganizationsArgs = {
+  _inc?: InputMaybe<Organizations_Inc_Input>;
+  _set?: InputMaybe<Organizations_Set_Input>;
+  where: Organizations_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organizations_By_PkArgs = {
+  _inc?: InputMaybe<Organizations_Inc_Input>;
+  _set?: InputMaybe<Organizations_Set_Input>;
+  pk_columns: Organizations_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Organizations_ManyArgs = {
+  updates: Array<Organizations_Updates>;
 };
 
 
@@ -891,6 +954,19 @@ export type My_Sample_2_Updates = {
   where: My_Sample_2_Bool_Exp;
 };
 
+/** Boolean expression to compare columns of type "name". All fields are combined with logical 'AND'. */
+export type Name_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['name']['input']>;
+  _gt?: InputMaybe<Scalars['name']['input']>;
+  _gte?: InputMaybe<Scalars['name']['input']>;
+  _in?: InputMaybe<Array<Scalars['name']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['name']['input']>;
+  _lte?: InputMaybe<Scalars['name']['input']>;
+  _neq?: InputMaybe<Scalars['name']['input']>;
+  _nin?: InputMaybe<Array<Scalars['name']['input']>>;
+};
+
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
 export type Numeric_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['numeric']['input']>;
@@ -920,11 +996,231 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
+/** ログインユーザーが所属する組織 */
+export type Organizations = {
+  __typename?: 'organizations';
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['Int']['output'];
+  organization_name: Scalars['name']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** aggregated selection of "organizations" */
+export type Organizations_Aggregate = {
+  __typename?: 'organizations_aggregate';
+  aggregate?: Maybe<Organizations_Aggregate_Fields>;
+  nodes: Array<Organizations>;
+};
+
+/** aggregate fields of "organizations" */
+export type Organizations_Aggregate_Fields = {
+  __typename?: 'organizations_aggregate_fields';
+  avg?: Maybe<Organizations_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Organizations_Max_Fields>;
+  min?: Maybe<Organizations_Min_Fields>;
+  stddev?: Maybe<Organizations_Stddev_Fields>;
+  stddev_pop?: Maybe<Organizations_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Organizations_Stddev_Samp_Fields>;
+  sum?: Maybe<Organizations_Sum_Fields>;
+  var_pop?: Maybe<Organizations_Var_Pop_Fields>;
+  var_samp?: Maybe<Organizations_Var_Samp_Fields>;
+  variance?: Maybe<Organizations_Variance_Fields>;
+};
+
+
+/** aggregate fields of "organizations" */
+export type Organizations_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Organizations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Organizations_Avg_Fields = {
+  __typename?: 'organizations_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "organizations". All fields are combined with a logical 'AND'. */
+export type Organizations_Bool_Exp = {
+  _and?: InputMaybe<Array<Organizations_Bool_Exp>>;
+  _not?: InputMaybe<Organizations_Bool_Exp>;
+  _or?: InputMaybe<Array<Organizations_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  organization_name?: InputMaybe<Name_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "organizations" */
+export enum Organizations_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  OrganizationPkey = 'organization_pkey'
+}
+
+/** input type for incrementing numeric columns in table "organizations" */
+export type Organizations_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "organizations" */
+export type Organizations_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  organization_name?: InputMaybe<Scalars['name']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Organizations_Max_Fields = {
+  __typename?: 'organizations_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Organizations_Min_Fields = {
+  __typename?: 'organizations_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "organizations" */
+export type Organizations_Mutation_Response = {
+  __typename?: 'organizations_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Organizations>;
+};
+
+/** on_conflict condition type for table "organizations" */
+export type Organizations_On_Conflict = {
+  constraint: Organizations_Constraint;
+  update_columns?: Array<Organizations_Update_Column>;
+  where?: InputMaybe<Organizations_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "organizations". */
+export type Organizations_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  organization_name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: organizations */
+export type Organizations_Pk_Columns_Input = {
+  id: Scalars['Int']['input'];
+};
+
+/** select columns of table "organizations" */
+export enum Organizations_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OrganizationName = 'organization_name',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "organizations" */
+export type Organizations_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  organization_name?: InputMaybe<Scalars['name']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Organizations_Stddev_Fields = {
+  __typename?: 'organizations_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Organizations_Stddev_Pop_Fields = {
+  __typename?: 'organizations_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Organizations_Stddev_Samp_Fields = {
+  __typename?: 'organizations_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "organizations" */
+export type Organizations_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Organizations_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Organizations_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  organization_name?: InputMaybe<Scalars['name']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Organizations_Sum_Fields = {
+  __typename?: 'organizations_sum_fields';
+  id?: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "organizations" */
+export enum Organizations_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OrganizationName = 'organization_name',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Organizations_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Organizations_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Organizations_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Organizations_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Organizations_Var_Pop_Fields = {
+  __typename?: 'organizations_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Organizations_Var_Samp_Fields = {
+  __typename?: 'organizations_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Organizations_Variance_Fields = {
+  __typename?: 'organizations_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
 /** columns and relationships of "products" */
 export type Products = {
   __typename?: 'products';
   id: Scalars['uuid']['output'];
   name?: Maybe<Scalars['jsonb']['output']>;
+  organization_id: Scalars['Int']['output'];
   price?: Maybe<Scalars['numeric']['output']>;
   /** An array relationship */
   receipt_items: Array<Receipt_Items>;
@@ -997,6 +1293,7 @@ export type Products_Append_Input = {
 /** aggregate avg on columns */
 export type Products_Avg_Fields = {
   __typename?: 'products_avg_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1008,6 +1305,7 @@ export type Products_Bool_Exp = {
   _or?: InputMaybe<Array<Products_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<Jsonb_Comparison_Exp>;
+  organization_id?: InputMaybe<Int_Comparison_Exp>;
   price?: InputMaybe<Numeric_Comparison_Exp>;
   receipt_items?: InputMaybe<Receipt_Items_Bool_Exp>;
   receipt_items_aggregate?: InputMaybe<Receipt_Items_Aggregate_Bool_Exp>;
@@ -1037,6 +1335,7 @@ export type Products_Delete_Key_Input = {
 
 /** input type for incrementing numeric columns in table "products" */
 export type Products_Inc_Input = {
+  organization_id?: InputMaybe<Scalars['Int']['input']>;
   price?: InputMaybe<Scalars['numeric']['input']>;
   weight?: InputMaybe<Scalars['numeric']['input']>;
 };
@@ -1045,6 +1344,7 @@ export type Products_Inc_Input = {
 export type Products_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['jsonb']['input']>;
+  organization_id?: InputMaybe<Scalars['Int']['input']>;
   price?: InputMaybe<Scalars['numeric']['input']>;
   receipt_items?: InputMaybe<Receipt_Items_Arr_Rel_Insert_Input>;
   weight?: InputMaybe<Scalars['numeric']['input']>;
@@ -1054,6 +1354,7 @@ export type Products_Insert_Input = {
 export type Products_Max_Fields = {
   __typename?: 'products_max_fields';
   id?: Maybe<Scalars['uuid']['output']>;
+  organization_id?: Maybe<Scalars['Int']['output']>;
   price?: Maybe<Scalars['numeric']['output']>;
   weight?: Maybe<Scalars['numeric']['output']>;
 };
@@ -1062,6 +1363,7 @@ export type Products_Max_Fields = {
 export type Products_Min_Fields = {
   __typename?: 'products_min_fields';
   id?: Maybe<Scalars['uuid']['output']>;
+  organization_id?: Maybe<Scalars['Int']['output']>;
   price?: Maybe<Scalars['numeric']['output']>;
   weight?: Maybe<Scalars['numeric']['output']>;
 };
@@ -1093,6 +1395,7 @@ export type Products_On_Conflict = {
 export type Products_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  organization_id?: InputMaybe<Order_By>;
   price?: InputMaybe<Order_By>;
   receipt_items_aggregate?: InputMaybe<Receipt_Items_Aggregate_Order_By>;
   weight?: InputMaybe<Order_By>;
@@ -1115,6 +1418,8 @@ export enum Products_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  OrganizationId = 'organization_id',
+  /** column name */
   Price = 'price',
   /** column name */
   Weight = 'weight'
@@ -1124,6 +1429,7 @@ export enum Products_Select_Column {
 export type Products_Set_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['jsonb']['input']>;
+  organization_id?: InputMaybe<Scalars['Int']['input']>;
   price?: InputMaybe<Scalars['numeric']['input']>;
   weight?: InputMaybe<Scalars['numeric']['input']>;
 };
@@ -1131,6 +1437,7 @@ export type Products_Set_Input = {
 /** aggregate stddev on columns */
 export type Products_Stddev_Fields = {
   __typename?: 'products_stddev_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1138,6 +1445,7 @@ export type Products_Stddev_Fields = {
 /** aggregate stddev_pop on columns */
 export type Products_Stddev_Pop_Fields = {
   __typename?: 'products_stddev_pop_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1145,6 +1453,7 @@ export type Products_Stddev_Pop_Fields = {
 /** aggregate stddev_samp on columns */
 export type Products_Stddev_Samp_Fields = {
   __typename?: 'products_stddev_samp_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1161,6 +1470,7 @@ export type Products_Stream_Cursor_Input = {
 export type Products_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['jsonb']['input']>;
+  organization_id?: InputMaybe<Scalars['Int']['input']>;
   price?: InputMaybe<Scalars['numeric']['input']>;
   weight?: InputMaybe<Scalars['numeric']['input']>;
 };
@@ -1168,6 +1478,7 @@ export type Products_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Products_Sum_Fields = {
   __typename?: 'products_sum_fields';
+  organization_id?: Maybe<Scalars['Int']['output']>;
   price?: Maybe<Scalars['numeric']['output']>;
   weight?: Maybe<Scalars['numeric']['output']>;
 };
@@ -1178,6 +1489,8 @@ export enum Products_Update_Column {
   Id = 'id',
   /** column name */
   Name = 'name',
+  /** column name */
+  OrganizationId = 'organization_id',
   /** column name */
   Price = 'price',
   /** column name */
@@ -1206,6 +1519,7 @@ export type Products_Updates = {
 /** aggregate var_pop on columns */
 export type Products_Var_Pop_Fields = {
   __typename?: 'products_var_pop_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1213,6 +1527,7 @@ export type Products_Var_Pop_Fields = {
 /** aggregate var_samp on columns */
 export type Products_Var_Samp_Fields = {
   __typename?: 'products_var_samp_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1220,6 +1535,7 @@ export type Products_Var_Samp_Fields = {
 /** aggregate variance on columns */
 export type Products_Variance_Fields = {
   __typename?: 'products_variance_fields';
+  organization_id?: Maybe<Scalars['Float']['output']>;
   price?: Maybe<Scalars['Float']['output']>;
   weight?: Maybe<Scalars['Float']['output']>;
 };
@@ -1238,6 +1554,12 @@ export type Query_Root = {
   my_sample_2_aggregate: My_Sample_2_Aggregate;
   /** fetch data from the table: "my_sample_2" using primary key columns */
   my_sample_2_by_pk?: Maybe<My_Sample_2>;
+  /** fetch data from the table: "organizations" */
+  organizations: Array<Organizations>;
+  /** fetch aggregated fields from the table: "organizations" */
+  organizations_aggregate: Organizations_Aggregate;
+  /** fetch data from the table: "organizations" using primary key columns */
+  organizations_by_pk?: Maybe<Organizations>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
@@ -1308,6 +1630,29 @@ export type Query_RootMy_Sample_2_AggregateArgs = {
 
 export type Query_RootMy_Sample_2_By_PkArgs = {
   ID: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootOrganizationsArgs = {
+  distinct_on?: InputMaybe<Array<Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Organizations_Order_By>>;
+  where?: InputMaybe<Organizations_Bool_Exp>;
+};
+
+
+export type Query_RootOrganizations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Organizations_Order_By>>;
+  where?: InputMaybe<Organizations_Bool_Exp>;
+};
+
+
+export type Query_RootOrganizations_By_PkArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -1965,6 +2310,14 @@ export type Subscription_Root = {
   my_sample_2_by_pk?: Maybe<My_Sample_2>;
   /** fetch data from the table in a streaming manner: "my_sample_2" */
   my_sample_2_stream: Array<My_Sample_2>;
+  /** fetch data from the table: "organizations" */
+  organizations: Array<Organizations>;
+  /** fetch aggregated fields from the table: "organizations" */
+  organizations_aggregate: Organizations_Aggregate;
+  /** fetch data from the table: "organizations" using primary key columns */
+  organizations_by_pk?: Maybe<Organizations>;
+  /** fetch data from the table in a streaming manner: "organizations" */
+  organizations_stream: Array<Organizations>;
   /** fetch data from the table: "products" */
   products: Array<Products>;
   /** fetch aggregated fields from the table: "products" */
@@ -2057,6 +2410,36 @@ export type Subscription_RootMy_Sample_2_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<My_Sample_2_Stream_Cursor_Input>>;
   where?: InputMaybe<My_Sample_2_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganizationsArgs = {
+  distinct_on?: InputMaybe<Array<Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Organizations_Order_By>>;
+  where?: InputMaybe<Organizations_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganizations_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Organizations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Organizations_Order_By>>;
+  where?: InputMaybe<Organizations_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrganizations_By_PkArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type Subscription_RootOrganizations_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Organizations_Stream_Cursor_Input>>;
+  where?: InputMaybe<Organizations_Bool_Exp>;
 };
 
 

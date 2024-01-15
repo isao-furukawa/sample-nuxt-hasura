@@ -1,10 +1,11 @@
 import { sign } from 'jsonwebtoken';
 import { sampleUsers } from '~/plugins/sample-user';
+import { getServerSession } from '#auth';
+
 export const { jwtSecretKey } = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
   const { email, password } = await readBody(event);
-  // const { jwtSecretKey } = useRuntimeConfig();
   if (!jwtSecretKey) {
     throw new Error('JWT secret key is not defined');
   }
@@ -16,8 +17,13 @@ export default defineEventHandler(async (event) => {
     const customClaims = {
       'https://hasura.io/jwt/claims': {
         'x-hasura-default-role': 'anonymous',
-        'x-hasura-allowed-roles': ['admin', 'viewer', 'anonymous'],
+        'x-hasura-allowed-roles': ['admin', 'editor', 'viewer', 'anonymous'],
+        'x-hasura-role': user.role,
+        'x-hasura-organization-id': user.organization_id,
       },
+      name: user.name,
+      organization_id: user.organization_id,
+      role: user.role,
     };
     const accessToken = sign(
       {
@@ -25,11 +31,23 @@ export default defineEventHandler(async (event) => {
         iss: 'MyLocalAuthServer',
       },
       jwtSecretKey,
-      { algorithm: 'RS256', expiresIn: '1h' }
+      { algorithm: 'RS256', expiresIn: '2h' }
     );
+    const refreshToken = sign(
+      {
+        ...customClaims,
+        iss: 'MyLocalAuthServer',
+      },
+      jwtSecretKey,
+      { algorithm: 'RS256', expiresIn: '7d' }
+    );
+
     return {
-      accessToken,
-      user: { email: user.email, name: user.name, role: user.role },
+      token: {
+        accessToken,
+        refreshToken,
+      },
+      loginUser: { email: user.email, name: user.name, organization_id: user.organization_id, role: user.role },
     };
   } else {
     throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });

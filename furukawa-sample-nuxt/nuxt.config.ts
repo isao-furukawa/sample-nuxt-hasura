@@ -107,8 +107,6 @@ export default defineNuxtConfig({
 
     jwtSecretKey: process.env.JWT_SECRET_KEY,
 
-    
-
     // 🔼🔼🔼 ここまで、privateな区画なのでここに記述したものはサーバサイドでしか参照できない(※ブラウザ露出しないので安全) 🔼🔼🔼
   },
 
@@ -273,27 +271,31 @@ export default defineNuxtConfig({
   },
   auth: {
     provider: {
-      type: 'local',
-      endpoints: {
-        getSession: { path: '/user' },
-      },
+      type: 'refresh',
+      // endpoints: {
+      //   getSession: { path: '/user' },
+      // },
       pages: {
         login: '/login',
       },
       token: {
         signInResponseTokenPointer: '/token/accessToken',
       },
+      refreshToken: {
+        signInResponseRefreshTokenPointer: '/token/refreshToken',
+      },
       sessionDataType: {
         id: 'string',
         email: 'string',
         name: 'string',
         role: 'admin | viewer | anonymous',
+        organization_id: 'string',
       },
     },
-    // session: {
-    //   enableRefreshOnWindowFocus: true,
-    //   enableRefreshPeriodically: 5000,
-    // },
+    session: {
+      enableRefreshPeriodically: 1000 * 60 * 15,
+      enableRefreshOnWindowFocus: true,
+    },
     // globalAppMiddleware: {
     //   isEnabled: true,
     // },

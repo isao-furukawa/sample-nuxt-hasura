@@ -4,6 +4,7 @@ import { getMainDefinition, offsetLimitPagination, relayStylePagination } from '
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { reactive } from 'vue';
+import { useAuth } from '#imports';
 
 /**
  * graphqlの実行結果の戻り値のキャッシュを作成する関数
@@ -151,23 +152,27 @@ const authHeaders = reactive<{ [key: string]: string }>({
 });
 
 function updateAuthHeaders() {
-  const token = process.client ? sessionStorage.getItem('jwt') : null;
-  const userItem = process.client ? sessionStorage.getItem('user') : null;
-  const user = userItem ? JSON.parse(userItem) : null;
+  const { token, data } = useAuth();
+  console.log('token🍊', token.value);
+  if (token.value) {
+    authHeaders.Authorization = `${token.value}`;
 
-  if (token) {
-    console.log('token', token);
-    authHeaders.Authorization = `Bearer ${token}`;
-    if (user && user.role) {
-      authHeaders['X-Hasura-Role'] = user.role;
+    const userRole = data.value?.role;
+    if (userRole) {
+      authHeaders['X-Hasura-Role'] = userRole;
     }
-    console.log('authHeaders🍋', authHeaders.Authorization);
+    const organizationId = data.value?.organization_id;
+    if (organizationId) {
+      authHeaders['X-Hasura-Organization-Id'] = organizationId;
+    }
+
+    console.log('Updated authHeaders:', authHeaders);
   } else {
     delete authHeaders.Authorization;
     delete authHeaders['X-Hasura-Role'];
+    delete authHeaders['X-Hasura-Organization-Id'];
     console.log('Authorization header removed');
   }
-  console.log('authHeaders🍑', authHeaders);
 }
 
 /**

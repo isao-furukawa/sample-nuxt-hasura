@@ -4,13 +4,13 @@ query SearchUsers(
   $order_by: [users_order_by!]
   $limit: Int
   $offset: Int
-  $isAdmin: Boolean!
+  $isAuthorized: Boolean!
 ) {
   users(where: $where, order_by: $order_by, limit: $limit, offset: $offset) {
     id
     first_name
     family_name
-    ...searchUsersByRolesAttributes @include(if: $isAdmin)
+    ...searchUsersByRolesAttributes @include(if: $isAuthorized)
   }
 }
 

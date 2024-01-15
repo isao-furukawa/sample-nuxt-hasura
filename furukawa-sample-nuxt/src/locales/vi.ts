@@ -8,7 +8,8 @@ export default {
   menu: {
     login: 'Đăng Nhập',
     home: 'Trang Chủ',
-    query: 'Truy Vấn',
+    user_query: 'Truy Vấn Người Dùng',
+    product_query: 'Truy Vấn Sản Phẩm',
     subscribe: 'Đăng Ký',
     update: 'Cập Nhật Mutation',
     validate_yup: 'Xác Thực (Yup)',
@@ -22,6 +23,8 @@ export default {
   gender: 'Giới Tính',
   birthday: 'Ngày Sinh',
   is_logged_in: 'đang đăng nhập.',
+  access_denied: 'Truy cập bị từ chối',
+  organization_id: 'ID Tổ Chức',
 
   validation: {
     name: 'Tên',

@@ -17,33 +17,25 @@ n-space(vertical)
 import { NH1, NText, NSpace, useMessage } from 'naive-ui';
 import { useForm, useField, defineRule } from 'vee-validate';
 import * as yup from 'yup';
+import type { User } from '~/plugins/sample-user';
 import { definePageMeta, useAuth } from '#imports';
-import { useLoginUserState } from '~/composables/store/loginUser';
 import { updateAuthHeaders } from '~/utils/create-apollo-client';
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  },
+});
+
 const {
   status,
   data,
   token,
-  lastRefreshedAt,
-  getSession,
-  signUp,
   signIn,
   signOut,
 } = useAuth();
 
-// definePageMeta({
-//   auth: {
-//     unauthenticatedOnly: true,
-//     // navigateAuthenticatedTo: '/',
-//   },
-// });
-
 const router = useRouter();
-type User = {
-  email: string;
-  name: string;
-  role: string;
-}
 const user = ref<User | null>(null);
 
 const loginFormData: Record<string, string> = reactive({
@@ -79,34 +71,14 @@ const valid = (field: string) => {
   });
 };
 const message = useMessage();
-type LoginResponse = {
-  accessToken: string;
-  user: User;
-}
-
-const userState = useLoginUserState();
-
 const validate = async () => {
   try {
     // バリデーション処理
     await validationSchema.validate(loginFormData);
-    // await signIn({ email: loginFormData.email, password: loginFormData.password1 });
+    const credentials = { email: loginFormData.email, password: loginFormData.password1 };
+    console.log('credentials🍓:', credentials);
+    await signIn(credentials, { callbackUrl: '/' });
 
-    // バックエンドのログインエンドポイントにリクエストを送信
-    const response = await $fetch<LoginResponse>('/api/auth/login', {
-      method: 'POST',
-      body: {
-        email: loginFormData.email,
-        password: loginFormData.password1,
-      },
-    });
-
-    // JWTを受け取り、セッションに保存
-    const { accessToken, user:userData } = response;
-    sessionStorage.setItem('jwt', accessToken);
-    sessionStorage.setItem('user', JSON.stringify(userData));
-    console.log('user💛:', userData);
-    userState.value = userData;
     updateAuthHeaders();
 
     loginFormData.email = '';
@@ -114,9 +86,9 @@ const validate = async () => {
 
     message.success('ログインしました。');
 
-    router.push('/');
-    console.log('data:', data);
-    console.log('ログイン成功。🌟JWTトークン🌟:', accessToken);
+    console.log('status:', status.value);
+    console.log('data:', data.value);
+    console.log('ログイン成功。🌟JWTトークン🌟:', token.value);
   } catch (error) {
     console.error('ログイン失敗またはバリデーションエラー', error);
     message.error('ログインに失敗しました。');
@@ -125,6 +97,10 @@ const validate = async () => {
 
 const { value: email, meta: metaEmail } = useField('email');
 const { value: password1, meta: metaPassword1 } = useField('password1');
+
+const logOut = async () => {
+  await signOut({ callbackUrl: '/' });
+};
 
 </script>
 

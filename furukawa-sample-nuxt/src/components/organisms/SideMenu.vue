@@ -89,9 +89,14 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon('material-icons-outlined', 'home'),
   },
   {
-    key: 'select',
-    label: () => menuItemRender('/query_user', 'menu.query'),
+    key: 'select_user',
+    label: () => menuItemRender('/query_user', 'menu.user_query'),
     icon: renderIcon('material-icons-outlined', 'how_to_reg'),
+  },
+  {
+    key: 'select_product',
+    label: () => menuItemRender('/query_product', 'menu.product_query'),
+    icon: renderIcon('material-icons-outlined', 'grass'),
   },
   {
     key: 'update',

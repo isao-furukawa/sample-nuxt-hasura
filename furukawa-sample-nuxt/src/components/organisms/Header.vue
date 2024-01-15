@@ -11,13 +11,24 @@ n-space(justify="space-around" size="large" align="center")
     NuxtLink(:to='switchLocalePath("en")') {{ $t('language.en') }}
   n-button(size="tiny")
     NuxtLink(:to='switchLocalePath("vi")') {{ $t('language.vi') }}
-  div.login-user(v-if="user && user.name")
-    | {{ user.name }}  {{ $t('is_logged_in') }}
-    n-button.log-out(strong secondary type="error" @click="logout") Logout
+  div.login-user(v-if="userName")
+    | {{ userName }} ( {{ userRole }}・{{ $t('organization_id') }}：{{ userOrganizationId }} ) {{ $t('is_logged_in') }}
+    n-button.log-out(strong secondary type="error" @click="logOut") Logout
 </template>
 <script lang="ts" setup>
 import { NH1, NH2, NText, NImage, NSpace, NButton } from 'naive-ui';
-// import { useLoginUserState } from '~/composables/store/loginUser';
+import { useApolloClient } from '@vue/apollo-composable';
+import { definePageMeta, useAuth } from '#imports';
+import { authHeaders, updateAuthHeaders } from '~/utils/create-apollo-client';
+
+
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+  },
+});
+
+const { data, signOut } = useAuth();
 
 const route = useRoute();
 const router = useRouter();
@@ -29,24 +40,20 @@ let path = route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/|$)/, '');
 path = path.length <= 1 ? '/home' : path;
 console.warn(path.replaceAll('/', '.'));
 
-const user = useLoginUserState();
+const userName = computed(() => data.value?.name);
+const userRole = computed(() => data.value?.role);
+const userOrganizationId = computed(() => data.value?.organization_id);
+console.warn('userName🐱', userName.value);
 
-function loadUser() {
-  const savedUser = sessionStorage.getItem('user');
-  if (savedUser) {
-    user.value = JSON.parse(savedUser);
-  }
-}
+const logOut = async () => {
+  await signOut({ callbackUrl: '/login' });
+  // apolloのキャッシュをクリア
+  const { client } = useApolloClient();
+  await client.clearStore();
 
-onMounted(() => {
-  loadUser();
-});
-
-const logout = () => {
-  sessionStorage.removeItem('jwt');
-  sessionStorage.removeItem('user');
-  user.value = null;
-  router.push('/login');
+  // 認証ヘッダーを更新（クリア）
+  updateAuthHeaders();
+  console.log('authHeaders🍊', authHeaders);
 };
 
 
@@ -117,12 +124,12 @@ const logout = () => {
 //   };
 // }
 
-const data = [
-  'aaaあ1', // hack: prettier
-  'aaaあ2',
-  'aaaあ3',
-  'aaaあ4',
-];
+// const data = [
+//   'aaaあ1', // hack: prettier
+//   'aaaあ2',
+//   'aaaあ3',
+//   'aaaあ4',
+// ];
 
 const title = computed(() =>
   i18n.t(
