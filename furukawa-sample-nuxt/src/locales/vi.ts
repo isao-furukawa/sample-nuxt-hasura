@@ -25,6 +25,9 @@ export default {
   is_logged_in: 'đang đăng nhập.',
   access_denied: 'Truy cập bị từ chối',
   organization_id: 'ID Tổ Chức',
+  random_change_apple: 'Thay đổi ngẫu nhiên số lượng táo',
+  random_change_orange: 'Thay đổi ngẫu nhiên số lượng cam',
+  random_change_banana: 'Thay đổi ngẫu nhiên số lượng chuối',
 
 
   label: {

@@ -8,20 +8,20 @@ div(v-else)
         n-tr
           //- th 期
           n-th ID
-          n-th {{ $t('first_name') }}
+          n-th(v-if="hasFirstName") {{ $t('first_name') }}
           n-th {{ $t('family_name') }}
           n-th(v-if="hasGender") {{ $t('gender') }}
-          n-th(v-if="hasBirthday") {{ $t('birthday') }}
+          n-th {{ $t('birthday') }}
       n-tbody
         template(v-if="searchUsersQueryLoading")
           n-tr: n-td ロード中
         template(v-else)
           n-tr(v-for='user in searchUsersQueryResult.users', :key='user.id')
             n-td(valign="top" align="left" ) {{ user.id }}
-            n-td(valign="top" align="left" ) {{ translate(user.first_name) }}
+            n-td(v-if="user.first_name" valign="top" align="left" ) {{ translate(user.first_name) }}
             n-td(valign="top" align="left") {{ translate(user.family_name) }}
             n-td(v-if="user.gender" valign="top" align="right") {{ user.gender }}
-            n-td(v-if="user.birthday" valign="top" align="right") {{ user.birthday }}
+            n-td(valign="top" align="right") {{ user.birthday }}
 </template>
 <script lang="ts" setup>
 import { NTable, NThead, NTh, NTbody, NTr, NTd, NH1, NGrid, NGridItem, NText } from 'naive-ui';
@@ -76,8 +76,8 @@ console.log('Current Auth Headers🐶🐶:', authHeaders);
 const hasGender = computed(() => {
   return searchUsersQueryResult.value?.users.some(user => user.gender);
 });
-const hasBirthday = computed(() => {
-  return searchUsersQueryResult.value?.users.some(user => user.birthday);
+const hasFirstName = computed(() => {
+  return searchUsersQueryResult.value?.users.some(user => user.first_name);
 });
 
 const translate = (value: any) => value[nuxt.$i18n.locale.value];

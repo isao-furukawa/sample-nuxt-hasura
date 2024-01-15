@@ -8,7 +8,7 @@ query SearchUsers(
 ) {
   users(where: $where, order_by: $order_by, limit: $limit, offset: $offset) {
     id
-    first_name
+    birthday
     family_name
     ...searchUsersByRolesAttributes @include(if: $isAuthorized)
   }
@@ -16,5 +16,5 @@ query SearchUsers(
 
 fragment searchUsersByRolesAttributes on users {
   gender
-  birthday
+  first_name
 }

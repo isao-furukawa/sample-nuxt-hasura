@@ -1,5 +1,7 @@
 <template lang="pug">
-div(v-if="isAuthorized")
+div(v-if="isAnonymous")
+  p {{ $t('access_denied') }}
+div(v-else)
   div サブスクリプションのサンプル
     n-table(:single-line='false')
       n-thead
@@ -17,13 +19,11 @@ div(v-if="isAuthorized")
             n-td(valign="top" align="left") {{ translate(item.name) }}
             n-td(valign="top" align="right") {{ item.price }}
 
-    p: button( @click="doIt1") りんごの在庫をランダム変化
-    p: button( @click="doIt2") みかんの在庫をランダム変化
-    p: button( @click="doIt3") バナナの在庫をランダム変化
+    p: button(:disabled="disableButtonApple" @click="doIt1") {{ $t('random_change_apple') }}
+    p: button(:disabled="disableButtonOrange" @click="doIt2") {{ $t('random_change_orange') }}
+    p: button(:disabled="disableButtonBanana" @click="doIt3") {{ $t('random_change_banana') }}
     //- p: button( @click="doIt4") 言語Cookie確認
     //- p: button( @click="doIt5") Apolloキャッシュ
-div(v-else)
-  p {{ $t('access_denied') }}
 
 </template>
 <script lang="ts" setup>
@@ -44,8 +44,7 @@ definePageMeta({ middleware: 'auth' });
 const { data, getSession } = useAuth();
 await getSession();
 
-const isAuthorized = computed(() => data.value?.role === 'admin' || data.value?.role === 'editor');
-
+const isAnonymous = computed(() => data.value?.role === 'anonymous');
 
 const route = useRoute();
 const nuxt = useNuxtApp();
@@ -76,10 +75,40 @@ const {
   onError: searchProductsQueryOnError,
 } = useSearchProductsQuery(useSearchProductsQueryVariables, useSearchProductsQueryOptions);
 
+
+const isOrganizationMatch = (productName: string) => {
+  const product = searchProductsQueryResult.value?.products.find(p => p.name.en === productName);
+  const productOrgId = Number(product?.organization_id);
+  const userOrgId = Number(data.value?.organization_id);
+  return productOrgId === userOrgId;
+};
+console.log('isOrganizationMatch:', isOrganizationMatch('apple'));
+
 searchProductsQueryOnResult((param) => {
   console.warn('ホゲ');
   console.warn(param);
 });
+
+const disableButtonApple = computed(() =>
+  searchProductsQueryLoading.value ||
+  (data.value?.role !== 'admin' && (
+    data.value?.role === 'viewer' || !isOrganizationMatch('apple')
+  ))
+);
+
+const disableButtonOrange = computed(() =>
+  (data.value?.role !== 'admin' && (
+  data.value?.role === 'viewer' || !isOrganizationMatch('orange')
+))
+);
+
+const disableButtonBanana = computed(() =>
+  searchProductsQueryLoading.value ||
+  (data.value?.role !== 'admin' && (
+    data.value?.role === 'viewer' || !isOrganizationMatch('banana')
+  ))
+);
+
 
 // 🔼🔼🔼🔼🔼🔼 ここまで、Query 🔼🔼🔼🔼🔼🔼
 

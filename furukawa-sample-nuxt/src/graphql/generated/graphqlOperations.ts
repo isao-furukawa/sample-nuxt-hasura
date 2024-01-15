@@ -2880,9 +2880,9 @@ export type SearchUsersQueryVariables = Exact<{
 }>;
 
 
-export type SearchUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', id: any, first_name?: any | null, family_name?: any | null, gender?: any | null, birthday?: any | null }> };
+export type SearchUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', id: any, birthday?: any | null, family_name?: any | null, gender?: any | null, first_name?: any | null }> };
 
-export type SearchUsersByRolesAttributesFragment = { __typename?: 'users', gender?: any | null, birthday?: any | null };
+export type SearchUsersByRolesAttributesFragment = { __typename?: 'users', gender?: any | null, first_name?: any | null };
 
 export type ObserveProductsSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -2892,7 +2892,7 @@ export type ObserveProductsSubscription = { __typename?: 'subscription_root', pr
 export const SearchUsersByRolesAttributesFragmentDoc = gql`
     fragment searchUsersByRolesAttributes on users {
   gender
-  birthday
+  first_name
 }
     `;
 export const UpdateProductsDocument = gql`
@@ -3005,7 +3005,7 @@ export const SearchUsersDocument = gql`
     query SearchUsers($where: users_bool_exp, $order_by: [users_order_by!], $limit: Int, $offset: Int, $isAuthorized: Boolean!) {
   users(where: $where, order_by: $order_by, limit: $limit, offset: $offset) {
     id
-    first_name
+    birthday
     family_name
     ...searchUsersByRolesAttributes @include(if: $isAuthorized)
   }

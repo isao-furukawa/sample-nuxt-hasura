@@ -3,14 +3,14 @@ n-space(vertical)
   n-h1 {{ $t('menu.login') }}
   form(@submit.prevent="validate")
     div.field
-      label(for="email") {{ $t('validation.email') }}
+      label(for="email") {{ $t('label.item.email') }}
       input(v-model="loginFormData.email" type="text" name="email" @blur="valid('email')")
       span.error(v-if="errorInput.email") {{ errorInput.email }}
     div.field
-      label(for="password1")  {{ $t('validation.password1') }}
+      label(for="password")  {{ $t('label.item.password') }}
       input(v-model="loginFormData.password1" type="password" name="password1" @blur="valid('password1')")
       span.error(v-if="errorInput.password1") {{ errorInput.password1 }}
-    button(type="submit") {{ $t('validation.submit') }}
+    button(type="submit") {{ $t('label.action.submit') }}
 </template>
 
 <script lang="ts" setup>

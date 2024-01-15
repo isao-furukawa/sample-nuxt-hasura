@@ -1,5 +1,7 @@
 <template lang="pug">
-div(v-if="isAuthorized")
+div(v-if="isAnonymous")
+  p {{ $t('access_denied') }}
+div(v-else)
   div Update Mutationのサンプル
     template(v-if="getUsersQueryLoading")
         span ロード中
@@ -12,14 +14,12 @@ div(v-if="isAuthorized")
             p {{ $format(parseISO(data.birthday), 'PPPPpppp') }} 多言語対応の表示
 
     //- div {{ getUsersQueryResult }}
-    p: button( @click="doIt1") 現在日時をベトナム(+07:00)とみなして更新
-    p: button( @click="doIt2") 現在日時をサンティアゴ(-04:00)とみなして更新
-    p: button( @click="doIt3") 現在日時を東京(+09:00)とみなして更新
+    p: button(:disabled="disableMutationButton" @click="doIt1") 現在日時をベトナム(+07:00)とみなして更新
+    p: button(:disabled="disableMutationButton" @click="doIt2") 現在日時をサンティアゴ(-04:00)とみなして更新
+    p: button(:disabled="disableMutationButton" @click="doIt3") 現在日時を東京(+09:00)とみなして更新
     //- p: nuxt-link(:to="localePath('/')") トップへのリンク
     //- p: nuxt-link(:to="localePath('/aaa')") AAAへのリンク
     //- p: nuxt-link(:to="localePath('/ccc')") CCCへのリンク
-div(v-else)
-  p {{ $t('access_denied') }}
 </template>
 <script lang="ts" setup>
 import { parseISO, parse } from 'date-fns';
@@ -40,7 +40,9 @@ const getUsersQueryOptions = reactive({
   enabled: true,
 });
 
+const isAnonymous = computed(() => data.value?.role === 'anonymous');
 const isAuthorized = computed(() => data.value?.role === 'admin' || data.value?.role === 'editor');
+const disableMutationButton = computed(() => !isAuthorized.value);
 
 
 const getUsersQueryVariables = reactive({
