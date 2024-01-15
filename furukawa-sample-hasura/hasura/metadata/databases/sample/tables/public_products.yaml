@@ -9,3 +9,32 @@ array_relationships:
         table:
           name: receipt_items
           schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns: []
+      filter: {}
+    comment: ""
+  - role: editor
+    permission:
+      columns:
+        - id
+        - name
+        - organization_id
+        - price
+        - weight
+      filter:
+        organization_id:
+          _eq: x-hasura-organization-id
+    comment: ""
+  - role: viewer
+    permission:
+      columns:
+        - id
+        - name
+        - organization_id
+        - price
+      filter:
+        organization_id:
+          _eq: x-hasura-organization-id
+    comment: ""

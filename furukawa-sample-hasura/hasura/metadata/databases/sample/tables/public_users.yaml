@@ -15,6 +15,16 @@ select_permissions:
       columns: []
       filter: {}
     comment: ""
+  - role: editor
+    permission:
+      columns:
+        - birthday
+        - family_name
+        - first_name
+        - gender
+        - id
+      filter: {}
+    comment: ""
   - role: viewer
     permission:
       columns:
