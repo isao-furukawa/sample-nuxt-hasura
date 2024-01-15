@@ -9,6 +9,18 @@ array_relationships:
         table:
           name: receipt_items
           schema: public
+insert_permissions:
+  - role: editor
+    permission:
+      check:
+        organization_id:
+          _eq: x-hasura-organization-id
+      columns:
+        - name
+        - organization_id
+        - price
+        - weight
+    comment: ""
 select_permissions:
   - role: anonymous
     permission:
@@ -34,6 +46,25 @@ select_permissions:
         - name
         - organization_id
         - price
+      filter:
+        organization_id:
+          _eq: x-hasura-organization-id
+    comment: ""
+update_permissions:
+  - role: editor
+    permission:
+      columns:
+        - name
+        - price
+        - weight
+      filter: {}
+      check:
+        organization_id:
+          _eq: x-hasura-organization-id
+    comment: ""
+delete_permissions:
+  - role: editor
+    permission:
       filter:
         organization_id:
           _eq: x-hasura-organization-id

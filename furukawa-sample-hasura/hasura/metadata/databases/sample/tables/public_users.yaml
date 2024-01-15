@@ -9,6 +9,17 @@ array_relationships:
         table:
           name: receipts
           schema: public
+insert_permissions:
+  - role: editor
+    permission:
+      check: {}
+      columns:
+        - birthday
+        - family_name
+        - first_name
+        - gender
+        - id
+    comment: ""
 select_permissions:
   - role: anonymous
     permission:
@@ -28,8 +39,20 @@ select_permissions:
   - role: viewer
     permission:
       columns:
+        - birthday
         - family_name
-        - first_name
         - id
       filter: {}
+    comment: ""
+update_permissions:
+  - role: editor
+    permission:
+      columns:
+        - birthday
+        - family_name
+        - first_name
+        - gender
+        - id
+      filter: {}
+      check: null
     comment: ""
