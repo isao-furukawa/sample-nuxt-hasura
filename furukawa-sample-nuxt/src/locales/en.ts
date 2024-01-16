@@ -24,9 +24,9 @@ export default {
   is_logged_in: 'is logged in.',
   access_denied: 'Access Denied',
   organization_id: 'Organization ID',
-  random_change_apple: 'Randomly change the inventory of apples',
-  random_change_orange: 'Randomly change the inventory of oranges',
-  random_change_banana: 'Randomly change the inventory of bananas',
+  random_change_apple: 'Randomly change the price of apples',
+  random_change_orange: 'Randomly change the price of oranges',
+  random_change_banana: 'Randomly change the price of bananas',
 
 
   label: {
@@ -41,7 +41,6 @@ export default {
     },
     action: {
       submit: 'Submit',
-    email: 'Email',
     },
   },
 

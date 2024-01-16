@@ -25,10 +25,9 @@ export default {
   is_logged_in: 'đang đăng nhập.',
   access_denied: 'Truy cập bị từ chối',
   organization_id: 'ID Tổ Chức',
-  random_change_apple: 'Thay đổi ngẫu nhiên số lượng táo',
-  random_change_orange: 'Thay đổi ngẫu nhiên số lượng cam',
-  random_change_banana: 'Thay đổi ngẫu nhiên số lượng chuối',
-
+  random_change_apple: 'Giá Táo thay đổi ngẫu nhiên',
+  random_change_orange: 'Giá quýt thay đổi ngẫu nhiên',
+  random_change_banana: 'Giá Chuối thay đổi ngẫu nhiên',
 
   label: {
     item: {
@@ -36,12 +35,12 @@ export default {
       age: 'Tuổi',
       phone: 'Số Điện Thoại',
       birth: 'Ngày Sinh',
-      email: 'email',
+      email: 'Email',
       email_confirm: 'email(xác nhận)',
+      password: 'Mật Khẩu',
     },
     action: {
       submit: 'Gửi',
-    email: 'Địa Chỉ Email',
     },
   },
 
