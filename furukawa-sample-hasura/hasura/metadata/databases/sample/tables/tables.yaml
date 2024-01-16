@@ -1,5 +1,6 @@
 - "!include public_my_sample_1.yaml"
 - "!include public_my_sample_2.yaml"
+- "!include public_organizations.yaml"
 - "!include public_products.yaml"
 - "!include public_receipt_items.yaml"
 - "!include public_receipts.yaml"

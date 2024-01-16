@@ -1,8 +1,7 @@
 schema:
-  - ${NUXT_PUBLIC_API_PROTOCOL}://${NUXT_PUBLIC_API_HOST}/${NUXT_PUBLIC_API_PATH}:
+  - http://localhost:8080/v1/graphql:
       headers:
         x-hasura-admin-secret: hogehoge
-        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJodHRwOi8vbG9jYWwtYXBpLmNhcmVlcm1hcC5qcDoyODA4MC92MS9ncmFwaHFsIiwiYXVkIjoiaHR0cDovL2xvY2FsLmNhcmVlcm1hcC5qcDo0MDAxLyIsImh0dHBzOi8vaGFzdXJhLmlvL2p3dC9jbGFpbXMiOnsieC1oYXN1cmEtZGVmYXVsdC1yb2xlIjoic2Nob29sIiwieC1oYXN1cmEtc2Nob29sLWlkIjoiREFUQS1OT1QtVVNFIiwieC1oYXN1cmEtdXNlci1pZCI6IkRBVEEtTk9ULVVTRSIsIngtaGFzdXJhLWxhbmciOiJqYSIsIngtaGFzdXJhLWFsbG93ZWQtcm9sZXMiOlsic2Nob29sIl19LCJpc3MiOiJodHRwOi8vbG9jYWwtYXBpLmNhcmVlcm1hcC5qcDo4MDgwL21pbmlhdXRoIiwiZXhwIjoxNjkyODU2NTI1LCJpYXQiOjE2NjEzMjA1MjV9.05CDhs_l9IxyQRKtPFYRhc-I_sEXpKZGvyjVIug40T4
 documents:
   - ./src/graphql/documents/**/*.graphql
 overwrite: true

@@ -79,9 +79,24 @@ const menuItemRender = (path: string, labelKey: string) => {
 // </span>
 const menuOptions: MenuOption[] = [
   {
+    key: 'login',
+    label: () => menuItemRender('/login', 'menu.login'),
+    icon: renderIcon('material-icons-outlined', 'login'),
+  },
+  {
     key: 'index',
     label: () => menuItemRender('/', 'menu.home'),
     icon: renderIcon('material-icons-outlined', 'home'),
+  },
+  {
+    key: 'select_user',
+    label: () => menuItemRender('/query_user', 'menu.user_query'),
+    icon: renderIcon('material-icons-outlined', 'how_to_reg'),
+  },
+  {
+    key: 'select_product',
+    label: () => menuItemRender('/query_product', 'menu.product_query'),
+    icon: renderIcon('material-icons-outlined', 'grass'),
   },
   {
     key: 'update',

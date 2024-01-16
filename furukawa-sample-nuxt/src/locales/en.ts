@@ -6,7 +6,10 @@ export default {
     vi: 'Vietnamese',
   },
   menu: {
+    login: 'Login',
     home: 'Home',
+    user_query: 'User Query',
+    product_query: 'Product Query',
     subscribe: 'Subscription',
     update: 'Update Mutation',
     validate_yup: 'Validation (Yup)',
@@ -14,6 +17,17 @@ export default {
   },
   product_name: 'Product Name',
   price: 'Price',
+  first_name: 'First Name',
+  family_name: 'Family Name',
+  gender: 'gender',
+  birthday: 'Birthday',
+  is_logged_in: 'is logged in.',
+  access_denied: 'Access Denied',
+  organization_id: 'Organization ID',
+  random_change_apple: 'Randomly change the inventory of apples',
+  random_change_orange: 'Randomly change the inventory of oranges',
+  random_change_banana: 'Randomly change the inventory of bananas',
+
 
   label: {
     item: {
@@ -23,9 +37,11 @@ export default {
       birth: 'Birthday',
       email: 'email',
       email_confirm: 'confirm',
+      password: 'Password',
     },
     action: {
       submit: 'Submit',
+    email: 'Email',
     },
   },
 

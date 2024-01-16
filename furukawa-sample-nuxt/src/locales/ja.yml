@@ -4,7 +4,10 @@ language:
   vi: ベトナム語
 
 menu:
+  login: ログイン
   home: ホーム
+  user_query: ユーザークエリ
+  product_query: 商品クエリ
   subscribe: サブスクリプション
   update: 更新ミューテーション
   validate_yup: バリデーション(Yup)
@@ -12,6 +15,14 @@ menu:
 
 product_name: 商品名
 price: 価格
+
+first_name: 名
+family_name: 姓
+gender: 性別
+birthday: 誕生日
+is_logged_in: がログイン中。
+access_denied: アクセスが拒否されました。
+organization_id: 組織ID
 
 validation:
   name: 名前
@@ -21,6 +32,7 @@ validation:
   date_enrollment: 入学日
   date_graduation: 卒業日
   submit: 送信
+  email: メールアドレス
 
 message:
   error:

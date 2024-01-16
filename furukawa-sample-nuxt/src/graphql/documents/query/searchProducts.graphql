@@ -9,5 +9,6 @@ query SearchProducts(
     id
     name
     price
+    organization_id
   }
 }

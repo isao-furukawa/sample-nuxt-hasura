@@ -1,41 +1,57 @@
 <template lang="pug">
-div Update Mutationのサンプル
-  template(v-if="getUsersQueryLoading")
-      span ロード中
-  template(v-else)
-    ul
-      li(v-for="data in getUsersQueryResult.users" :key="data.id")
-        div
-          p {{ formatInTimeZone(parseISO(data.birthday), 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss.SSSXXX') }}    日本時間(+09:00)として表示
-          p {{ formatInTimeZone(parseISO(data.birthday), 'Europe/Berlin', 'yyyy-MM-dd HH:mm:ss.SSSXXX') }} ベルリン(+01:00)として表示
-          p {{ $format(parseISO(data.birthday), 'PPPPpppp') }} 多言語対応の表示
+div(v-if="isAnonymous")
+  p {{ $t('access_denied') }}
+div(v-else)
+  div Update Mutationのサンプル
+    template(v-if="getUsersQueryLoading")
+        span ロード中
+    template(v-else)
+      ul
+        li(v-for="data in getUsersQueryResult.users" :key="data.id")
+          div
+            p {{ formatInTimeZone(parseISO(data.birthday), 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss.SSSXXX') }}    日本時間(+09:00)として表示
+            p {{ formatInTimeZone(parseISO(data.birthday), 'Europe/Berlin', 'yyyy-MM-dd HH:mm:ss.SSSXXX') }} ベルリン(+01:00)として表示
+            p {{ $format(parseISO(data.birthday), 'PPPPpppp') }} 多言語対応の表示
 
-  //- div {{ getUsersQueryResult }}
-  p: button( @click="doIt1") 現在日時をベトナム(+07:00)とみなして更新
-  p: button( @click="doIt2") 現在日時をサンティアゴ(-04:00)とみなして更新
-  p: button( @click="doIt3") 現在日時を東京(+09:00)とみなして更新
-  //- p: nuxt-link(:to="localePath('/')") トップへのリンク
-  //- p: nuxt-link(:to="localePath('/aaa')") AAAへのリンク
-  //- p: nuxt-link(:to="localePath('/ccc')") CCCへのリンク
+    //- div {{ getUsersQueryResult }}
+    p: button(:disabled="disableMutationButton" @click="doIt1") 現在日時をベトナム(+07:00)とみなして更新
+    p: button(:disabled="disableMutationButton" @click="doIt2") 現在日時をサンティアゴ(-04:00)とみなして更新
+    p: button(:disabled="disableMutationButton" @click="doIt3") 現在日時を東京(+09:00)とみなして更新
+    //- p: nuxt-link(:to="localePath('/')") トップへのリンク
+    //- p: nuxt-link(:to="localePath('/aaa')") AAAへのリンク
+    //- p: nuxt-link(:to="localePath('/ccc')") CCCへのリンク
 </template>
 <script lang="ts" setup>
 import { parseISO, parse } from 'date-fns';
 import { zonedTimeToUtc, utcToZonedTime, format, formatInTimeZone } from 'date-fns-tz';
 import { Order_By, useSearchUsersQuery, useUpdateUsersMutation } from '@/graphql/generated/graphqlOperations';
 import type { Users_Bool_Exp, Users_Order_By, Users_Set_Input } from '@/graphql/generated/graphqlOperations';
+import { useAuth, definePageMeta } from '#imports';
+
+definePageMeta({ middleware: 'auth' });
 
 const route = useRoute();
 const nuxt = useNuxtApp();
 const runtimeConfig = useRuntimeConfig();
+const { data, getSession } = useAuth();
+await getSession();
 
 const getUsersQueryOptions = reactive({
   enabled: true,
 });
 
+const isAnonymous = computed(() => data.value?.role === 'anonymous');
+const isAuthorized = computed(() => data.value?.role === 'admin' || data.value?.role === 'editor');
+const disableMutationButton = computed(() => !isAuthorized.value);
+
+
 const getUsersQueryVariables = reactive({
   where: {} as Users_Bool_Exp,
   order_by: [] as Array<Users_Order_By>,
+  isAuthorized,
 });
+console.log('Variables🐱', getUsersQueryVariables);
+
 getUsersQueryVariables.order_by.push({ id: Order_By.Asc });
 // getUsersQueryVariables.order_by.push({ area: Order_By.Asc });
 // getUsersQueryVariables.order_by.push({ school_name: Order_By.Asc });
@@ -47,6 +63,8 @@ getUsersQueryVariables.where = {
     _eq: '40bc12a8-99dd-4bf4-b2b9-ba6cb393b110',
   },
 };
+
+console.log('Variables🐱', getUsersQueryVariables);
 
 const {
   result: getUsersQueryResult,

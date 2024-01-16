@@ -6,7 +6,10 @@ export default {
     vi: 'Tiếng Việt',
   },
   menu: {
+    login: 'Đăng Nhập',
     home: 'Trang Chủ',
+    user_query: 'Truy Vấn Người Dùng',
+    product_query: 'Truy Vấn Sản Phẩm',
     subscribe: 'Đăng Ký',
     update: 'Cập Nhật Mutation',
     validate_yup: 'Xác Thực (Yup)',
@@ -14,6 +17,18 @@ export default {
   },
   product_name: 'Tên Sản Phẩm',
   price: 'Giá',
+
+  first_name: 'Tên',
+  family_name: 'Họ',
+  gender: 'Giới Tính',
+  birthday: 'Ngày Sinh',
+  is_logged_in: 'đang đăng nhập.',
+  access_denied: 'Truy cập bị từ chối',
+  organization_id: 'ID Tổ Chức',
+  random_change_apple: 'Thay đổi ngẫu nhiên số lượng táo',
+  random_change_orange: 'Thay đổi ngẫu nhiên số lượng cam',
+  random_change_banana: 'Thay đổi ngẫu nhiên số lượng chuối',
+
 
   label: {
     item: {
@@ -26,6 +41,7 @@ export default {
     },
     action: {
       submit: 'Gửi',
+    email: 'Địa Chỉ Email',
     },
   },
 

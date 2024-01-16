@@ -4,7 +4,10 @@ language:
   vi: Tiếng Việt
 
 menu:
+  login: Đăng nhập
   home: Trang chủ
+  user_query: Truy vấn người dùng
+  product_query: Truy vấn sản phẩm
   subscribe: Đăng ký
   update: Cập nhật đột biến
   validate_yup: Thẩm định(Yup)
@@ -13,9 +16,18 @@ menu:
 product_name: Sản phẩm
 price: Giá
 
+first_name: Tên
+family_name: Họ
+gender: Giới tính
+birthday: Ngày sinh
+is_logged_in: Đang đăng nhập.
+access_denied: Truy cập bị từ chối.
+organization_id: ID tổ chức
+
 validation:
   name: Tên
   age: Tuổi
   date_enrollment: Ngày nhập học
   date_graduation: Ngày lễ tốt nghiệp
   submit: Gửi
+  email: Địa Chỉ Email

@@ -6,7 +6,10 @@ export default {
     vi: 'ベトナム語',
   },
   menu: {
+    login: 'ログイン',
     home: 'ホーム',
+    user_query: 'ユーザークエリ',
+    product_query: '商品クエリ',
     subscribe: 'サブスクリプション',
     update: '更新ミューテーション',
     validate_yup: 'バリデーション(Yup)',
@@ -14,6 +17,17 @@ export default {
   },
   product_name: '商品名',
   price: '価格',
+  first_name: '名',
+  family_name: '姓',
+  gender: '性別',
+  birthday: '生年月日',
+  is_logged_in: 'がログイン中。',
+  access_denied: 'アクセスが拒否されました',
+  organization_id: '組織ID',
+  random_change_apple: 'りんごの在庫をランダムに変更',
+  random_change_orange: 'みかんの在庫をランダムに変更',
+  random_change_banana: 'ばななの在庫をランダムに変更',
+
 
   label: {
     item: {
@@ -23,9 +37,11 @@ export default {
       birth: '誕生日',
       email: 'メールアドレス',
       email_confirm: 'メールアドレス(確認)',
+      password: 'パスワード',
     },
     action: {
       submit: '送信',
+    email: 'メールアドレス',
     },
   },
 
