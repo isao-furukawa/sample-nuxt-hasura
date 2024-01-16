@@ -134,42 +134,42 @@ services:
       # HASURA_GRAPHQL_AUTH_HOOK_MODE: POST
 
   # 🔽🔽🔽🔽🔽🔽🔽🔽🔽 Nuxt3 🔽🔽🔽🔽🔽🔽🔽🔽🔽
-  furukawa-sample-nuxt:
-    # user: 1000:1000
-    container_name: furukawa-sample-nuxt
-    tty: true
-    stdin_open: true
-    build:
-      context: ./furukawa-sample-nuxt
-      dockerfile: Dockerfile
-      target: dev
-    healthcheck:
-      # test: curl -I 127.0.0.1:2000/health_check
-      test: lsof -i:2000
-      interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
-      timeout: 2s # 応答が2秒以上かかっても許さない
-      retries: 999999 # 100回ぐらい失敗応答したら許さない
-      # start_period: 30s # 立ち上がるのに、10秒かかりそう
-      # args:
-      #   - MODE_LOCAL=true
-      #   - API_HOST=http://my-rails:3000
-    ports:
-      - "2000:2000"
-    depends_on:
-      furukawa-sample-hasura:
-        condition: service_healthy
-        # condition: service_started
-    volumes:
-      - ./furukawa-sample-nuxt:/app
-      - furukawa-sample-nuxt-node_modules-volume:/app/node_modules
-    environment:
-      - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
-      - NUXT_PUBLIC_DOCKER_MODE=true
-      - NUXT_PUBLIC_SSR_MODE=true
-      - NUXT_PUBLIC_API_HOST=furukawa-sample-hasura:8080
-      - NUXT_PUBLIC_API_PROTOCOL=http
-      - NUXT_PUBLIC_API_WS_PROTOCOL=ws
-      - NUXT_PUBLIC_API_PATH=v1/graphql
-      - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
-      - NUXT_X_HASURA_ADMIN_SECRET=hogehoge
-      - NUXT_X_HASURA_ACTION_SECRET=hogehoge
+  # furukawa-sample-nuxt:
+  #   # user: 1000:1000
+  #   container_name: furukawa-sample-nuxt
+  #   tty: true
+  #   stdin_open: true
+  #   build:
+  #     context: ./furukawa-sample-nuxt
+  #     dockerfile: Dockerfile
+  #     target: dev
+  #   healthcheck:
+  #     # test: curl -I 127.0.0.1:2000/health_check
+  #     test: lsof -i:2000
+  #     interval: 3s # ヘルスチェックは3秒に1度ぐらいに押さえておきたい
+  #     timeout: 2s # 応答が2秒以上かかっても許さない
+  #     retries: 999999 # 100回ぐらい失敗応答したら許さない
+  #     # start_period: 30s # 立ち上がるのに、10秒かかりそう
+  #     # args:
+  #     #   - MODE_LOCAL=true
+  #     #   - API_HOST=http://my-rails:3000
+  #   ports:
+  #     - "2000:2000"
+  #   depends_on:
+  #     furukawa-sample-hasura:
+  #       condition: service_healthy
+  #       # condition: service_started
+  #   volumes:
+  #     - ./furukawa-sample-nuxt:/app
+  #     - furukawa-sample-nuxt-node_modules-volume:/app/node_modules
+  #   environment:
+  #     - NODE_ENV=development # ------------> モード 開発モード(development) 本番モード(production)
+  #     - NUXT_PUBLIC_DOCKER_MODE=true
+  #     - NUXT_PUBLIC_SSR_MODE=true
+  #     - NUXT_PUBLIC_API_HOST=furukawa-sample-hasura:8080
+  #     - NUXT_PUBLIC_API_PROTOCOL=http
+  #     - NUXT_PUBLIC_API_WS_PROTOCOL=ws
+  #     - NUXT_PUBLIC_API_PATH=v1/graphql
+  #     - NUXT_PUBLIC_API_PATH_RELAY=v1beta1/relay
+  #     - NUXT_X_HASURA_ADMIN_SECRET=hogehoge
+  #     - NUXT_X_HASURA_ACTION_SECRET=hogehoge

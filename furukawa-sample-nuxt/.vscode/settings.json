@@ -1,0 +1,114 @@
+{
+  // ファイル保存時の自動フォーマット有効
+  "editor.formatOnSave": true,
+
+  // ペーストした文字の自動フォーマット有効
+  "editor.formatOnPaste": true,
+
+  // 文字入力行の自動フォーマット有効
+  "editor.formatOnType": true,
+
+  // デフォルトフォーマッターをPrettierに指定
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // ペアになっている { } や ( ) の範囲を折れ線で視覚化
+  "editor.guides.bracketPairs": true,
+
+  // "todohighlight.isCaseSensitive": false,
+
+  // 【TodoTree】に認識させるタグ
+  "todo-tree.general.tags": [
+    "TODO",
+    "todo",
+    "FIXME",
+    "fixme",
+    "BUG",
+    "bug",
+    "NOTE",
+    "note",
+    "HACK",
+    "hack",
+    "CHECK",
+    "check"
+    // "[ ]",
+    // "[x]"
+  ],
+
+  // 【TodoTree】で同じタグと見做すグループ
+  "todo-tree.general.tagGroups": {
+    "TODO": ["ToDo", "todo", "TODOS", "ToDos", "todos"],
+    "FIXME": ["fixme"],
+    "BUG": ["bug"],
+    "NOTE": ["note"],
+    "HACK": ["hack"],
+    "CHECK": ["check"]
+  },
+
+  // 【TodoTree】で隠しファイルも対象にするかどうか？
+  "todo-tree.filtering.includeHiddenFiles": true,
+
+  // 【TodoTree】でエディターのガター(※左側の行番号のそのまた左の溝)にアイコンを表示するかどうか？
+  "todo-tree.highlights.defaultHighlight": {
+    "gutterIcon": true
+  },
+
+  // 【TodoTree】で /** コメント */ のようなブロックコメントにも反応させるための正規表現設定
+  "todo-tree.regex.regex": "((//|#|;|\\*)[ ]*($TAGS)[^\\n]*)|(/\\*(\\*?\\s*)*($TAGS)(.|\\n|\\r)*?\\*/)|(<!--\\s*($TAGS)(.|\\n|\\r)*?-->)",
+  // "todo-tree.regex.regex": "((//|#|;|\\*)[ ]*($TAGS)[^\\n]*|/\\*(\\*?\\s*)*($TAGS)(.|\\n|\\r)*?\\*/|<!--\\s*($TAGS)(.|\\n|\\r)*?-->)|((\\*|\\s)+[^\\n]*\\n\\s*(\\*|\\s)*)+\\s*($TAGS)",
+
+  // 【TodoTree】のアイコンや色のカスタム設定
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "type": "text-and-comment",
+      "foreground": "#caaa09"
+      // "background": "#ffff0058",
+      // "icon": "check-circle-fill"
+      // "background": "#FFFFFF"
+      // "icon": "x",
+    },
+    "FIXME": {
+      "type": "text-and-comment",
+      "foreground": "#ff8000",
+      // "background": "#ffff0058",
+      "icon": "flame"
+    },
+    "BUG": {
+      "type": "text-and-comment",
+      "foreground": "#f224b7",
+      // "background": "#FFFFFF",
+      "icon": "bug"
+    },
+    "NOTE": {
+      "type": "text-and-comment",
+      "foreground": "#3b83ef",
+      // "background": "#00bfff",
+      // "icon": "paintbrush"
+      "icon": "pencil"
+    },
+    "HACK": {
+      "type": "text-and-comment",
+      "foreground": "#616464",
+      "icon": "tools"
+    },
+    "CHECK": {
+      "type": "text-and-comment",
+      "foreground": "#0bf6f6",
+      // "background": "#22ef4b",
+      "opacity": 0,
+      "icon": "check"
+      // "icon": "plus-circle"
+    }
+    // "[ ]": {
+    //   "icon": "issue-draft"
+    // },
+    // "[x]": {
+    //   "icon": "issue-closed"
+    // }
+  },
+
+  // ペアになっている { } や ( ) を色付け
+  "editor.bracketPairColorization.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}
