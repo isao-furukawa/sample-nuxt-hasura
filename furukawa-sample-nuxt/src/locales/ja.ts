@@ -24,9 +24,9 @@ export default {
   is_logged_in: 'がログイン中。',
   access_denied: 'アクセスが拒否されました',
   organization_id: '組織ID',
-  random_change_apple: 'りんごの在庫をランダムに変更',
-  random_change_orange: 'みかんの在庫をランダムに変更',
-  random_change_banana: 'ばななの在庫をランダムに変更',
+  random_change_apple: 'りんごの価格をランダムに変更',
+  random_change_orange: 'みかんの価格をランダムに変更',
+  random_change_banana: 'ばななの価格をランダムに変更',
 
 
   label: {
@@ -41,7 +41,6 @@ export default {
     },
     action: {
       submit: '送信',
-    email: 'メールアドレス',
     },
   },
 
