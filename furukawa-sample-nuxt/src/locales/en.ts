@@ -15,6 +15,7 @@ export default {
     validate_yup: 'Validation (Yup)',
     validate_zod: 'Validation (Zod)',
   },
+
   product_name: 'Product Name',
   price: 'Price',
   first_name: 'First Name',
@@ -27,7 +28,6 @@ export default {
   random_change_apple: 'Randomly change the price of apples',
   random_change_orange: 'Randomly change the price of oranges',
   random_change_banana: 'Randomly change the price of bananas',
-
 
   label: {
     item: {

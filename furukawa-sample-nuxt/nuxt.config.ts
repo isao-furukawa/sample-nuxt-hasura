@@ -105,7 +105,7 @@ export default defineNuxtConfig({
     // GraphqlのAPIサーバ、ACTION経由か判別するキー
     X_HASURA_ACTION_SECRET: process.env.NUXT_X_HASURA_ACTION_SECRET,
 
-    jwtSecretKey: process.env.JWT_SECRET_KEY,
+    jwtSecretKey: process.env.NUXT_JWT_SECRET_KEY,
 
     // 🔼🔼🔼 ここまで、privateな区画なのでここに記述したものはサーバサイドでしか参照できない(※ブラウザ露出しないので安全) 🔼🔼🔼
   },

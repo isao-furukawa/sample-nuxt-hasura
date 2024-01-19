@@ -28,7 +28,6 @@ export default {
   random_change_orange: 'みかんの価格をランダムに変更',
   random_change_banana: 'ばななの価格をランダムに変更',
 
-
   label: {
     item: {
       name: '名前',

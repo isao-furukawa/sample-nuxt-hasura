@@ -9,7 +9,6 @@ TemplatesNaiveUiLayout.layout-container
       template(v-for="n in 20" :key="n")
         n-h2 縦スクロール確認用 {{ n }}
   n-layout-footer.footer-container(bordered='' position='absolute' style='height: 64px; padding: 24px')
-    | &#x57CE;&#x5E9C;&#x8DEF;
 </template>
 <script lang="ts" setup>
 import {

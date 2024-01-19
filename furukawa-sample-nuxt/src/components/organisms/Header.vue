@@ -21,7 +21,6 @@ import { useApolloClient } from '@vue/apollo-composable';
 import { definePageMeta, useAuth } from '#imports';
 import { authHeaders, updateAuthHeaders } from '~/utils/create-apollo-client';
 
-
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
@@ -55,7 +54,6 @@ const logOut = async () => {
   updateAuthHeaders();
   console.log('authHeaders🍊', authHeaders);
 };
-
 
 // console.warn(i18n.t(`menu${route.path.replace(/^\/[a-z]{2}(-[a-z]{2})?(?=\/)/, '').replaceAll('/', '.')}`));
 // console.warn(localePath());
