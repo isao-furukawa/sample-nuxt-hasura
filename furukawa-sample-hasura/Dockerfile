@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.35.1.cli-migrations-v3.ubuntu
+FROM hasura/graphql-engine:v2.36.2.cli-migrations-v3.ubuntu
 
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
